@@ -227,28 +227,28 @@
         <div class="issue">
           A means to indicate multiple sensors triggering is currently missing.
         </div>
-      </section>
-      <section>
-        <h2>Event handlers</h2>
-        <p>
-          The following are the <a>event handlers</a> (and their corresponding
-          <a>event handler event types</a>) that MUST be supported as
-          attributes by the <code>Window</code> object:
-        </p>
-        <table class="simple">
-          <thead>
-            <tr>
-              <th>event handler</th>
-              <th>event handler event type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong><code>ondeviceproximity</code></strong></td>
-              <td><code>deviceproximity</code></td>
-            </tr>
-          </tbody>
-        </table>
+        <section>
+          <h2>Event handlers</h2>
+          <p>
+            The following are the <a>event handlers</a> (and their corresponding
+            <a>event handler event types</a>) that MUST be supported as
+            attributes by the <code>Window</code> object:
+          </p>
+          <table class="simple">
+            <thead>
+              <tr>
+                <th>event handler</th>
+                <th>event handler event type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong><code>ondeviceproximity</code></strong></td>
+                <td><code>deviceproximity</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
       </section>
     </section>
       
@@ -258,61 +258,64 @@
         This section is work in progress to specify an abstract proximity
         event that fires only when the screen is close to the user's face.
       </div>
-      <p>
-        The HTML5 specification [[!HTML5]] defines a <a>Navigator</a> interface,
-        which this specification extends:
-      </p>
-      <dl title="partial interface Navigator" class="idl">
-        <dt>readonly attribute DOMString proximitystate</dt>
-        <dd>
-          The <a>current user proximity state</a>.
-        </dd>
-        <dt>[TreatNonCallableAsNull] attribute Function? onproximitystatechange</dt>
-        <dd>
-        </dd>
-      </dl>
-      <p>
-        Each document has a <a>current user proximity state</a>. When a
-        <code>Navigator</code> object is created, it MUST have its <a>current
-        user proximity state</a> set to the string "<code>near</code>", if
-        the <a>current user proximity state</a> represented is the <a>near user
-        proximity</a> state, or to the string "<code>far</code>", if the
-        <a>current state proximity state</a> represented is the <a>far user
-        proximity</a> state. If the implementation is unable to report the
-        state, or otherwise, the string MUST be set to "<code>unknown</code>".
-      </p>
-      <p>
-        The <code><dfn>proximitystate</dfn></code> IDL attribute MUST, on
-        getting, return the <a>current user proximity state</a>.
-      </p>
-      <p>
-        When the <a>current user proximity state</a> is changes, the <a>user
-        agent</a> MUST <a>queue a task</a> which sets the
-        <code><a>proximitystate</a></code> attribute's value and <a>fires a
-        simple event</a> named <code><a>proximitystatechange</a></code> at the
-        <code><a>Window</a></code> object.
-      </p>
       <section>
-        <h2>Event handlers</h2>
+        <h2>The <code>proximitystate</code> attribute</h2>
         <p>
-          The following are the <a>event handlers</a> (and their corresponding
-          <a>event handler event types</a>) that MUST be supported as
-          attributes by the <code>Navigator</code> object:
+          The HTML5 specification [[!HTML5]] defines a <a>Navigator</a> interface,
+          which this specification extends:
         </p>
-        <table class="simple">
-          <thead>
-            <tr>
-              <th>event handler</th>
-              <th>event handler event type</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong><code>onproximitystatechange</code></strong></td>
-              <td><code>proximitystatechange</code></td>
-            </tr>
-          </tbody>
-        </table>
+        <dl title="partial interface Navigator" class="idl">
+          <dt>readonly attribute DOMString proximitystate</dt>
+          <dd>
+            The <a>current user proximity state</a>.
+          </dd>
+          <dt>[TreatNonCallableAsNull] attribute Function? onproximitystatechange</dt>
+          <dd>
+          </dd>
+        </dl>
+        <p>
+          Each document has a <a>current user proximity state</a>. When a
+          <code>Navigator</code> object is created, it MUST have its <a>current
+          user proximity state</a> set to the string "<code>near</code>", if
+          the <a>current user proximity state</a> represented is the <a>near user
+          proximity</a> state, or to the string "<code>far</code>", if the
+          <a>current state proximity state</a> represented is the <a>far user
+          proximity</a> state. If the implementation is unable to report the
+          state, or otherwise, the string MUST be set to "<code>unknown</code>".
+        </p>
+        <p>
+          The <code><dfn>proximitystate</dfn></code> IDL attribute MUST, on
+          getting, return the <a>current user proximity state</a>.
+        </p>
+        <p>
+          When the <a>current user proximity state</a> is changes, the <a>user
+          agent</a> MUST <a>queue a task</a> which sets the
+          <code><a>proximitystate</a></code> attribute's value and <a>fires a
+          simple event</a> named <code><a>proximitystatechange</a></code> at the
+          <code><a>Window</a></code> object.
+        </p>
+        <section>
+          <h2>Event handlers</h2>
+          <p>
+            The following are the <a>event handlers</a> (and their corresponding
+            <a>event handler event types</a>) that MUST be supported as
+            attributes by the <code>Navigator</code> object:
+          </p>
+          <table class="simple">
+            <thead>
+              <tr>
+                <th>event handler</th>
+                <th>event handler event type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong><code>onproximitystatechange</code></strong></td>
+                <td><code>proximitystatechange</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
       </section>
     </section>
     
