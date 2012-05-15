@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Device Proximity</title>
+    <title>Proximity Events</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <!--script src='http://respec.specifiction.com/js/profiles/w3c-common.js' class='remove'></script-->
     <script src='http://dev.w3.org/2009/dap/ReSpec.js/js/respec.js' class='remove'></script>
@@ -49,6 +49,15 @@
     <section class="informative">
       <h2>Introduction</h2>
       <p>
+        The <a>DeviceProximityEvent</a> interface provides web developers
+        information about the distance between the hosting device and the
+        nearby object.
+      </p>
+      <p>
+        The <code><a>proximitystate</a></code>
+        and the corresponding event handler abstract the proximity by
+        providing a user-agent- and platform-specific approximation of the
+        proximity.
       </p>
     </section>
     
@@ -59,6 +68,7 @@
         interfaces that it contains.
       </p>
     </section>
+    
     <section>
       <h2>Terminology</h2>
       <p>
@@ -67,8 +77,10 @@
         language being used as defined in [[!HTML5]].
       </p>
       <p>
-        The concept <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
-        queue a task</a></dfn> is defined in [[!HTML5]].
+        The concepts <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
+        queue a task</a></dfn> and
+        <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#fire-a-simple-event">
+        fires a simple event</a></dfn> are defined in [[!HTML5]].
       </p>
       <p>
         The terms <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
@@ -82,18 +94,32 @@
       <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#firing-events">
       fire an event</a></dfn> are defined in [[!DOM4]].
       <p>
-        <dfn>The current proximity</dfn> is the distance between the hosting
+        The <dfn>current device proximity</dfn> is the distance between the hosting
         device and the nearby object, in centimeters.
       </p>
       <p>
-        <dfn>The minimum proximity</dfn> is the minimum supported value for
-        <a>the current proximity</a>.
+        The <dfn>minimum device proximity</dfn> is the minimum supported value for
+        the <a>current device proximity</a>.
       </p>
       <p>
-        <dfn>The maximum proximity</dfn> is the maximum supported value for
-        <a>the current proximity</a>.
+        The <dfn>maximum device proximity</dfn> is the maximum supported value for
+        the <a>current device proximity</a>.
+      </p>
+      <p>
+        The <dfn>current user proximity state</dfn> is a user-agent- and
+        platform-specific approximation of the proximity of a physical object
+        with the hosting device.
+      </p>
+      <p>
+        The <dfn>near user proximity</dfn>, a <a>current user proximity
+        state</a>, is an approximation that a physical object is near.
+      </p>
+      <p>
+        The <dfn>far user proximity</dfn>, a <a>current user proximity
+        state</a>, is an approximation that no physical object is near.
       </p>
     </section>
+    
     <section>
       <h2>Security and privacy considerations</h2>
       <p>
@@ -101,10 +127,11 @@
     </section>
     
     <section>
-      <h2>Event handler IDL attribute</h2>
+      <h2>Device proximity</h2>
       <p>
         The HTML5 specification [[!HTML5]] defines a <a>Window</a> interface,
         which this specification extends:
+      </p>
       <dl title="partial interface Window" class="idl">
         <dt>[TreatNonCallableAsNull] attribute Function? ondeviceproximity</dt>
         <dd>
@@ -116,79 +143,74 @@
         as an IDL attribute by all objects implementing the <a>Window</a>
         interface.
       </p>
-    </section>
-    
-    <section>
-      <h2><a>DeviceProximityEvent</a> Interface</h2>
-      <dl title="[Constructor (DOMString type, optional DeviceProximityEventInit eventInitDict)]
-                 interface DeviceProximityEvent : Event"
-          class="idl" data-merge='DeviceProximityEventInit'>
-        <dt>readonly attribute double value</dt>
-        <dd>
-          <a>The current proximity</a>.
-        </dd>
-        <dt>readonly attribute double min</dt>
-        <dd>
-          <a>The minimum proximity</a>.
-        </dd>
-        <dt>readonly attribute double max</dt>
-        <dd>
-          <a>The maximum proximity</a>.
-        </dd>
-      </dl>
-      
-      <dl title="dictionary DeviceProximityEventInit : EventInit" class='idl'>
-        <dt>
-          double value
-        </dt>
-        <dd></dd>
-        <dt>
-          double min
-        </dt>
-        <dd></dd>
-        <dt>
-          double max
-        </dt>
-        <dd></dd>
-      </dl>
-      
       <section>
+        <h2><a>DeviceProximityEvent</a> Interface</h2>
+        <dl title="[Constructor (DOMString type, optional DeviceProximityEventInit eventInitDict)]
+                   interface DeviceProximityEvent : Event"
+            class="idl" data-merge='DeviceProximityEventInit'>
+          <dt>readonly attribute double value</dt>
+          <dd>
+            <a>The current proximity</a>.
+          </dd>
+          <dt>readonly attribute double min</dt>
+          <dd>
+            <a>The minimum device proximity</a>.
+          </dd>
+          <dt>readonly attribute double max</dt>
+          <dd>
+            The <a>maximum device proximity</a>.
+          </dd>
+        </dl>
+        <dl title="dictionary DeviceProximityEventInit : EventInit" class='idl'>
+          <dt>
+            double value
+          </dt>
+          <dd></dd>
+          <dt>
+            double min
+          </dt>
+          <dd></dd>
+          <dt>
+            double max
+          </dt>
+          <dd></dd>
+        </dl>
         <p>
           When a <dfn>user agent</dfn> is required to <dfn>fire a device
           proximity event</dfn>, the <dfn>user agent</dfn> MUST run the
           following steps:
         </p>
         <ol class="rule">
-            <li>
-              <a>Create an event</a> that uses the <a>DeviceProximityEvent</a>
-              interface, with the name <code>deviceproximity</code>, which
-              bubbles, is not cancelable, and has no default action, that also
-              meets the following conditions:
-              <ol>
-                <li>
-                  If the implementation is unable to report <a>the current
-                  proximity</a>, initialize the <code>value</code> attribute
-                  to positive Infinity, otherwise initialize the attribute
-                  to <a>the current proximity</a>.
-                </li>
-                <li>
-                   If the implementation is unable to report <a>the minimum
-                   proximity</a>, initialize the <code>min</code> attribute
-                   to negative Infinity, otherwise initialize the attribute
-                   to <a>the minimum proximity</a>.
-                </li>
-                <li>
-                   If the implementation is unable to report <a>the maximum
-                   proximity</a>, initialize the <code>max</code> attribute
-                   to positive Infinity, otherwise initialize the attribute
-                   to <a>the maximum proximity</a>.
-                </li>
-              </ol>
-            </li>
-            <li>
-              <a>Queue a task</a> to dispatch the newly created event at the
-              <a>Window</a> object.
-            </li>
+          <li>
+            <a>Create an event</a> that uses the <a>DeviceProximityEvent</a>
+            interface, with the name <code>deviceproximity</code>, which
+            bubbles, is not cancelable, and has no default action, that also
+            meets the following conditions:
+            <ol>
+              <li>
+                If the implementation is unable to report <a>the current
+                proximity</a>, initialize the <code>value</code> attribute
+                to positive Infinity, otherwise initialize the attribute
+                to <a>the current proximity</a>.
+              </li>
+              <li>
+                 If the implementation is unable to report the <a>minimum
+                 device proximity</a>, initialize the <code>min</code>
+                 attribute to negative Infinity, otherwise initialize the
+                 attribute to the <a>minimum device proximity</a>.
+              </li>
+              <li>
+                 If the implementation is unable to report the <a>maximum
+                 device proximity</a>, initialize the <code>max</code>
+                 attribute to positive Infinity, otherwise initialize the
+                 attribute to the <a>maximum device proximity</a>.
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a>Queue a task</a> to dispatch the newly created event at the
+            <a>Window</a> object.
+          </li>
         </ol>
         <p>
           When <a>the current proximity</a> changes, the <dfn>user
@@ -197,13 +219,15 @@
         <div class="note">
           The definition of granularity i.e. how often the event is fired is
           left to the implementation. Different devices may also support
-          different minimum and maximum proximities as well as different
+          different minimum and maximum device proximities as well as different
           resolution, thus authors are strongly advised not to assume near or
           far proximity solely based on the <code>min</code> and
           <code>max</code> attributes' values.
         </div>
+        <div class="issue">
+          A means to indicate multiple sensors triggering is currently missing.
+        </div>
       </section>
-      
       <section>
         <h2>Event handlers</h2>
         <p>
@@ -211,7 +235,6 @@
           <a>event handler event types</a>) that MUST be supported as
           attributes by the <code>Window</code> object:
         </p>
-        
         <table class="simple">
           <thead>
             <tr>
@@ -227,19 +250,77 @@
           </tbody>
         </table>
       </section>
-      <div class="issue">
-        Specify another more abstract proximity event that fires only when the
-        screen is close to the user's face as per Jonas' proposal.
+    </section>
+      
+    <section>
+      <h2>User proximity</h2>
+      <div class="note">
+        This section is work in progress to specify an abstract proximity
+        event that fires only when the screen is close to the user's face.
       </div>
-      <div class="issue">
-        A means to indicate multiple sensors triggering is currently missing.
-      </div>
+      <p>
+        The HTML5 specification [[!HTML5]] defines a <a>Navigator</a> interface,
+        which this specification extends:
+      </p>
+      <dl title="partial interface Navigator" class="idl">
+        <dt>readonly attribute DOMString proximitystate</dt>
+        <dd>
+          The <a>current user proximity state</a>.
+        </dd>
+        <dt>[TreatNonCallableAsNull] attribute Function? onproximitystatechange</dt>
+        <dd>
+        </dd>
+      </dl>
+      <p>
+        Each document has a <a>current user proximity state</a>. When a
+        <code>Navigator</code> object is created, it MUST have its <a>current
+        user proximity state</a> set to the string "<code>near</code>", if
+        the <a>current user proximity state</a> represented is the <a>near user
+        proximity</a> state, or to the string "<code>far</code>", if the
+        <a>current state proximity state</a> represented is the <a>far user
+        proximity</a> state. If the implementation is unable to report the
+        state, or otherwise, the string MUST be set to "<code>unknown</code>".
+      </p>
+      <p>
+        The <code><dfn>proximitystate</dfn></code> IDL attribute MUST, on
+        getting, return the <a>current user proximity state</a>.
+      </p>
+      <p>
+        When the <a>current user proximity state</a> is changes, the <a>user
+        agent</a> MUST <a>queue a task</a> which sets the
+        <code><a>proximitystate</a></code> attribute's value and <a>fires a
+        simple event</a> named <code><a>proximitystatechange</a></code> at the
+        <code><a>Window</a></code> object.
+      </p>
+      <section>
+        <h2>Event handlers</h2>
+        <p>
+          The following are the <a>event handlers</a> (and their corresponding
+          <a>event handler event types</a>) that MUST be supported as
+          attributes by the <code>Navigator</code> object:
+        </p>
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>event handler</th>
+              <th>event handler event type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong><code>onproximitystatechange</code></strong></td>
+              <td><code>proximitystatechange</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
     </section>
     
     <section class="appendix">
       <h2>Acknowledgements</h2>
       <p>
-        Doug Turner for the initial prototype.
+        Doug Turner for the initial prototype. All Device APIs working group
+        participants who have sent helpful feedback.
       </p>
     </section>
   </body>
