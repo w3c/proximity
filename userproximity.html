@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Proximity</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <!--script src='http://respec.specifiction.com/js/profiles/w3c-common.js' class='remove'></script-->
+    <script src='http://dev.w3.org/2009/dap/ReSpec.js/js/respec.js' class='remove'></script>
+    <script class="remove">
+      var respecConfig = {
+          specStatus:           "ED",
+          shortName:            "proximity",
+          //publishDate:          "yyyy-mm-dd",
+          //previousPublishDate:  "yyyy-mm-dd",
+          previousMaturity:     "ED",
+          edDraftURI:           "http://dvcs.w3.org/hg/dap/raw-file/tip/proximity/userproximity.html",
+          //lcEnd:                "yyyy-mm-dd",
+          editors:  [
+              { name: "Anssi Kostiainen", company: "Nokia", companyURL: "http://nokia.com/" },
+              { name: "Dzung D Tran", company: "Intel", companyURL: "http://intel.com/" }
+          ],
+          inlineCSS:    true,
+          noIDLIn:      true,
+          //extraCSS:     ["../ReSpec.js/css/respec.css"],
+          extraCSS:     ["http://dev.w3.org/2009/dap/ReSpec.js/css/respec.css"],
+          wg:           "Device APIs Working Group",
+          wgURI:        "http://www.w3.org/2009/dap/",
+          wgPublicList: "public-device-apis",
+          wgPatentURI:  "http://www.w3.org/2004/01/pp-impl/43696/status",
+      };
+    </script>
+  </head>
+  <body>
+    <section id="abstract">
+      This specification defines an event interface that provides information about the
+      proximity of the hosting device to the nearby physical object.
+    </section>
+
+    <section class="informative">
+      <h2>Introduction</h2>
+      <p>
+      </p>
+    </section>
+    
+    <section id="conformance">
+      <p>
+        This specification defines conformance criteria that apply to a single
+        product: the <dfn>user agent</dfn> that implements the
+        interfaces that it contains.
+      </p>
+    </section>
+    <section>
+      <h2>Terminology</h2>
+      <p>
+        The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#function">
+        Function</a></code> interface represents a function in the scripting
+        language being used as defined in [[!HTML5]].
+      </p>
+      <p>
+        The concept <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
+        queue a task</a></dfn> is defined in [[!HTML5]].
+      </p>
+      <p>
+        The terms <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handlers">
+        event handlers</a></dfn> and
+        <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#event-handler-event-type">
+        event handler event types</a></dfn> are defined in [[!HTML5]].
+      </p>
+      <p>The concepts <dfn>
+      <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#constructing-events">
+      create an event</a></dfn> and <dfn>
+      <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#firing-events">
+      fire an event</a></dfn> are defined in [[!DOM4]].
+      <p>
+        <dfn>The user proximity</dfn> is a boolean value that represents the presence of the 
+        user or a physical object near the hosting device.
+      </p>
+    </section>
+    <section>
+      <h2>Security and privacy considerations</h2>
+	  <p>An implementation of this specification SHOULD provide a mechanism that protects the user's privacy and this mechanism should ensure that
+	  no sensitive information is made available through this event without the user's express permission. User agents SHOULD acquire permission through a 
+      user interface, unless they have prearranged trust relationships with users. </p>
+    </section>
+    
+    <section>
+      <h2>Event handler IDL attribute</h2>
+      <p>
+        The HTML5 specification [[!HTML5]] defines a <a>Window</a> interface,
+        which this specification extends:
+      <dl title="partial interface Window" class="idl">
+        <dt>[TreatNonCallableAsNull] attribute Function? onuserproximity</dt>
+        <dd>
+        </dd>
+      </dl>
+      <p>
+        The <code>onuserproximity</code> event handler and its corresponding
+        event handler event type <code>userproximity</code> MUST be supported
+        as an IDL attribute by all objects implementing the <a>Window</a>
+        interface.
+      </p>
+    </section>
+    
+    <section>
+      <h2><a>UserProximityEvent</a> Interface</h2>
+      <dl title="[Constructor (DOMString type, optional UserProximityEventInit eventInitDict)]
+                 interface UserProximityEvent : Event"
+          class="idl" data-merge='UserProximityEventInit'>
+        <dt>readonly attribute boolean near</dt>
+        <dd>
+          <a>The current proximity that represents the presence of the user or a physical object near the hosting device
+          with a UA/OS/sensor-specific degree of confidence.
+        </dd>
+      </dl>
+      
+      <dl title="dictionary UserProximityEventInit : EventInit" class='idl'>
+        <dt>
+          boolean near
+        </dt>
+        <dd></dd>
+      </dl>
+      
+      <section>
+        <p>
+          When a <dfn>user agent</dfn> is required to <dfn>fire a user
+          proximity event</dfn>, the <dfn>user agent</dfn> MUST run the
+          following steps:
+        </p>
+        <ol class="rule">
+            <li>
+              <a>Create an event</a> that uses the <a>UserProximityEvent</a>
+              interface, with the name <code>userproximity</code>, which
+              bubbles, is not cancelable, and has no default action, that only fires 
+              the event if the implementation is able to report <a>the user proximity</a>. 
+            </li>
+            <li>
+              <a>Queue a task</a> to dispatch the newly created event at the
+              <a>Window</a> object.
+            </li>
+        </ol>
+        <p>
+          When <a>the user proximity</a> toggles from its previous state either 
+          from true to false or vice versa, the <dfn>user
+          agent</dfn> MUST <a>fire a user proximity event</a>.
+        </p>
+      </section>
+      
+      <section>
+        <h2>Event handlers</h2>
+        <p>
+          The following are the <a>event handlers</a> (and their corresponding
+          <a>event handler event types</a>) that MUST be supported as
+          attributes by the <code>Window</code> object:
+        </p>
+        
+        <table class="simple">
+          <thead>
+            <tr>
+              <th>event handler</th>
+              <th>event handler event type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong><code>onuserproximity</code></strong></td>
+              <td><code>userproximity</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+    
+    <section class="appendix">
+      <h2>Acknowledgements</h2>
+       <p>Mozilla's <a href="http://dougturner.wordpress.com/2012/03/26/device-light-sensor/">Device Light Sensor APIs</a> 
+       and <a href="http://dougturner.wordpress.com/2012/03/22/device-proximity-sensor/">Device Proximity Sensor API</a>, in particular Doug Turner</p>
+        <p>Marcos Caceres from W3C and Bryan Sullivan from AT&T</p>
+      </p>
+    </section>
+  </body>
+</html>
