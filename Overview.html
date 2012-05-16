@@ -281,14 +281,15 @@
           proximity</a> state, or to the string "<code>far</code>", if the
           <a>current state proximity state</a> represented is the <a>far user
           proximity</a> state. If the implementation is unable to report the
-          state, or otherwise, the string MUST be set to "<code>unknown</code>".
+          state, or otherwise, the string MUST be set to
+          "<code>uninitialized</code>".
         </p>
         <p>
           The <code><dfn>proximitystate</dfn></code> IDL attribute MUST, on
           getting, return the <a>current user proximity state</a>.
         </p>
         <p>
-          When the <a>current user proximity state</a> is changes, the <a>user
+          When the <a>current user proximity state</a> changes, the <a>user
           agent</a> MUST <a>queue a task</a> which sets the
           <code><a>proximitystate</a></code> attribute's value and <a>fires a
           simple event</a> named <code><a>proximitystatechange</a></code> at the
