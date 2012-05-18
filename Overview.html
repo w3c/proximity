@@ -220,9 +220,9 @@
           The definition of granularity i.e. how often the event is fired is
           left to the implementation. Different devices may also support
           different minimum and maximum device proximities as well as different
-          resolution, thus authors are strongly advised not to assume near or
-          far proximity solely based on the <code>min</code> and
-          <code>max</code> attributes' values.
+          resolution, thus authors are strongly advised to use the
+          <a href="#user-proximity">user proximity</a> event if the are only
+          interested in finding out if the user is near or far.
         </div>
         <section>
           <h2>Event handlers</h2>
