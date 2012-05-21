@@ -54,10 +54,9 @@
         nearby object.
       </p>
       <p>
-        The <code><a>proximitystate</a></code>
-        and the corresponding event handler abstract the proximity by
-        providing a user-agent- and platform-specific approximation of the
-        proximity.
+        The <a>UserProximityEvent</a> interface provides web developers
+        a user-agent- and platform-specific approximation of a proximity of
+        the user.
       </p>
     </section>
     
@@ -107,16 +106,8 @@
       </p>
       <p>
         The <dfn>current user proximity state</dfn> is a user-agent- and
-        platform-specific approximation of the proximity of a physical object
-        with the hosting device.
-      </p>
-      <p>
-        The <dfn>near user proximity</dfn>, a <a>current user proximity
-        state</a>, is an approximation that a physical object is near.
-      </p>
-      <p>
-        The <dfn>far user proximity</dfn>, a <a>current user proximity
-        state</a>, is an approximation that no physical object is near.
+        platform-specific approximation of the proximity of a physical object,
+        typically a user, with the hosting device.
       </p>
     </section>
     
@@ -221,8 +212,8 @@
           left to the implementation. Different devices may also support
           different minimum and maximum device proximities as well as different
           resolution, thus authors are strongly advised to use the
-          <a href="#user-proximity">user proximity</a> event if the are only
-          interested in finding out if the user is near or far.
+          <a>UserProximityEvent</a> interface if the are only interested in
+          finding out if the user is near or far.
         </div>
         <section>
           <h2>Event handlers</h2>
@@ -251,53 +242,72 @@
       
     <section>
       <h2>User proximity</h2>
-      <div class="note">
-        This section is work in progress to specify an abstract proximity
-        event that fires only when the screen is close to the user's face.
-      </div>
+      <p>
+        The HTML5 specification [[!HTML5]] defines a <a>Window</a> interface,
+        which this specification extends:
+      </p>
+      <dl title="partial interface Window" class="idl">
+        <dt>[TreatNonCallableAsNull] attribute Function? onuserproximity</dt>
+        <dd>
+        </dd>
+      </dl>
+      <p>
+        The <code>onuserproximity</code> event handler and its corresponding
+        event handler event type <code>userproximity</code> MUST be supported
+        as an IDL attribute by all objects implementing the <a>Window</a>
+        interface.
+      </p>
       <section>
-        <h2>The <code>proximitystate</code> attribute</h2>
-        <p>
-          The HTML5 specification [[!HTML5]] defines a <a>Navigator</a> interface,
-          which this specification extends:
-        </p>
-        <dl title="partial interface Navigator" class="idl">
-          <dt>readonly attribute DOMString proximitystate</dt>
+        <h2><a>UserProximityEvent</a> Interface</h2>
+        <dl title="[Constructor (DOMString type, optional UserProximityEventInit eventInitDict)]
+                   interface UserProximityEvent : Event"
+            class="idl" data-merge='UserProximityEventInit'>
+          <dt>readonly attribute boolean near</dt>
           <dd>
             The <a>current user proximity state</a>.
           </dd>
-          <dt>[TreatNonCallableAsNull] attribute Function? onproximitystatechange</dt>
-          <dd>
-          </dd>
+        </dl>
+        <dl title="dictionary UserProximityEventInit : EventInit" class='idl'>
+          <dt>
+            boolean near
+          </dt>
+          <dd></dd>
         </dl>
         <p>
-          Each document has a <a>current user proximity state</a>. When a
-          <code>Navigator</code> object is created, it MUST have its <a>current
-          user proximity state</a> set to the string "<code>near</code>", if
-          the <a>current user proximity state</a> represented is the <a>near user
-          proximity</a> state, or to the string "<code>far</code>", if the
-          <a>current state proximity state</a> represented is the <a>far user
-          proximity</a> state. If the implementation is unable to report the
-          state, or otherwise, the string MUST be set to
-          "<code>uninitialized</code>".
+          When a <dfn>user agent</dfn> is required to <dfn>fire a user
+          proximity event</dfn>, the <dfn>user agent</dfn> MUST run the
+          following steps:
         </p>
+        <ol class="rule">
+          <li>
+            <a>Create an event</a> that uses the <a>UserProximityEvent</a>
+            interface, with the name <code>userproximity</code>, which bubbles,
+            is not cancelable, and has no default action, that also meets the
+            following conditions:
+            <ol>
+              <li>
+                If the implementation is unable to report the <a>current user
+                proximity state</a>, initialize the <code>near</code> attribute
+                to false, otherwise initialize the attribute to the <a>current
+                user proximity state</a>.
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a>Queue a task</a> to dispatch the newly created event at the
+            <a>Window</a> object.
+          </li>
+        </ol>
         <p>
-          The <code><dfn>proximitystate</dfn></code> IDL attribute MUST, on
-          getting, return the <a>current user proximity state</a>.
-        </p>
-        <p>
-          When the <a>current user proximity state</a> changes, the <a>user
-          agent</a> MUST <a>queue a task</a> which sets the
-          <code><a>proximitystate</a></code> attribute's value and <a>fires a
-          simple event</a> named <code><a>proximitystatechange</a></code> at the
-          <code><a>Window</a></code> object.
+          When the <a>current user proximity state</a> changes, the <dfn>user
+          agent</dfn> MUST <a>fire a user proximity event</a>.
         </p>
         <section>
           <h2>Event handlers</h2>
           <p>
             The following are the <a>event handlers</a> (and their corresponding
             <a>event handler event types</a>) that MUST be supported as
-            attributes by the <code>Navigator</code> object:
+            attributes by the <code>Window</code> object:
           </p>
           <table class="simple">
             <thead>
@@ -308,8 +318,8 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong><code>onproximitystatechange</code></strong></td>
-                <td><code>proximitystatechange</code></td>
+                <td><strong><code>onuserproximity</code></strong></td>
+                <td><code>userproximity</code></td>
               </tr>
             </tbody>
           </table>
