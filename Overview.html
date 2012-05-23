@@ -209,11 +209,13 @@
         </p>
         <div class="note">
           The definition of granularity i.e. how often the event is fired is
-          left to the implementation. Different devices may also support
-          different minimum and maximum device proximities as well as different
-          resolution, thus authors are strongly advised to use the
-          <a>UserProximityEvent</a> interface if the are only interested in
-          finding out if the user is near or far.
+          left to the implementation. Implementations may fire the event if
+          they have reason to believe that the page does not have sufficiently
+          fresh data. Different devices may also support different minimum and
+          maximum device proximities as well as different resolution, thus
+          authors are strongly advised to use the <a>UserProximityEvent</a>
+          interface if the are only interested in finding out if the user is
+          near or far.
         </div>
         <section>
           <h2>Event handlers</h2>
