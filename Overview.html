@@ -39,10 +39,11 @@
       <p>
         The functionality described in this specification was initially
         specified as part of the
-        <a href="http://dvcs.w3.org/hg/dap/raw-file/tip/sensor-api/Overview.html">Sensor
-        API</a> but has been extracted in order to be more straightforward to implement,
-        and in order to produce a specification that could be implemented on its own merits without
-        interference with other features.
+        <a href="http://dvcs.w3.org/hg/dap/raw-file/tip/sensor-api/Overview.html">
+        Sensor API</a> but has been extracted in order to be more
+        straightforward to implement, and in order to produce a specification
+        that could be implemented on its own merits without interference with
+        other features.
       </p>
     </section>
     
@@ -50,13 +51,34 @@
       <h2>Introduction</h2>
       <p>
         The <a>DeviceProximityEvent</a> interface provides web developers
-        information about the distance between the hosting device and the
+        information about the distance between the hosting device and a
         nearby object.
       </p>
       <p>
         The <a>UserProximityEvent</a> interface provides web developers
         a user-agent- and platform-specific approximation that the hosting
         device has sensed a nearby object.
+      </p>
+      <p>
+        This is achieved by interrogating a proximity sensor of a device, which
+        is a sensor that can detect the presence of a physical object without
+        physical contact. Not all devices contain a proximity sensor, and when
+        there is no proximity sensor, this API is still exposed to the
+        scripting environment but it does nothing.
+      </p>
+      <p>
+        Because most proximity sensors detect electromagnetic radiation (e.g.,
+        an infrared light or a magnetic field), certain material properties can
+        interfere with the sensor's ability to sense the presence of a physical
+        object. Things that can interfere with a sensor include, but are not
+        limited to, the material's translucency, reflectiveness, color,
+        temperature, chemical composition, and even the angle at which the
+        object is reflecting the radiation back at the sensor. As such,
+        proximity sensors should not be relied on as a means to measure
+        distance: the only thing that can be deduced from a proximity sensor is
+        that an object is somewhere in the distance between the minimum device
+        proximity and the maximum device proximity with some degree of
+        certainty.
       </p>
     </section>
     
@@ -93,16 +115,18 @@
       <a href="http://dvcs.w3.org/hg/domcore/raw-file/tip/Overview.html#firing-events">
       fire an event</a></dfn> are defined in [[!DOM4]].
       <p>
-        The <dfn>current device proximity</dfn> is the distance between the hosting
-        device and the nearby object, in centimeters.
+        The <dfn>current device proximity</dfn> is a value that represents the
+        proximity of the hosting device to a physical object (i.e., some value
+        between the <a>maximum sensing distance</a> and the <a>minimum sensing
+        distance</a>), in centimeters.
       </p>
       <p>
-        The <dfn>minimum device proximity</dfn> is the minimum supported value for
-        the <a>current device proximity</a>.
+        The <dfn>minimum sensing distance</dfn> at which the sensor can detect
+        a physical object. 
       </p>
       <p>
-        The <dfn>maximum device proximity</dfn> is the maximum supported value for
-        the <a>current device proximity</a>.
+        The <dfn>maximum sensing distance</dfn> at which the sensor can detect
+        a physical object.
       </p>
       <p>
         The <dfn>current user proximity state</dfn>, a boolean state, is a
@@ -145,11 +169,11 @@
           </dd>
           <dt>readonly attribute double min</dt>
           <dd>
-            The <a> minimum device proximity</a>.
+            The <a> minimum sensing distance</a>.
           </dd>
           <dt>readonly attribute double max</dt>
           <dd>
-            The <a>maximum device proximity</a>.
+            The <a>maximum sensing distance<strong></strong></a>.
           </dd>
         </dl>
         <dl title="dictionary DeviceProximityEventInit : EventInit" class='idl'>
@@ -186,15 +210,15 @@
               </li>
               <li>
                  If the implementation is unable to report the <a>minimum
-                 device proximity</a>, initialize the <code>min</code>
+                 sensing distance</a>, initialize the <code>min</code>
                  attribute to negative Infinity, otherwise initialize the
-                 attribute to the <a>minimum device proximity</a>.
+                 attribute to the <a>minimum sensing distance</a>.
               </li>
               <li>
                  If the implementation is unable to report the <a>maximum
-                 device proximity</a>, initialize the <code>max</code>
+                 sensing distance</a>, initialize the <code>max</code>
                  attribute to positive Infinity, otherwise initialize the
-                 attribute to the <a>maximum device proximity</a>.
+                 attribute to the <a>maximum sensing distance</a>.
               </li>
             </ol>
           </li>
@@ -212,7 +236,7 @@
           left to the implementation. Implementations may fire the event if
           they have reason to believe that the page does not have sufficiently
           fresh data. Different devices may also support different minimum and
-          maximum device proximities as well as different resolution, thus
+          maximum sensing distances as well as different resolution, thus
           authors are strongly advised to use the <a>UserProximityEvent</a>
           interface if the are only interested in finding out if the user is
           near or far.
