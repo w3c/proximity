@@ -93,9 +93,9 @@
     <section>
       <h2>Terminology</h2>
       <p>
-        The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#function">
-        Function</a></code> interface represents a function in the scripting
-        language being used as defined in [[!HTML5]].
+        The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
+        EventHandler</a></code> interface represents a callback used for event
+        handlers as defined in [[!HTML5]].
       </p>
       <p>
         The concepts <dfn><a href="http://dev.w3.org/html5/spec/webappapis.html#queue-a-task">
@@ -148,7 +148,7 @@
         which this specification extends:
       </p>
       <dl title="partial interface Window" class="idl">
-        <dt>[TreatNonCallableAsNull] attribute Function? ondeviceproximity</dt>
+        <dt>attribute EventHandler ondeviceproximity</dt>
         <dd>
         </dd>
       </dl>
@@ -273,7 +273,7 @@
         which this specification extends:
       </p>
       <dl title="partial interface Window" class="idl">
-        <dt>[TreatNonCallableAsNull] attribute Function? onuserproximity</dt>
+        <dt>attribute EventHandler onuserproximity</dt>
         <dd>
         </dd>
       </dl>
