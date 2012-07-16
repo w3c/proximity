@@ -239,10 +239,12 @@
 
     test(function() {
         var desc = 'window.onuserproximity did not accept callable object',
-            func = function() {}
+            func = function() {},
+            desc = 'onuserproximity does not exist';
+        assert_own_property(window, 'onuserproximity', desc);
         window.onuserproximity = func;
         assert_equals(window.onuserproximity, func, desc);
-    }, 'onuserproximity is set to function');
+    }, 'onuserproximity exists and can be set to a function');
 
     test(function() {
         var desc = 'window.onuserproximity did not treat noncallable as null';

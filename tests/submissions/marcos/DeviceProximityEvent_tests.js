@@ -247,7 +247,9 @@
 
     test(function() {
         var desc = 'window.ondeviceproximity did not accept callable object',
-            func = function() {};
+            func = function() {},
+            desc = 'Expected to find ondeviceproximity attribute on window object';
+        assert_own_property(window, 'ondeviceproximity', desc);
         window.ondeviceproximity = func;
         assert_equals(window.ondeviceproximity, func, desc);
     }, 'ondeviceproximity is set to function');
