@@ -237,7 +237,7 @@
     }, 'value props check');
     test(function() {
         var desc = 'Expected to find ondeviceproximity attribute on window object';
-        assert_equals('ondeviceproximity' in window, desc);
+        assert_idl_attribute(window,'ondeviceproximity', desc);
     }, 'ondeviceproximity exists');
 
     test(function() {
@@ -249,7 +249,7 @@
         var desc = 'window.ondeviceproximity did not accept callable object',
             func = function() {},
             desc = 'Expected to find ondeviceproximity attribute on window object';
-        assert_equals('ondeviceproximity' in window, desc);
+        assert_idl_attribute(window,'ondeviceproximity', desc);
         window.ondeviceproximity = func;
         assert_equals(window.ondeviceproximity, func, desc);
     }, 'ondeviceproximity is set to function');
