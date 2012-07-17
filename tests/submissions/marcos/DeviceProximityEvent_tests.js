@@ -41,7 +41,7 @@
 
     //Type attribute tests
     test(function() {
-        assert_throws(TypeError(), function() {
+        assert_throws(null, function() {
             new DeviceProximityEvent();
         }, 'First argument is required, so was expecting a TypeError.');
     }, 'Missing type argument');
