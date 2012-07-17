@@ -117,7 +117,7 @@
 
     test(function() {
         var event = new UserProximityEvent(function test() {});
-        assert_regex_match(event.type, /function test.+{\s?}/);
+        assert_regexp_match(event.type, /function test.+{\s?}/);
     }, 'type argument is function');
 
     test(function() {
