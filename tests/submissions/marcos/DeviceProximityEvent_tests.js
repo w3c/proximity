@@ -174,67 +174,6 @@
         assert_readonly(event, 'max', 'readonly attribute max');
     }, 'max attribute is readonly');
 
-
-    test(function() {
-        var dic = {
-            min: 3,
-            max: 7,
-            value: 13
-        },
-            event = new DeviceProximityEvent('test', dic),
-            props = {
-                writable: false,
-                enumerable: true,
-                configurable: true
-            },
-            eProps = Object.getOwnPropertyDescriptor(event, 'max'),
-            writable = eProps.writable === props.writable,
-            enumerable = eProps.enumerable === props.enumerable,
-            config = eProps.configurable === props.configurable;
-        assert_true(writable && enumerable && config);
-    }, 'min props check');
-
-    test(function() {
-        //the max attribute
-        var dic = {
-            min: 3,
-            max: 7,
-            value: 13
-        },
-            event = new DeviceProximityEvent('test', dic),
-            props = {
-                writable: false,
-                enumerable: true,
-                configurable: true
-            },
-            eProps = Object.getOwnPropertyDescriptor(event, 'max'),
-            writable = eProps.writable === props.writable,
-            enumerable = eProps.enumerable === props.enumerable,
-            config = eProps.configurable === props.configurable;
-
-        assert_true(writable && enumerable && config);
-
-    }, 'max props check');
-
-    test(function() {
-        var dic = {
-            min: 3,
-            max: 7,
-            value: 13
-        },
-            event = new DeviceProximityEvent('test', dic),
-            props = {
-                writable: false,
-                enumerable: true,
-                configurable: true
-            },
-            eProps = Object.getOwnPropertyDescriptor(event, 'value'),
-            writable = eProps.writable === props.writable,
-            enumerable = eProps.enumerable === props.enumerable,
-            config = eProps.configurable === props.configurable;
-
-        assert_true(writable && enumerable && config);
-    }, 'value props check');
     test(function() {
         var desc = 'Expected to find ondeviceproximity attribute on window object';
         assert_idl_attribute(window, 'ondeviceproximity', desc);
