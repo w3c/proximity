@@ -210,15 +210,6 @@
     }, 'treat object with non-callable call property as null');
 
     test(function() {
-        var desc = 'window.ondeviceproximity did not treat noncallable as null',
-            test = function() {};
-        test.call = 'test';
-        window.ondeviceproximity = function() {};
-        window.ondeviceproximity = test;
-        assert_equals(window.ondeviceproximity, null, desc);
-    }, 'treat object with non-callable call property as null');
-
-    test(function() {
         var desc = 'window.ondeviceproximity did not treat noncallable (string) as null';
         window.ondeviceproximity = function() {};
         window.ondeviceproximity = 'string';
