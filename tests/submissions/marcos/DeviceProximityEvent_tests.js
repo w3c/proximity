@@ -143,17 +143,17 @@
     //test the attributes exist
     test(function() {
         var event = new DeviceProximityEvent('test');
-        assert_own_property(event, 'value', 'must have attribute value');
+        assert_idl_attribute(event, 'value', 'must have attribute value');
     }, 'value attribute exist');
 
     test(function() {
         var event = new DeviceProximityEvent('test');
-        assert_own_property(event, 'min', 'must have attribute min');
+        assert_idl_attribute(event, 'min', 'must have attribute min');
     }, 'min attribute exist');
 
     test(function() {
         var event = new DeviceProximityEvent('test');
-        assert_own_property(event, 'max', 'must have attribute max');
+        assert_idl_attribute(event, 'max', 'must have attribute max');
     }, 'max attribute exist');
 
     //test readonly attribute double value;
@@ -237,7 +237,7 @@
     }, 'value props check');
     test(function() {
         var desc = 'Expected to find ondeviceproximity attribute on window object';
-        assert_idl_attribute(window,'ondeviceproximity', desc);
+        assert_idl_attribute(window, 'ondeviceproximity', desc);
     }, 'ondeviceproximity exists');
 
     test(function() {
@@ -249,7 +249,7 @@
         var desc = 'window.ondeviceproximity did not accept callable object',
             func = function() {},
             desc = 'Expected to find ondeviceproximity attribute on window object';
-        assert_idl_attribute(window,'ondeviceproximity', desc);
+        assert_idl_attribute(window, 'ondeviceproximity', desc);
         window.ondeviceproximity = func;
         assert_equals(window.ondeviceproximity, func, desc);
     }, 'ondeviceproximity is set to function');

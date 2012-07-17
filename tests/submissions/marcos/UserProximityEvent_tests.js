@@ -142,6 +142,12 @@
     //test readonly attribute boolean near;
     test(function() {
         var event = new UserProximityEvent('test');
+        assert_idl_attribute(event, 'near', 'must have attribute near');
+    }, 'must have attribute near');
+
+
+    test(function() {
+        var event = new UserProximityEvent('test');
         assert_readonly(event, 'near', 'readonly attribute near');
     }, 'near is readonly');
 
@@ -229,7 +235,7 @@
 
     test(function() {
         var desc = 'Expected to find onuserproximity attribute on window object';
-        assert_idl_attribute(window,'onuserproximity', desc)
+        assert_idl_attribute(window, 'onuserproximity', desc);
     }, 'onuserproximity exists');
 
     test(function() {
@@ -241,7 +247,7 @@
         var desc = 'window.onuserproximity did not accept callable object',
             func = function() {},
             desc = 'onuserproximity does not exist';
-        assert_idl_attribute(window,'onuserproximity', desc);
+        assert_idl_attribute(window, 'onuserproximity', desc);
         window.onuserproximity = func;
         assert_equals(window.onuserproximity, func, desc);
     }, 'onuserproximity exists and can be set to a function');
