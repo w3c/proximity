@@ -131,7 +131,7 @@
     }, 'type argument is complext object, with toString method');
 
     test(function() {
-        assert_throws(TypeError(), function() {
+        assert_throws(null, function() {
             new DeviceProximityEvent({
                 toString: function() {
                     return function() {}

@@ -40,7 +40,7 @@
 
     //Type attribute tests
     test(function() {
-        assert_throws(TypeError(), function() {
+        assert_throws(null, function() {
             new UserProximityEvent();
         }, 'First argument is required, so was expecting a TypeError.');
     }, 'Missing type argument');
@@ -130,7 +130,7 @@
     }, 'type argument is complext object, with toString method');
 
     test(function() {
-        assert_throws(TypeError(), function() {
+        assert_throws(null, function() {
             new UserProximityEvent({
                 toString: function() {
                     return function() {}
