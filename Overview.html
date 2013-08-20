@@ -382,7 +382,7 @@ table.exceptions table {
     border-collapse:    collapse;
     width:  100%;
 }
-</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
+</style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
   <body class="h-entry" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
   <p>
     
@@ -391,7 +391,7 @@ table.exceptions table {
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Proximity Events</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2013-08-20T17:05:34.000Z" id="w3c-editor-s-draft-20-august-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2013-08-20">20 August 2013</time></h2>
+  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2013-08-20T17:19:21.000Z" id="w3c-editor-s-draft-20-august-2013"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2013-08-20">20 August 2013</time></h2>
   <dl>
     
       <dt>This version:</dt>
@@ -584,6 +584,13 @@ table.exceptions table {
         This specification defines conformance criteria that apply to a single
         product: the <dfn id="dfn-user-agent">user agent</dfn> that implements the
         interfaces that it contains.
+      </p>
+      <p>
+        Implementations that use ECMAScript to implement the APIs
+        defined in this specification must implement them in a manner
+        consistent with the ECMAScript Bindings defined in the Web IDL
+        specification [<cite><a class="bibref" href="#bib-WEBIDL">WEBIDL</a></cite>], as this specification uses that
+        specification and terminology.
       </p>
     </section>
     
@@ -899,4 +906,5 @@ interface <span class="idlInterfaceID">UserProximityEvent</span> : <span class="
 <section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:chapter"><h3 aria-level="2" role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-DOM4">[DOM4]</dt><dd rel="dcterms:requires">Anne van Kesteren; Aryeh Gregor; Lachlan Hunt; Ms2ger. <a href="http://www.w3.org/TR/dom/"><cite>DOM4</cite></a>. 6 December 2012. W3C Working Draft. URL: <a href="http://www.w3.org/TR/dom/">http://www.w3.org/TR/dom/</a>
 </dd><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 6 August 2013. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
 </dd><dt id="bib-RFC2119">[RFC2119]</dt><dd rel="dcterms:requires">S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a> March 1997. Internet RFC 2119.  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a> 
+</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd rel="dcterms:requires">Cameron McCormack. <a href="http://www.w3.org/TR/WebIDL/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/WebIDL/">http://www.w3.org/TR/WebIDL/</a>
 </dd></dl></section></section></body></html>
