@@ -711,7 +711,8 @@ table.exceptions table {
 <span class="idlAttribute">                attribute <span class="idlAttrType"><a>EventHandler</a></span> <span class="idlAttrName"><a href="#widl-Window-ondeviceproximity">ondeviceproximity</a></span>;</span>
 };</span></pre>
       <p>
-        The <code>ondeviceproximity</code> event handler and its corresponding
+        The <code id="widl-Window-ondeviceproximity">ondeviceproximity</code>
+        event handler and its corresponding
         event handler event type <code>deviceproximity</code> <em class="rfc2119" title="MUST">MUST</em> be supported
         as an IDL attribute by all objects implementing the <a href="#idl-def-Window" class="idlType"><code>Window</code></a>
         interface.
@@ -730,19 +731,25 @@ interface <span class="idlInterfaceID">DeviceProximityEvent</span> : <span class
 };</span></pre>
         
         <p>
-          The <code>value</code> attribute of the <a href="#idl-def-DeviceProximityEvent" class="idlType"><code>DeviceProximityEvent</code></a>
+          The <code id="widl-DeviceProximityEvent-value">value</code>
+          <code id="widl-DeviceProximityEventInit-value"></code>
+          attribute of the <a href="#idl-def-DeviceProximityEvent" class="idlType"><code>DeviceProximityEvent</code></a>
           interface <em class="rfc2119" title="MUST">MUST</em> return the value it was initialized to. When the
           object is created, this attribute <em class="rfc2119" title="MUST">MUST</em> be initialized to positive
           Infinity. It represents the <a href="#dfn-current-device-proximity" class="internalDFN">current device proximity</a>.
         </p>
         <p>
-          The <code>min</code> attribute of the <a href="#idl-def-DeviceProximityEvent" class="idlType"><code>DeviceProximityEvent</code></a>
+          The <code id="widl-DeviceProximityEvent-min">min</code>
+          <code id="widl-DeviceProximityEventInit-min"></code>
+          attribute of the <a href="#idl-def-DeviceProximityEvent" class="idlType"><code>DeviceProximityEvent</code></a>
           interface <em class="rfc2119" title="MUST">MUST</em> return the value it was initialized to. When the
           object is created, this attribute <em class="rfc2119" title="MUST">MUST</em> be initialized to negative
           Infinity. It represents the <a href="#dfn-minimum-sensing-distance" class="internalDFN">minimum sensing distance</a>.
         </p>
         <p>
-          The <code>max</code> attribute of the <a href="#idl-def-DeviceProximityEvent" class="idlType"><code>DeviceProximityEvent</code></a>
+          The <code id="widl-DeviceProximityEvent-max">max</code>
+          <code id="widl-DeviceProximityEventInit-max"></code>
+          attribute of the <a href="#idl-def-DeviceProximityEvent" class="idlType"><code>DeviceProximityEvent</code></a>
           interface <em class="rfc2119" title="MUST">MUST</em> return the value it was initialized to. When the
           object is created, this attribute <em class="rfc2119" title="MUST">MUST</em> be initialized to positive
           Infinity. It represents the <a href="#dfn-maximum-sensing-distance" class="internalDFN">maximum sensing distance</a>.
@@ -830,7 +837,8 @@ interface <span class="idlInterfaceID">DeviceProximityEvent</span> : <span class
 <span class="idlAttribute">                attribute <span class="idlAttrType"><a>EventHandler</a></span> <span class="idlAttrName"><a href="#widl-Window-onuserproximity">onuserproximity</a></span>;</span>
 };</span></pre>
       <p>
-        The <code>onuserproximity</code> event handler and its corresponding
+        The <code id="widl-Window-onuserproximity">onuserproximity</code>
+        event handler and its corresponding
         event handler event type <code>userproximity</code> <em class="rfc2119" title="MUST">MUST</em> be supported
         as an IDL attribute by all objects implementing the <a href="#idl-def-Window" class="idlType"><code>Window</code></a>
         interface.
@@ -845,7 +853,9 @@ interface <span class="idlInterfaceID">UserProximityEvent</span> : <span class="
 };</span></pre>
         
         <p>
-          The <code>near</code> attribute of the <a href="#idl-def-UserProximityEvent" class="idlType"><code>UserProximityEvent</code></a>
+          The <code id="widl-UserProximityEvent-near">near</code>
+          <code id="widl-UserProximityEventInit-near"></code>
+          attribute of the <a href="#idl-def-UserProximityEvent" class="idlType"><code>UserProximityEvent</code></a>
           interface <em class="rfc2119" title="MUST">MUST</em> return the value it was initialized to. When the
           object is created, this attribute <em class="rfc2119" title="MUST">MUST</em> be initialized to false.
           It represents the <a href="#dfn-current-user-proximity-state" class="internalDFN">current user proximity state</a>.
