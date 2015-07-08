@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" typeof="bibo:Document " about="" property="dcterms:language" content="en">
-<head>
+<html lang="en" dir="ltr" typeof="bibo:Document " prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#">
+<head><meta lang="" property="dc:language" content="en">
     <title>Proximity Events</title>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
     
@@ -48,7 +48,7 @@ cite .bibref {
 }
 
 code {
-    color:  #ff4500;
+    color:  #C83500;
 }
 
 /* --- TOC --- */
@@ -121,44 +121,71 @@ table.simple {
     }
 }
 </style><style>/* --- ISSUES/NOTES --- */
-div.issue-title, div.note-title {
+div.issue-title, div.note-title , div.ednote-title, div.warning-title {
     padding-right:  1em;
     min-width: 7.5em;
     color: #b9ab2d;
 }
 div.issue-title { color: #e05252; }
-div.note-title { color: #2b2; }
-div.issue-title span, div.note-title span {
+div.note-title, div.ednote-title { color: #2b2; }
+div.warning-title { color: #f22; }
+div.issue-title span, div.note-title span, div.ednote-title span, div.warning-title span {
     text-transform: uppercase;
 }
-div.note, div.issue {
+div.note, div.issue, div.ednote, div.warning {
     margin-top: 1em;
     margin-bottom: 1em;
 }
-.note > p:first-child, .issue > p:first-child { margin-top: 0 }
-.issue, .note {
+.note > p:first-child, .ednote > p:first-child, .issue > p:first-child, .warning > p:first-child { margin-top: 0 }
+.issue, .note, .ednote, .warning {
     padding: .5em;
     border-left-width: .5em;
     border-left-style: solid;
 }
-div.issue, div.note {
+div.issue, div.note , div.ednote,  div.warning {
     padding: 1em 1.2em 0.5em;
     margin: 1em 0;
     position: relative;
     clear: both;
 }
-span.note, span.issue { padding: .1em .5em .15em; }
+span.note, span.ednote, span.issue, span.warning { padding: .1em .5em .15em; }
 
 .issue {
     border-color: #e05252;
     background: #fbe9e9;
 }
-.note {
+.note, .ednote {
     border-color: #52e052;
     background: #e9fbe9;
 }
 
+.warning {
+    border-color: #f11;
+    border-right-width: .2em;
+    border-top-width: .2em;
+    border-bottom-width: .2em;
+    border-style: solid;
+    background: #fbe9e9;
+}
 
+.warning-title:before{
+    content: "⚠"; /*U+26A0 WARNING SIGN*/
+    font-size: 3em;
+    float: left;
+    height: 100%;
+    padding-right: .3em;
+    vertical-align: top;
+    margin-top: -0.5em;
+}
+
+li.task-list-item {
+    list-style: none;
+}
+
+input.task-list-item-checkbox {
+    margin: 0 0.35em 0.25em -1.6em;
+    vertical-align: middle;
+}
 </style><style>/* --- WEB IDL --- */
 pre.idl {
     border-top: 1px solid #90b8de;
@@ -173,7 +200,7 @@ pre.idl::before {
     width:      150px;
     background: #90b8de;
     color:  #fff;
-    font-family:    initial;
+    font-family:    sans-serif;
     padding:    3px;
     font-weight:    bold;
     margin: -1em 0 1em -1em;
@@ -254,6 +281,16 @@ a.idlEnumItem {
 /*.idlSectionComment*/
 .idlSectionComment {
     color: gray;
+}
+
+/*.idlIterable*/
+.idlIterableKeyType, .idlIterableValueType {
+    color:  #005a9c;
+}
+
+/*.idlMaplike*/
+.idlMaplikeKeyType, .idlMaplikeValueType {
+    color:  #005a9c;
 }
 
 /*.idlConst*/
@@ -358,7 +395,6 @@ table.exceptions { border-bottom:  1px solid #deb890; }
     color:  #fff;
     padding:    3px 5px;
     text-align: left;
-    font-family:    initial;
     font-weight:    normal;
     text-shadow:    #666 1px 1px 0;
 }
@@ -389,25 +425,27 @@ table.exceptions table {
     width:  100%;
 }
 </style><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/W3C-ED"><!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]--></head>
-  <body class="h-entry" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
+  <body style="" class="h-entry" role="document" id="respecDocument"><div class="head" role="contentinfo" id="respecHeader">
   <p>
-    
-      <a href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/Icons/w3c_home" alt="W3C"></a>
-    
+      
+        
+            <a href="http://www.w3.org/"><img width="72" height="48" src="https://www.w3.org/Icons/w3c_home" alt="W3C"></a>
+        
+      
   </p>
   <h1 class="title p-name" id="title" property="dcterms:title">Proximity Events</h1>
   
-  <h2 property="dcterms:issued" datatype="xsd:dateTime" content="2014-04-28T08:00:18.000Z" id="w3c-editor-s-draft-28-april-2014"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time class="dt-published" datetime="2014-04-28">28 April 2014</time></h2>
+  <h2 id="w3c-editor-s-draft-08-july-2015"><abbr title="World Wide Web Consortium">W3C</abbr> Editor's Draft <time property="dcterms:issued" class="dt-published" datetime="2015-07-08">08 July 2015</time></h2>
   <dl>
     
       <dt>This version:</dt>
-      <dd><a class="u-url" href="http://dvcs.w3.org/hg/dap/raw-file/default/proximity/Overview.html">http://dvcs.w3.org/hg/dap/raw-file/default/proximity/Overview.html</a></dd>
+      <dd><a class="u-url" href="http://w3c.github.io/proximity/">http://w3c.github.io/proximity/</a></dd>
       <dt>Latest published version:</dt>
       <dd><a href="http://www.w3.org/TR/proximity/">http://www.w3.org/TR/proximity/</a></dd>
     
     
       <dt>Latest editor's draft:</dt>
-      <dd><a href="http://dvcs.w3.org/hg/dap/raw-file/default/proximity/Overview.html">http://dvcs.w3.org/hg/dap/raw-file/default/proximity/Overview.html</a></dd>
+      <dd><a href="http://w3c.github.io/proximity/">http://w3c.github.io/proximity/</a></dd>
     
     
       <dt>Test suite:</dt>
@@ -421,9 +459,11 @@ table.exceptions table {
     
     
     <dt>Editors:</dt>
-    <dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Anssi Kostiainen</span>, <a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://intel.com/">Intel</a></span>
+    <dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0"><span property="rdf:first" typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Anssi Kostiainen</span>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://intel.com/">Intel</a></span>
+<span property="rdf:rest" resource="_:editor1"></span>
 </dd>
-<dd class="p-author h-card vcard" rel="bibo:editor" inlist=""><span typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Dzung D Tran</span>, <a rel="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://intel.com/">Intel</a></span>
+<dd class="p-author h-card vcard" resource="_:editor1"><span property="rdf:first" typeof="foaf:Person"><span property="foaf:name" class="p-name fn">Dzung D Tran</span>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://intel.com/">Intel</a></span>
+<span property="rdf:rest" resource="rdf:nil"></span>
 </dd>
 
     
@@ -435,8 +475,8 @@ table.exceptions table {
              
                 
                   <dd>
-                    <a href="https://dvcs.w3.org/hg/dap/log/default/proximity/Overview.src.html">
-                      https://dvcs.w3.org/hg/dap/log/default/proximity/Overview.src.html
+                    <a href="https://github.com/w3c/proximity/commits/">
+                      https://github.com/w3c/proximity/commits/
                     </a>
                   </dd>
                 
@@ -453,14 +493,12 @@ table.exceptions table {
     
       <p class="copyright">
         <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> ©
-        2014
+        2015
         
         <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup>
         (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
         <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
-        <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>), 
-        
-        All Rights Reserved.
+        <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). 
         
         <abbr title="World Wide Web Consortium">W3C</abbr> <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
         <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
@@ -473,19 +511,17 @@ table.exceptions table {
   
   <hr>
 </div>
-    <section id="abstract" class="introductory" property="dcterms:abstract" datatype="" typeof="bibo:Chapter" resource="#abstract" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_abstract">Abstract</h2><p>
+    <section id="abstract" class="introductory" property="dc:abstract"><h2 id="h-abstract" resource="#h-abstract"><span property="xhv:role" resource="xhv:heading">Abstract</span></h2><p>
       This specification defines a means to receive events that correspond to
       a proximity sensor detecting the presence of a physical object.
-    </p></section><section id="sotd" class="introductory" typeof="bibo:Chapter" resource="#sotd" rel="bibo:Chapter"><h2 aria-level="1" role="heading" id="h2_sotd">Status of This Document</h2>
+    </p></section><section id="sotd" class="introductory"><h2 id="h-sotd" resource="#h-sotd"><span property="xhv:role" resource="xhv:heading">Status of This Document</span></h2>
   
     
       
         <p>
-          <em>This section describes the status of this document at the time of its publication.
-          Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the
-          latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at
-          http://www.w3.org/TR/.</em>
+          <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="http://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at http://www.w3.org/TR/.</em>
         </p>
+        
         
       <p>
         The functionality described in this specification was initially
@@ -497,6 +533,7 @@ table.exceptions table {
         other features.
       </p>
     
+        
         <p>
           This document was published by the <a href="http://www.w3.org/2009/dap/">Device APIs Working Group</a> as an Editor's Draft.
           
@@ -509,9 +546,13 @@ table.exceptions table {
           
           
           
+          
+            
             All comments are welcome.
+            
           
         </p>
+        
         
         
           <p>
@@ -526,7 +567,7 @@ table.exceptions table {
         <p>
           
             This document was produced by a group operating under the 
-            <a id="sotd_patent" about="" rel="w3p:patentRules" href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
+            <a id="sotd_patent" property="w3p:patentRules" href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
             Policy</a>.
           
           
@@ -546,15 +587,19 @@ table.exceptions table {
           
         </p>
         
+          <p>This document is governed by the <a id="w3c_process_revision" href="http://www.w3.org/2014/Process-20140801/">1 August 2014 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+          </p>
+        
+        
       
     
   
-</section><section id="toc"><h2 class="introductory" aria-level="1" role="heading" id="h2_toc">Table of Contents</h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security-and-privacy-considerations" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#device-proximity" class="tocxref"><span class="secno">5. </span>Device proximity</a><ul class="toc"><li class="tocline"><a href="#deviceproximityevent-interface" class="tocxref"><span class="secno">5.1 </span><span class="formerLink"><code>DeviceProximityEvent</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#event-handlers" class="tocxref"><span class="secno">5.1.1 </span>Event handlers</a></li></ul></li></ul></li><li class="tocline"><a href="#user-proximity" class="tocxref"><span class="secno">6. </span>User proximity</a><ul class="toc"><li class="tocline"><a href="#userproximityevent-interface" class="tocxref"><span class="secno">6.1 </span><span class="formerLink"><code>UserProximityEvent</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#event-handlers-1" class="tocxref"><span class="secno">6.1.1 </span>Event handlers</a></li></ul></li></ul></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li></ul></li></ul></section>
+</section><section id="toc"><h2 class="introductory" id="h-toc" resource="#h-toc"><span property="xhv:role" resource="xhv:heading">Table of Contents</span></h2><ul class="toc" role="directory" id="respecContents"><li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a></li><li class="tocline"><a href="#conformance" class="tocxref"><span class="secno">2. </span>Conformance</a></li><li class="tocline"><a href="#terminology" class="tocxref"><span class="secno">3. </span>Terminology</a></li><li class="tocline"><a href="#security-and-privacy-considerations" class="tocxref"><span class="secno">4. </span>Security and privacy considerations</a></li><li class="tocline"><a href="#device-proximity" class="tocxref"><span class="secno">5. </span>Device proximity</a><ul class="toc"><li class="tocline"><a href="#deviceproximityevent-interface" class="tocxref"><span class="secno">5.1 </span><span class="formerLink"><code>DeviceProximityEvent</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#event-handlers" class="tocxref"><span class="secno">5.1.1 </span>Event handlers</a></li></ul></li></ul></li><li class="tocline"><a href="#user-proximity" class="tocxref"><span class="secno">6. </span>User proximity</a><ul class="toc"><li class="tocline"><a href="#userproximityevent-interface" class="tocxref"><span class="secno">6.1 </span><span class="formerLink"><code>UserProximityEvent</code></span> Interface</a><ul class="toc"><li class="tocline"><a href="#event-handlers-1" class="tocxref"><span class="secno">6.1.1 </span>Event handlers</a></li></ul></li></ul></li><li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li><li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a><ul class="toc"><li class="tocline"><a href="#normative-references" class="tocxref"><span class="secno">B.1 </span>Normative references</a></li></ul></li></ul></section>
     
     
     
-    <section class="informative" id="introduction">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_introduction"><span class="secno">1. </span>Introduction</h2><p><em>This section is non-normative.</em></p>
+    <section class="informative" id="introduction" typeof="bibo:Chapter" resource="#introduction" property="bibo:hasPart">
+      <!--OddPage--><h2 id="h-introduction" resource="#h-introduction"><span property="xhv:role" resource="xhv:heading"><span class="secno">1. </span>Introduction</span></h2><p><em>This section is non-normative.</em></p>
       <p>
         The <a href="#idl-def-DeviceProximityEvent" class="idlType"><code>DeviceProximityEvent</code></a> interface provides web developers
         information about the distance between the hosting device and a
@@ -588,15 +633,14 @@ table.exceptions table {
       </p>
     </section>
     
-    <section id="conformance" typeof="bibo:Chapter" resource="#conformance" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_conformance"><span class="secno">2. </span>Conformance</h2>
+    <section id="conformance" typeof="bibo:Chapter" resource="#conformance" property="bibo:hasPart"><!--OddPage--><h2 id="h-conformance" resource="#h-conformance"><span property="xhv:role" resource="xhv:heading"><span class="secno">2. </span>Conformance</span></h2>
 <p>
   As well as sections marked as non-normative, all authoring guidelines, diagrams, examples,
   and notes in this specification are non-normative. Everything else in this specification is
   normative.
 </p>
-<p>
-  The key words <em class="rfc2119" title="MUST">MUST</em>, <em class="rfc2119" title="MUST NOT">MUST NOT</em>, <em class="rfc2119" title="REQUIRED">REQUIRED</em>, <em class="rfc2119" title="SHOULD">SHOULD</em>, <em class="rfc2119" title="SHOULD NOT">SHOULD NOT</em>, <em class="rfc2119" title="RECOMMENDED">RECOMMENDED</em>, <em class="rfc2119" title="MAY">MAY</em>,
-  and <em class="rfc2119" title="OPTIONAL">OPTIONAL</em> in this specification are to be interpreted as described in [<cite><a class="bibref" href="#bib-RFC2119">RFC2119</a></cite>].
+<p id="respecRFC2119">The key word <em class="rfc2119" title="MUST">MUST</em> is 
+  to be interpreted as described in [<cite><a class="bibref" href="#bib-RFC2119">RFC2119</a></cite>].
 </p>
 
       <p>
@@ -613,8 +657,8 @@ table.exceptions table {
       </p>
     </section>
     
-    <section id="terminology">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_terminology"><span class="secno">3. </span>Terminology</h2>
+    <section id="terminology" typeof="bibo:Chapter" resource="#terminology" property="bibo:hasPart">
+      <!--OddPage--><h2 id="h-terminology" resource="#h-terminology"><span property="xhv:role" resource="xhv:heading"><span class="secno">3. </span>Terminology</span></h2>
       <p>
         The <code><a href="http://dev.w3.org/html5/spec/webappapis.html#eventhandler">
         EventHandler</a></code> interface represents a callback used for event
@@ -667,8 +711,8 @@ table.exceptions table {
       </p>
     </section>
     
-    <section class="informative" id="security-and-privacy-considerations">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_security-and-privacy-considerations"><span class="secno">4. </span>Security and privacy considerations</h2><p><em>This section is non-normative.</em></p>
+    <section class="informative" id="security-and-privacy-considerations" typeof="bibo:Chapter" resource="#security-and-privacy-considerations" property="bibo:hasPart">
+      <!--OddPage--><h2 id="h-security-and-privacy-considerations" resource="#h-security-and-privacy-considerations"><span property="xhv:role" resource="xhv:heading"><span class="secno">4. </span>Security and privacy considerations</span></h2><p><em>This section is non-normative.</em></p>
       <p>
         Privacy risks can arise when this specification is used in
         combination with other functionality or when used over time,
@@ -712,8 +756,8 @@ table.exceptions table {
       </p>
     </section>
     
-    <section id="device-proximity">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_device-proximity"><span class="secno">5. </span>Device proximity</h2>
+    <section id="device-proximity" typeof="bibo:Chapter" resource="#device-proximity" property="bibo:hasPart">
+      <!--OddPage--><h2 id="h-device-proximity" resource="#h-device-proximity"><span property="xhv:role" resource="xhv:heading"><span class="secno">5. </span>Device proximity</span></h2>
       <p>
         The HTML5 specification [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>] defines a <a href="#idl-def-Window" class="idlType"><code>Window</code></a> interface,
         which this specification extends:
@@ -728,12 +772,12 @@ table.exceptions table {
         as an IDL attribute by all objects implementing the <a href="#idl-def-Window" class="idlType"><code>Window</code></a>
         interface.
       </p>
-      <section id="deviceproximityevent-interface">
-        <h3 aria-level="2" role="heading" id="h3_deviceproximityevent-interface"><span class="secno">5.1 </span><a href="#idl-def-DeviceProximityEvent" class="idlType"><code>DeviceProximityEvent</code></a> Interface</h3>
+      <section id="deviceproximityevent-interface" typeof="bibo:Chapter" resource="#deviceproximityevent-interface" property="bibo:hasPart">
+        <h3 id="h-deviceproximityevent-interface" resource="#h-deviceproximityevent-interface"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.1 </span><a href="#idl-def-DeviceProximityEvent" class="idlType"><code>DeviceProximityEvent</code></a> Interface</span></h3>
         <pre class="idl"><span class="idlInterface" id="idl-def-DeviceProximityEvent"><span class="idlDictionary" id="idl-def-DeviceProximityEventInit">dictionary <span class="idlDictionaryID">DeviceProximityEventInit</span> : <span class="idlSuperclass">EventInit</span> {
-<span class="idlMember">    <span class="idlMemberType">double</span> <span class="idlMemberName"><a href="#widl-DeviceProximityEventInit-value">value</a></span>;</span>
-<span class="idlMember">    <span class="idlMemberType">double</span> <span class="idlMemberName"><a href="#widl-DeviceProximityEventInit-min">min</a></span>;</span>
-<span class="idlMember">    <span class="idlMemberType">double</span> <span class="idlMemberName"><a href="#widl-DeviceProximityEventInit-max">max</a></span>;</span>
+<span class="idlMember">             <span class="idlMemberType">double</span> <span class="idlMemberName"><a href="#widl-DeviceProximityEventInit-value">value</a></span>;</span>
+<span class="idlMember">             <span class="idlMemberType">double</span> <span class="idlMemberName"><a href="#widl-DeviceProximityEventInit-min">min</a></span>;</span>
+<span class="idlMember">             <span class="idlMemberType">double</span> <span class="idlMemberName"><a href="#widl-DeviceProximityEventInit-max">max</a></span>;</span>
 };</span><br><br>[<span class="extAttr">Constructor (DOMString type, optional DeviceProximityEventInit eventInitDict)</span>]
 interface <span class="idlInterfaceID">DeviceProximityEvent</span> : <span class="idlSuperclass">Event</span> {
 <span class="idlAttribute">    readonly    attribute <span class="idlAttrType">unrestricted double</span> <span class="idlAttrName"><a href="#widl-DeviceProximityEvent-value">value</a></span>;</span>
@@ -803,7 +847,7 @@ interface <span class="idlInterfaceID">DeviceProximityEvent</span> : <span class
           agent</a> <em class="rfc2119" title="MUST">MUST</em> queue a task to <a href="#dfn-fire-a-device-proximity-event" class="internalDFN">fire a device proximity event</a>
           at the <a href="#dfn-top-level-browsing-context" class="internalDFN">top-level browsing context</a>'s <a href="#idl-def-Window" class="idlType"><code>Window</code></a> object.
         </p>
-        <div class="note"><div class="note-title" aria-level="3" role="heading" id="h_note_1"><span>Note</span></div><div class="">
+        <div class="note"><div class="note-title" aria-level="4" role="heading" id="h-note1"><span>Note</span></div><div class="">
           The definition of granularity i.e. how often the event is fired is
           left to the implementation. Implementations can fire the event if
           they have reason to believe that the page does not have sufficiently
@@ -813,8 +857,8 @@ interface <span class="idlInterfaceID">DeviceProximityEvent</span> : <span class
           interface if they are only interested in finding out if the user is
           near or far.
         </div></div>
-        <section id="event-handlers">
-          <h4 aria-level="3" role="heading" id="h4_event-handlers"><span class="secno">5.1.1 </span>Event handlers</h4>
+        <section id="event-handlers" typeof="bibo:Chapter" resource="#event-handlers" property="bibo:hasPart">
+          <h4 id="h-event-handlers" resource="#h-event-handlers"><span property="xhv:role" resource="xhv:heading"><span class="secno">5.1.1 </span>Event handlers</span></h4>
           <p>
             The following are the <a href="#dfn-event-handlers" class="internalDFN">event handlers</a> (and their corresponding
             <a href="#dfn-event-handler-event-types" class="internalDFN">event handler event types</a>) that <em class="rfc2119" title="MUST">MUST</em> be supported as
@@ -838,8 +882,8 @@ interface <span class="idlInterfaceID">DeviceProximityEvent</span> : <span class
       </section>
     </section>
       
-    <section id="user-proximity">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_user-proximity"><span class="secno">6. </span>User proximity</h2>
+    <section id="user-proximity" typeof="bibo:Chapter" resource="#user-proximity" property="bibo:hasPart">
+      <!--OddPage--><h2 id="h-user-proximity" resource="#h-user-proximity"><span property="xhv:role" resource="xhv:heading"><span class="secno">6. </span>User proximity</span></h2>
       <p>
         The HTML5 specification [<cite><a class="bibref" href="#bib-HTML5">HTML5</a></cite>] defines a <a href="#idl-def-Window" class="idlType"><code>Window</code></a> interface,
         which this specification extends:
@@ -854,10 +898,10 @@ interface <span class="idlInterfaceID">DeviceProximityEvent</span> : <span class
         as an IDL attribute by all objects implementing the <a href="#idl-def-Window" class="idlType"><code>Window</code></a>
         interface.
       </p>
-      <section id="userproximityevent-interface">
-        <h3 aria-level="2" role="heading" id="h3_userproximityevent-interface"><span class="secno">6.1 </span><a href="#idl-def-UserProximityEvent" class="idlType"><code>UserProximityEvent</code></a> Interface</h3>
+      <section id="userproximityevent-interface" typeof="bibo:Chapter" resource="#userproximityevent-interface" property="bibo:hasPart">
+        <h3 id="h-userproximityevent-interface" resource="#h-userproximityevent-interface"><span property="xhv:role" resource="xhv:heading"><span class="secno">6.1 </span><a href="#idl-def-UserProximityEvent" class="idlType"><code>UserProximityEvent</code></a> Interface</span></h3>
         <pre class="idl"><span class="idlInterface" id="idl-def-UserProximityEvent"><span class="idlDictionary" id="idl-def-UserProximityEventInit">dictionary <span class="idlDictionaryID">UserProximityEventInit</span> : <span class="idlSuperclass">EventInit</span> {
-<span class="idlMember">    <span class="idlMemberType">boolean</span> <span class="idlMemberName"><a href="#widl-UserProximityEventInit-near">near</a></span>;</span>
+<span class="idlMember">             <span class="idlMemberType">boolean</span> <span class="idlMemberName"><a href="#widl-UserProximityEventInit-near">near</a></span>;</span>
 };</span><br><br>[<span class="extAttr">Constructor (DOMString type, optional UserProximityEventInit eventInitDict)</span>]
 interface <span class="idlInterfaceID">UserProximityEvent</span> : <span class="idlSuperclass">Event</span> {
 <span class="idlAttribute">    readonly    attribute <span class="idlAttrType">boolean</span> <span class="idlAttrName"><a href="#widl-UserProximityEvent-near">near</a></span>;</span>
@@ -897,8 +941,8 @@ interface <span class="idlInterfaceID">UserProximityEvent</span> : <span class="
           agent</a> <em class="rfc2119" title="MUST">MUST</em> queue a task to <a href="#dfn-fire-a-user-proximity-event" class="internalDFN">fire a user proximity event</a>
           at the <a href="#dfn-top-level-browsing-context" class="internalDFN">top-level browsing context</a>'s <a href="#idl-def-Window" class="idlType"><code>Window</code></a> object.
         </p>
-        <section id="event-handlers-1">
-          <h4 aria-level="3" role="heading" id="h4_event-handlers-1"><span class="secno">6.1.1 </span>Event handlers</h4>
+        <section id="event-handlers-1" typeof="bibo:Chapter" resource="#event-handlers-1" property="bibo:hasPart">
+          <h4 id="h-event-handlers-1" resource="#h-event-handlers-1"><span property="xhv:role" resource="xhv:heading"><span class="secno">6.1.1 </span>Event handlers</span></h4>
           <p>
             The following are the <a href="#dfn-event-handlers" class="internalDFN">event handlers</a> (and their corresponding
             <a href="#dfn-event-handler-event-types" class="internalDFN">event handler event types</a>) that <em class="rfc2119" title="MUST">MUST</em> be supported as
@@ -922,8 +966,8 @@ interface <span class="idlInterfaceID">UserProximityEvent</span> : <span class="
       </section>
     </section>
     
-    <section class="appendix" id="acknowledgements">
-      <!--OddPage--><h2 aria-level="1" role="heading" id="h2_acknowledgements"><span class="secno">A. </span>Acknowledgements</h2>
+    <section class="appendix" id="acknowledgements" typeof="bibo:Chapter" resource="#acknowledgements" property="bibo:hasPart">
+      <!--OddPage--><h2 id="h-acknowledgements" resource="#h-acknowledgements"><span property="xhv:role" resource="xhv:heading"><span class="secno">A. </span>Acknowledgements</span></h2>
       <p>
         Doug Turner for the initial prototype. All Device APIs working group
         participants who have sent helpful feedback. Marcos Caceres for his
@@ -932,8 +976,8 @@ interface <span class="idlInterfaceID">UserProximityEvent</span> : <span class="
     </section>
   
 
-<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" rel="bibo:Chapter"><!--OddPage--><h2 aria-level="1" role="heading" id="h2_references"><span class="secno">B. </span>References</h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" rel="bibo:Chapter"><h3 aria-level="2" role="heading" id="h3_normative-references"><span class="secno">B.1 </span>Normative references</h3><dl class="bibliography" about=""><dt id="bib-DOM4">[DOM4]</dt><dd rel="dcterms:requires">Anne van Kesteren; Aryeh Gregor; Ms2ger; Alex Russell; Robin Berjon. <a href="http://www.w3.org/TR/dom/"><cite>W3C DOM4</cite></a>. 4 February 2014. W3C Last Call Working Draft. URL: <a href="http://www.w3.org/TR/dom/">http://www.w3.org/TR/dom/</a>
-</dd><dt id="bib-HTML5">[HTML5]</dt><dd rel="dcterms:requires">Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/"><cite>HTML5</cite></a>. 4 February 2014. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/html5/">http://www.w3.org/TR/html5/</a>
-</dd><dt id="bib-RFC2119">[RFC2119]</dt><dd rel="dcterms:requires">S. Bradner. <a href="http://www.ietf.org/rfc/rfc2119.txt"><cite>Key words for use in RFCs to Indicate Requirement Levels.</cite></a> March 1997. Internet RFC 2119.  URL: <a href="http://www.ietf.org/rfc/rfc2119.txt">http://www.ietf.org/rfc/rfc2119.txt</a> 
-</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd rel="dcterms:requires">Cameron McCormack. <a href="http://www.w3.org/TR/WebIDL/"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/WebIDL/">http://www.w3.org/TR/WebIDL/</a>
+<section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" property="bibo:hasPart"><!--OddPage--><h2 id="h-references" resource="#h-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B. </span>References</span></h2><section id="normative-references" typeof="bibo:Chapter" resource="#normative-references" property="bibo:hasPart"><h3 id="h-normative-references" resource="#h-normative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.1 </span>Normative references</span></h3><dl class="bibliography" resource=""><dt id="bib-DOM4">[DOM4]</dt><dd>Anne van Kesteren; Aryeh Gregor; Ms2ger; Alex Russell; Robin Berjon. <a href="http://www.w3.org/TR/dom/" property="dc:requires"><cite>W3C DOM4</cite></a>. 18 June 2015. W3C Last Call Working Draft. URL: <a href="http://www.w3.org/TR/dom/" property="dc:requires">http://www.w3.org/TR/dom/</a>
+</dd><dt id="bib-HTML5">[HTML5]</dt><dd>Ian Hickson; Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Edward O'Connor; Silvia Pfeiffer. <a href="http://www.w3.org/TR/html5/" property="dc:requires"><cite>HTML5</cite></a>. 28 October 2014. W3C Recommendation. URL: <a href="http://www.w3.org/TR/html5/" property="dc:requires">http://www.w3.org/TR/html5/</a>
+</dd><dt id="bib-RFC2119">[RFC2119]</dt><dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119" property="dc:requires"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119" property="dc:requires">https://tools.ietf.org/html/rfc2119</a>
+</dd><dt id="bib-WEBIDL">[WEBIDL]</dt><dd>Cameron McCormack. <a href="http://www.w3.org/TR/WebIDL/" property="dc:requires"><cite>Web IDL</cite></a>. 19 April 2012. W3C Candidate Recommendation. URL: <a href="http://www.w3.org/TR/WebIDL/" property="dc:requires">http://www.w3.org/TR/WebIDL/</a>
 </dd></dl></section></section></body></html>
