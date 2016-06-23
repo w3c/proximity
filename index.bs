@@ -115,7 +115,7 @@ which creates a new {{ProximitySensorReading}} object and sets its
 positive infinity.
 
 <dfn>Distance</dfn> is a value that represents the distance between a device and
-the closest visible surface. Its unit is the centimetre (cm).
+the closest visible surface. Its unit is the centimeter (cm).
 
 API {#api}
 ===
