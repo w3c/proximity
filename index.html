@@ -1405,7 +1405,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Proximity Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-06-21">21 June 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-06-23">23 June 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1556,7 +1556,7 @@ must simply return a <a data-link-type="dfn" href="https://w3c.github.io/permiss
 to <dfn data-dfn-type="dfn" data-lt="Construct SensorReading Object" data-noexport="" id="construct-sensorreading-object">construct a SensorReading object<a class="self-link" href="#construct-sensorreading-object"></a></dfn> which creates a new <code class="idl"><a data-link-type="idl" href="#proximitysensorreading" id="ref-for-proximitysensorreading-2">ProximitySensorReading</a></code> object and sets its <a class="idl-code" data-link-type="attribute" href="#dom-proximitysensorreading-distance" id="ref-for-dom-proximitysensorreading-distance-1">distance</a> attribute to
 positive infinity.</p>
    <p><dfn data-dfn-type="dfn" data-noexport="" id="distance">Distance<a class="self-link" href="#distance"></a></dfn> is a value that represents the distance between a device and
-the closest visible surface. Its unit is the centimetre (cm).</p>
+the closest visible surface. Its unit is the centimeter (cm).</p>
    <h2 class="heading settled" data-level="5" id="api"><span class="secno">5. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="proximity-sensor-interface"><span class="secno">5.1. </span><span class="content">The ProximitySensor Interface</span><a class="self-link" href="#proximity-sensor-interface"></a></h3>
 <pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="ProximitySensor" data-dfn-type="constructor" data-export="" data-lt="ProximitySensor(sensorOptions)|ProximitySensor()" id="dom-proximitysensor-proximitysensor">Constructor<a class="self-link" href="#dom-proximitysensor-proximitysensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="ProximitySensor/ProximitySensor(sensorOptions)" data-dfn-type="argument" data-export="" id="dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions">sensorOptions<a class="self-link" href="#dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions"></a></dfn>)]
@@ -1670,22 +1670,6 @@ Marcos Caceres for the test suite.</p>
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/sensors#auto">auto</a>
-     <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
-     <li><a href="https://w3c.github.io/sensors#default-sensor">default sensor</a>
-     <li><a href="https://w3c.github.io/sensors#sensor-subclass">sensor subclass</a>
-     <li><a href="https://w3c.github.io/sensors#sensorreading-subclass">sensorreading subclass</a>
-     <li><a href="https://w3c.github.io/sensors#supported-reporting-modes">supported reporting mode</a>
-    </ul>
-   <li>
-    <a data-link-type="biblio">[permissions]</a> defines the following terms:
-    <ul>
-     <li><a href="https://w3c.github.io/permissions/#dfn-associated-permissiondescriptor">associated permissiondescriptor</a>
-     <li><a href="https://w3c.github.io/permissions/#idl-def-Permission">permission</a>
-    </ul>
-   <li>
-    <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
-    <ul>
      <li><a href="https://w3c.github.io/sensors/#sensor">Sensor</a>
      <li><a href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a>
      <li><a href="https://w3c.github.io/sensors/#sensorreading">SensorReading</a>
@@ -1696,8 +1680,6 @@ Marcos Caceres for the test suite.</p>
   <dl>
    <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
    <dd>Tobie Langel; Rick Waldron. <a href="https://w3c.github.io/sensors/">Generic Sensor API</a>. 24 March 2016. WD. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
-   <dt id="biblio-permissions">[PERMISSIONS]
-   <dd>Mounir Lamouri; Marcos Caceres. <a href="https://w3c.github.io/permissions/">The Permissions API</a>. 7 April 2015. WD. URL: <a href="https://w3c.github.io/permissions/">https://w3c.github.io/permissions/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
   </dl>
