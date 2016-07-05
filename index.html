@@ -1484,7 +1484,8 @@ the presence of nearby objects without physical contact.</p>
         <li><a href="#proximity-sensor-reading-attribute-near"><span class="secno">5.2.4</span> <span class="content">The near attribute</span></a>
        </ol>
      </ol>
-    <li><a href="#acknowledgements"><span class="secno">6</span> <span class="content">Acknowledgements</span></a>
+    <li><a href="#limitations-proximity-sensors"><span class="secno">6</span> <span class="content">Limitations of Proximity Sensors</span></a>
+    <li><a href="#acknowledgements"><span class="secno">7</span> <span class="content">Acknowledgements</span></a>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
      <ol class="toc">
@@ -1503,21 +1504,11 @@ the presence of nearby objects without physical contact.</p>
    <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
    <p>The Proximity Sensor extends the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-sensor">[GENERIC-SENSOR]</a> to provide information about proximity level, as detected by the device’s primary
 proximity sensor. The proximity level is reported as the distance (in centimeter)
-from the sensor to the closest visible surface. The precise distance value
+from the sensor to the closest visible surface. <a href="#limitations-proximity-sensors">§6 Limitations of Proximity Sensors</a> describes more about the potential limitations, why the precise distance value
 reported by different devices can be different, due to differences in detection
-method, sensor construction, etc. Moreover, some proximity sensors might be only
+method, sensor construction, etc.  Moreover some proximity sensors might be only
 able to provide just a boolean to indicate if there is an object which is near,
 more like presence detection, than an absolute value for the distance.</p>
-   <p>Since most proximity sensors detect electromagnetic radiation (e.g., an infrared light
-or a magnetic field), certain material properties can interfere with the sensor’s
-ability to sense the presence of a physical object. Things that can interfere with
-a sensor include, but are not limited to, the material’s translucency, reflectiveness,
-color, temperature, chemical composition, and even the angle at which the object
-is reflecting the radiation back at the sensor. As such, proximity sensors
-should not be relied on as a means to measure distance. The only thing that can
-be deduced from a proximity sensor is that an object is somewhere in the
-distance between the minimum sensing distance and the maximum sensing distance
-with some degree of certainty.</p>
    <h2 class="heading settled" data-level="2" id="examples"><span class="secno">2. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="example" id="example-bfea9999">
     <a class="self-link" href="#example-bfea9999"></a> 
@@ -1557,7 +1548,7 @@ the closest visible surface. Its unit is the centimeter (cm).</p>
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#proximitysensorreading" id="ref-for-proximitysensorreading-3">ProximitySensorReading</a>? <dfn class="nv idl-code" data-dfn-for="ProximitySensor" data-dfn-type="attribute" data-export="" data-readonly="" data-type="ProximitySensorReading?" id="dom-proximitysensor-reading">reading<a class="self-link" href="#dom-proximitysensor-reading"></a></dfn>;
 };
 </pre>
-   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-an-proximitysensor-object">Construct an ProximitySensor Object<a class="self-link" href="#construct-an-proximitysensor-object"></a></dfn> the user agent must invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object">construct a Sensor object</a> abstract operation.</p>
+   <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-a-proximitysensor-object">Construct a ProximitySensor Object<a class="self-link" href="#construct-a-proximitysensor-object"></a></dfn> the user agent must invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object">construct a Sensor object</a> abstract operation.</p>
    <h3 class="heading settled" data-level="5.2" id="proximity-sensor-reading-interface"><span class="secno">5.2. </span><span class="content">The ProximitySensorReading Interface</span><a class="self-link" href="#proximity-sensor-reading-interface"></a></h3>
 <pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="ProximitySensorReading" data-dfn-type="constructor" data-export="" data-lt="ProximitySensorReading(proximitySensorReadingInit)" id="dom-proximitysensorreading-proximitysensorreading">Constructor<a class="self-link" href="#dom-proximitysensorreading-proximitysensorreading"></a></dfn>(<a class="n" data-link-type="idl-name" href="#dictdef-proximitysensorreadinginit" id="ref-for-dictdef-proximitysensorreadinginit-1">ProximitySensorReadingInit</a> <dfn class="nv idl-code" data-dfn-for="ProximitySensorReading/ProximitySensorReading(proximitySensorReadingInit)" data-dfn-type="argument" data-export="" id="dom-proximitysensorreading-proximitysensorreading-proximitysensorreadinginit-proximitysensorreadinginit">proximitySensorReadingInit<a class="self-link" href="#dom-proximitysensorreading-proximitysensorreading-proximitysensorreadinginit-proximitysensorreadinginit"></a></dfn>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="proximitysensorreading">ProximitySensorReading</dfn> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensorreading">SensorReading</a> {
@@ -1579,7 +1570,18 @@ the closest visible surface. Its unit is the centimeter (cm).</p>
    <p>The <a class="idl-code" data-link-type="attribute" href="#dom-proximitysensorreading-max" id="ref-for-dom-proximitysensorreading-max-1">max</a> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensorreading" id="ref-for-proximitysensorreading-5">ProximitySensorReading</a></code> interface represents the maximum sensing range for the primary proximity sensor, in centimeters.</p>
    <h4 class="heading settled" data-level="5.2.4" id="proximity-sensor-reading-attribute-near"><span class="secno">5.2.4. </span><span class="content">The near attribute</span><a class="self-link" href="#proximity-sensor-reading-attribute-near"></a></h4>
    <p>The <a class="idl-code" data-link-type="attribute" href="#dom-proximitysensorreading-near" id="ref-for-dom-proximitysensorreading-near-1">near</a> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensorreading" id="ref-for-proximitysensorreading-6">ProximitySensorReading</a></code> interface represents the the presence of a visible surface in the vicinity of the primary proximity sensor, in centimeters.</p>
-   <h2 class="heading settled" data-level="6" id="acknowledgements"><span class="secno">6. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
+   <h2 class="heading settled" data-level="6" id="limitations-proximity-sensors"><span class="secno">6. </span><span class="content">Limitations of Proximity Sensors</span><a class="self-link" href="#limitations-proximity-sensors"></a></h2>
+   <p>Since most proximity sensors detect electromagnetic radiation (e.g., an infrared light
+or a magnetic field), certain material properties can interfere with the sensor’s
+ability to sense the presence of a physical object. Things that can interfere with
+a sensor include, but are not limited to, the material’s translucency, reflectiveness,
+color, temperature, chemical composition, and even the angle at which the object
+is reflecting the radiation back at the sensor. As such, proximity sensors
+should not be relied on as a means to measure distance. The only thing that can
+be deduced from a proximity sensor is that an object is somewhere in the
+distance between the minimum sensing distance and the maximum sensing distance
+with some degree of certainty.</p>
+   <h2 class="heading settled" data-level="7" id="acknowledgements"><span class="secno">7. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
    <p>Tobie Langel for the work on Generic Sensor API and inputs on this specification.
 Doug Turner for the initial prototype and
 Marcos Caceres for the test suite.</p>
@@ -1588,7 +1590,7 @@ Marcos Caceres for the test suite.</p>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#construct-an-proximitysensor-object">Construct an ProximitySensor Object</a><span>, in §5.1</span>
+   <li><a href="#construct-a-proximitysensor-object">Construct a ProximitySensor Object</a><span>, in §5.1</span>
    <li><a href="#construct-sensorreading-object">Construct SensorReading Object</a><span>, in §4</span>
    <li><a href="#distance">Distance</a><span>, in §4</span>
    <li>
