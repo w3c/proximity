@@ -130,7 +130,7 @@ The ProximitySensor Interface {#proximity-sensor-interface}
   };
 </pre>
 
-To <dfn>Construct an ProximitySensor Object</dfn> the user agent must invoke the
+To <dfn>Construct a ProximitySensor Object</dfn> the user agent must invoke the
 <a>construct a Sensor object</a> abstract operation.
 
 The ProximitySensorReading Interface {#proximity-sensor-reading-interface}
