@@ -46,22 +46,12 @@ Introduction {#intro}
 The Proximity Sensor extends the Generic Sensor API [[GENERIC-SENSOR]]
 to provide information about proximity level, as detected by the device's primary
 proximity sensor. The proximity level is reported as the distance (in centimeter)
-from the sensor to the closest visible surface. The precise distance value
+from the sensor to the closest visible surface. [[#limitations-proximity-sensors]]
+describes more about the potential limitations, why the precise distance value
 reported by different devices can be different, due to differences in detection
-method, sensor construction, etc. Moreover, some proximity sensors might be only
+method, sensor construction, etc.  Moreover some proximity sensors might be only
 able to provide just a boolean to indicate if there is an object which is near,
 more like presence detection, than an absolute value for the distance.
-
-Since most proximity sensors detect electromagnetic radiation (e.g., an infrared light
-or a magnetic field), certain material properties can interfere with the sensor's
-ability to sense the presence of a physical object. Things that can interfere with
-a sensor include, but are not limited to, the material's translucency, reflectiveness,
-color, temperature, chemical composition, and even the angle at which the object
-is reflecting the radiation back at the sensor. As such, proximity sensors
-should not be relied on as a means to measure distance. The only thing that can
-be deduced from a proximity sensor is that an object is somewhere in the
-distance between the minimum sensing distance and the maximum sensing distance
-with some degree of certainty.
 
 
 Examples {#examples}
@@ -167,6 +157,21 @@ interface represents the maximum sensing range for the primary proximity sensor,
 
 The <a attribute for="ProximitySensorReading">near</a> attribute of the {{ProximitySensorReading}}
 interface represents the the presence of a visible surface in the vicinity of the primary proximity sensor, in centimeters.
+
+
+Limitations of Proximity Sensors {#limitations-proximity-sensors}
+========================
+
+Since most proximity sensors detect electromagnetic radiation (e.g., an infrared light
+or a magnetic field), certain material properties can interfere with the sensor's
+ability to sense the presence of a physical object. Things that can interfere with
+a sensor include, but are not limited to, the material's translucency, reflectiveness,
+color, temperature, chemical composition, and even the angle at which the object
+is reflecting the radiation back at the sensor. As such, proximity sensors
+should not be relied on as a means to measure distance. The only thing that can
+be deduced from a proximity sensor is that an object is somewhere in the
+distance between the minimum sensing distance and the maximum sensing distance
+with some degree of certainty.
 
 
 Acknowledgements {#acknowledgements}
