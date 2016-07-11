@@ -1,0 +1,17 @@
+language: node_js
+
+branches:
+  only:
+    - gh-pages
+
+env:
+  global:
+    - URL="http://w3c.github.io/proximity"
+    - DECISION="https://lists.w3.org/Archives/Public/public-device-apis/2016Jun/0073.html"
+    - secure: "Vd8+ZgAbP5ePtCLFw5t7AKfyqP+LpwwjnVuAfssJHQlJmZ7xlTIgtvtRLml0XrMeYEAA0CkUhAIkZa7TzOzTj/sUMO6nmuJohMaJsA/SUCoJuaXKluWy8m/eyxu/uZNJnaEiR3ynl1ecA/hRwlu9vhLDJI31qoPK3GuDMM8ifDEd/JzFJnsQQQx+PFBgov7BjZ1TY6zjlQB7o4ZxTeIXn2Ytas3prRwjnjyU6QaqE4gJpYpv2+xiKAcDtJTjyrj4oZ0HOY9UbYR6zKmRjp3aaR6g9PCScrZGZWDKeyfqWuaAywogS5A9GX4hCI/XMd2N86k/OneomiD9gukfBIkR00ke+xXrBcdg8y8vXj4Cam5lqpHey1vsYfEe+PDf0t6hkqNsdh2g91RAEDwdxEBIRGa/kgd39hXKDXbzkmPqXQKQWPOYCAt6F8d8T88OauhOx8pFFL9TaitdNV/ynj4qLIBmMUtV4vfkn/qaoxM/6E+2ipCUaLqGIlvAh2umO01Ag6UMos8gg2LQQcTTlWZjkYowyMpoBOT9HD9X7xpfIglcogGh9mM1nX73YquWmHeJzrq2G50VaNKG0dVLvQ08YLK0CkYRQjfF+5t3k0nkHEoM6GigzvlJUaNogAaFm2BvtC8a4048aRP6+SX1pWxKBxUzXT/hFR8OmBhx+FzTZjs="
+
+script:
+  - echo "ok"
+
+after_success:
+  - test $TRAVIS_PULL_REQUEST = false && curl "https://labs.w3.org/echidna/api/request" --data "url=$URL" --data "decision=$DECISION" --data "token=$TOKEN"
