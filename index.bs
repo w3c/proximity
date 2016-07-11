@@ -129,14 +129,14 @@ The ProximitySensorReading Interface {#proximity-sensor-reading-interface}
 <pre class="idl">
   [Constructor(ProximitySensorReadingInit proximitySensorReadingInit)]
   interface ProximitySensorReading : SensorReading {
-      readonly attribute unrestricted double? distance;
-      readonly attribute unrestricted double? max;
+      readonly attribute unrestricted double distance;
+      readonly attribute unrestricted double max;
       readonly attribute boolean? near;
   };
 
   dictionary ProximitySensorReadingInit {
-    unrestricted double? distance;
-    unrestricted double? max;
+    unrestricted double distance = Infinity;
+    unrestricted double max = Infinity;
     boolean? near;
   };
 </pre>
@@ -157,6 +157,11 @@ interface represents the maximum sensing range for the primary proximity sensor,
 
 The <a attribute for="ProximitySensorReading">near</a> attribute of the {{ProximitySensorReading}}
 interface represents the the presence of a visible surface in the vicinity of the primary proximity sensor, in centimeters.
+
+
+Note: If the implementation is unable to provide the {{near}} value, it could infer the {{near}} value from the value of {{distance}}.
+For example, if {{distance}} is not equal to {{max}} or default value (Infinity),
+it could imply there is an object in the sensing range.
 
 
 Limitations of Proximity Sensors {#limitations-proximity-sensors}
