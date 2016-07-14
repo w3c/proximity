@@ -3,7 +3,7 @@ Title: Proximity Sensor
 Level: 1
 Status: WD
 ED: https://w3c.github.io/proximity/
-TR: https://www.w3.org/TR/proximity/releases/WD-2016-07-12.html
+TR: https://www.w3.org/TR/proximity/releases/WD-2016-07-14.html
 Shortname: proximity
 Previous Version: https://www.w3.org/TR/2015/WD-proximity-20150903/
 Editor: Anssi Kostiainen 41974, Intel Corporation, https://intel.com/
