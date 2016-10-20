@@ -156,7 +156,7 @@ interface represents the maximum sensing range for the primary proximity sensor,
 ### The near attribute ### {#proximity-sensor-reading-attribute-near}
 
 The <a attribute for="ProximitySensorReading">near</a> attribute of the {{ProximitySensorReading}}
-interface represents the the presence of a visible surface in the vicinity of the primary proximity sensor, in centimeters.
+interface represents the presence of a visible surface in the vicinity of the primary proximity sensor.
 
 
 Note: If the implementation is unable to provide the {{near}} value, it could infer the {{near}} value from the value of {{distance}}.
