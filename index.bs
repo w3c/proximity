@@ -25,18 +25,12 @@ Boilerplate: omit issues-index, omit conformance
 Default Biblio Status: current
 </pre>
 <pre class="anchors">
-urlPrefix: https://w3c.github.io/permissions/; spec: PERMISSIONS
-  type: dfn
-    text: permission; url: idl-def-Permission
-    text: associated PermissionDescriptor;  url: dfn-associated-permissiondescriptor
 urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
   type: dfn
     text: high-level
     text: sensor subclass
-    text: sensorreading subclass
+    text: latest reading
     text: default sensor
-    text: supported reporting mode; url: supported-reporting-modes
-    text: auto
     text: construct a sensor object; url: construct-sensor-object
 </pre>
 
@@ -62,11 +56,10 @@ Examples {#examples}
     let sensor = new ProximitySensor();
     sensor.start();
 
-    sensor.onchange = event => console.log(event.reading.distance);
+    sensor.onchange = () => console.log(sensor.distance);
 
-    sensor.onerror = function(event) {
-        console.log(event.error.name, event.error.message);
-    };
+    sensor.onerror = event => console.log(event.error.name, event.error.message);
+
     </pre>
 </div>
 
@@ -79,30 +72,14 @@ beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
 Model {#model}
 =====
 
-The Proximity Sensor's associated <a>Sensor subclass</a>
-is the {{ProximitySensor}} class.
-
-The Proximity Sensor's associated <a>SensorReading subclass</a>
-is the {{ProximitySensorReading}} class.
+The proximity sensor's associated {{Sensor}} subclass is the {{ProximitySensor}} class.
 
 The Proximity Sensor has a <a>default sensor</a>,
 which is the device's main proximity detector.
 
-The Proximity Sensor has a single <a>supported reporting mode</a>
-which is "<a>auto</a>".
+A [=latest reading=] per [=sensor=] of proximity sensor type includes three [=map/entries=]
+whose [=map/keys=] are "distance", "max", "near" and whose [=map/values=] contain {{ProximitySensor/distance!!attribute}}, {{ProximitySensor/max!!attribute}} and {{ProximitySensor/near!!attribute}} values.
 
-The Proximity Sensor's <a>permission</a> name is `"proximity"`.
-It has no <a>associated PermissionDescriptor</a>.
-
-The Proximity Sensor has an associated abstract operation
-to <dfn>retrieve the sensor permission</dfn> which
-must simply return a <a>permission</a> whose name is "proximity".
-
-The Proximity Sensor has an associated abstract operation
-to <dfn lt="Construct SensorReading Object">construct a SensorReading object</dfn>
-which creates a new {{ProximitySensorReading}} object and sets its
-<a attribute for="ProximitySensorReading">distance</a> attribute to
-positive infinity.
 
 <dfn>Distance</dfn> is a value that represents the distance between a device and
 the closest visible surface. Its unit is the centimeter (cm).
@@ -116,47 +93,33 @@ The ProximitySensor Interface {#proximity-sensor-interface}
 <pre class="idl">
   [Constructor(optional SensorOptions sensorOptions)]
   interface ProximitySensor : Sensor {
-    readonly attribute ProximitySensorReading? reading;
+    readonly attribute unrestricted double? distance;
+    readonly attribute unrestricted double? max;
+    readonly attribute boolean? near;
   };
 </pre>
 
 To <dfn>Construct a ProximitySensor Object</dfn> the user agent must invoke the
 <a>construct a Sensor object</a> abstract operation.
 
-The ProximitySensorReading Interface {#proximity-sensor-reading-interface}
----------------------------------------
 
-<pre class="idl">
-  [Constructor(ProximitySensorReadingInit proximitySensorReadingInit)]
-  interface ProximitySensorReading : SensorReading {
-      readonly attribute unrestricted double distance;
-      readonly attribute unrestricted double max;
-      readonly attribute boolean? near;
-  };
+### The distance attribute ### {#proximity-sensor-distance}
 
-  dictionary ProximitySensorReadingInit {
-    unrestricted double distance = Infinity;
-    unrestricted double max = Infinity;
-    boolean? near;
-  };
-</pre>
-
-### The ProximitySensorReading constructor ### {#proximity-sensor-reading-constructor}
-
-### The distance attribute ### {#proximity-sensor-reading-attribute-distance}
-
-The <a attribute for="ProximitySensorReading">distance</a> attribute of the {{ProximitySensorReading}}
+The {{ProximitySensor/distance!!attribute}} attribute of the {{ProximitySensor}}
 interface represents the distance between the sensor and the closest visible surface, in centimeters.
+In other words, this attribute returns [=latest reading=]["distance"].
 
-### The max attribute ### {#proximity-sensor-reading-attribute-max}
+### The max attribute ### {#proximity-sensor-max}
 
-The <a attribute for="ProximitySensorReading">max</a> attribute of the {{ProximitySensorReading}}
+The {{ProximitySensor/max!!attribute}} attribute of the {{ProximitySensor}}
 interface represents the maximum sensing range for the primary proximity sensor, in centimeters.
+In other words, this attribute returns [=latest reading=]["max"].
 
-### The near attribute ### {#proximity-sensor-reading-attribute-near}
+### The near attribute ### {#proximity-sensor-near}
 
-The <a attribute for="ProximitySensorReading">near</a> attribute of the {{ProximitySensorReading}}
+The {{ProximitySensor/near!!attribute}} attribute of the {{ProximitySensor}}
 interface represents the presence of a visible surface in the vicinity of the primary proximity sensor.
+In other words, this attribute returns [=latest reading=]["near"].
 
 
 Note: If the implementation is unable to provide the {{near}} value, it could infer the {{near}} value from the value of {{distance}}.
