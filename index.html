@@ -35,7 +35,6 @@
  *   - .note       for informative notes             (div, p, span, aside, details)
  *   - .example    for informative examples          (div, p, pre, span)
  *   - .issue      for issues                        (div, p, span)
- *   - .assertion  for assertions                    (div, p, span)
  *   - .advisement for loud normative statements     (div, p, strong)
  *   - .annoying-warning for spec obsoletion notices (div, aside, details)
  *
@@ -50,9 +49,9 @@
  *   - ::before styled for CSS-generated issue/example/figure numbers:
  *     -> Documents wishing to use this only need to add
  *        figcaption::before,
- *        .caption::before { content: "Figure "  counter(figure) " ";  }
- *        .example::before { content: "Example " counter(example) " "; }
- *        .issue::before   { content: "Issue "   counter(issue) " ";   }
+ *        .caption::before { content: "Figure "  counter(figure);  }
+ *        .example::before { content: "Example " counter(example); }
+ *        .issue::before   { content: "Issue "   counter(issue);   }
  *
  * Header Stuff (ignore, just don't conflict with these classes)
  *   - .head for the header
@@ -458,7 +457,7 @@
 		font-style: normal;
 	}
 	dt dfn code, code.idl {
-		font-size: normal;
+		font-size: inherit;
 	}
 	dfn var {
 		font-style: normal;
@@ -599,7 +598,7 @@
 /*                             Colored Boxes                                  */
 /******************************************************************************/
 
-	.issue, .note, .example, .assertion, .advisement, blockquote {
+	.issue, .note, .example, .advisement, blockquote {
 		padding: .5em;
 		border: .5em;
 		border-left-style: solid;
@@ -614,7 +613,6 @@
 	.note,
 	.example,
 	.advisement,
-	.assertion,
 	blockquote {
 		margin: 1em auto;
 	}
@@ -647,7 +645,7 @@
 		padding-right: 1em;
 		text-transform: uppercase;
 	}
-	/* Add .issue::before { content: "Issue " counter(issue) " "; } for autogen numbers,
+	/* Add .issue::before { content: "Issue " counter(issue); } for autogen numbers,
 	   or use class="marker" to mark up the issue number in source. */
 
 /** Example *******************************************************************/
@@ -665,7 +663,7 @@
 		min-width: 7.5em;
 		display: block;
 	}
-	/* Add .example::before { content: "Example " counter(example) " "; } for autogen numbers,
+	/* Add .example::before { content: "Example " counter(example); } for autogen numbers,
 	   or use class="marker" to mark up the example number in source. */
 
 /** Non-normative Note ********************************************************/
@@ -692,14 +690,6 @@
 	}
 	details.note[open] > summary {
 		border-bottom: 1px silver solid;
-	}
-
-/** Assertion Box *************************************************************/
-	/*  for assertions in algorithms */
-
-	.assertion {
-		border-color: #AAA;
-		background: #EEE;
 	}
 
 /** Advisement Box ************************************************************/
@@ -1252,7 +1242,7 @@ Possible extra rowspan handling
                 counter-increment: figure;
             }
             figcaption:not(.no-marker)::before {
-                content: "Figure " counter(figure) " ";
+                content: "Figure " counter(figure);
             }</style>
 <style>/* style-autolinks */
 
@@ -1415,7 +1405,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Proximity Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-08-26">26 August 2016</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-01">1 February 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1443,7 +1433,7 @@ pre.idl.highlight { color: #708090; }
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2016 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2017 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
@@ -1484,14 +1474,12 @@ the presence of nearby objects without physical contact.</p>
     <li>
      <a href="#api"><span class="secno">5</span> <span class="content">API</span></a>
      <ol class="toc">
-      <li><a href="#proximity-sensor-interface"><span class="secno">5.1</span> <span class="content">The ProximitySensor Interface</span></a>
       <li>
-       <a href="#proximity-sensor-reading-interface"><span class="secno">5.2</span> <span class="content">The ProximitySensorReading Interface</span></a>
+       <a href="#proximity-sensor-interface"><span class="secno">5.1</span> <span class="content">The ProximitySensor Interface</span></a>
        <ol class="toc">
-        <li><a href="#proximity-sensor-reading-constructor"><span class="secno">5.2.1</span> <span class="content">The ProximitySensorReading constructor</span></a>
-        <li><a href="#proximity-sensor-reading-attribute-distance"><span class="secno">5.2.2</span> <span class="content">The distance attribute</span></a>
-        <li><a href="#proximity-sensor-reading-attribute-max"><span class="secno">5.2.3</span> <span class="content">The max attribute</span></a>
-        <li><a href="#proximity-sensor-reading-attribute-near"><span class="secno">5.2.4</span> <span class="content">The near attribute</span></a>
+        <li><a href="#proximity-sensor-distance"><span class="secno">5.1.1</span> <span class="content">The distance attribute</span></a>
+        <li><a href="#proximity-sensor-max"><span class="secno">5.1.2</span> <span class="content">The max attribute</span></a>
+        <li><a href="#proximity-sensor-near"><span class="secno">5.1.3</span> <span class="content">The near attribute</span></a>
        </ol>
      </ol>
     <li><a href="#limitations-proximity-sensors"><span class="secno">6</span> <span class="content">Limitations of Proximity Sensors</span></a>
@@ -1521,68 +1509,48 @@ method, sensor construction, etc.  Moreover some proximity sensors might be only
 able to provide just a boolean to indicate if there is an object which is near,
 more like presence detection, than an absolute value for the distance.</p>
    <h2 class="heading settled" data-level="2" id="examples"><span class="secno">2. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
-   <div class="example" id="example-bfea9999">
-    <a class="self-link" href="#example-bfea9999"></a> 
-<pre class="highlight"><span></span><span class="kd">let</span> <span class="nx">sensor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ProximitySensor</span><span class="p">();</span>
+   <div class="example" id="example-05d81306">
+    <a class="self-link" href="#example-05d81306"></a> 
+<pre class="highlight"><span class="kd">let</span> <span class="nx">sensor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ProximitySensor</span><span class="p">();</span>
 <span class="nx">sensor</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 
-<span class="nx">sensor</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=></span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">reading</span><span class="p">.</span><span class="nx">distance</span><span class="p">);</span>
+<span class="nx">sensor</span><span class="p">.</span><span class="nx">onchange</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=></span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">sensor</span><span class="p">.</span><span class="nx">distance</span><span class="p">);</span>
 
-<span class="nx">sensor</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
-<span class="p">};</span>
+<span class="nx">sensor</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="nx">event</span> <span class="o">=></span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
 </pre>
    </div>
    <h2 class="heading settled" data-level="3" id="security-and-privacy"><span class="secno">3. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-and-privacy"></a></h2>
    <p>There are no specific security and privacy considerations
 beyond those described in the Generic Sensor API <a data-link-type="biblio" href="#biblio-generic-sensor">[GENERIC-SENSOR]</a>.</p>
    <h2 class="heading settled" data-level="4" id="model"><span class="secno">4. </span><span class="content">Model</span><a class="self-link" href="#model"></a></h2>
-   <p>The Proximity Sensor’s associated <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-subclass">Sensor subclass</a> is the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-1">ProximitySensor</a></code> class.</p>
-   <p>The Proximity Sensor’s associated <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensorreading-subclass">SensorReading subclass</a> is the <code class="idl"><a data-link-type="idl" href="#proximitysensorreading" id="ref-for-proximitysensorreading-1">ProximitySensorReading</a></code> class.</p>
+   <p>The Proximity Sensor’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-1">ProximitySensor</a></code> class.</p>
    <p>The Proximity Sensor has a <a data-link-type="dfn" href="https://w3c.github.io/sensors#default-sensor">default sensor</a>,
 which is the device’s main proximity detector.</p>
-   <p>The Proximity Sensor has a single <a data-link-type="dfn" href="https://w3c.github.io/sensors#supported-reporting-modes">supported reporting mode</a> which is "<a data-link-type="dfn" href="https://w3c.github.io/sensors#auto">auto</a>".</p>
-   <p>The Proximity Sensor’s <a data-link-type="dfn" href="https://w3c.github.io/permissions/#idl-def-Permission">permission</a> name is <code>"proximity"</code>.
-It has no <a data-link-type="dfn" href="https://w3c.github.io/permissions/#dfn-associated-permissiondescriptor">associated PermissionDescriptor</a>.</p>
-   <p>The Proximity Sensor has an associated abstract operation
-to <dfn data-dfn-type="dfn" data-noexport="" id="retrieve-the-sensor-permission">retrieve the sensor permission<a class="self-link" href="#retrieve-the-sensor-permission"></a></dfn> which
-must simply return a <a data-link-type="dfn" href="https://w3c.github.io/permissions/#idl-def-Permission">permission</a> whose name is "proximity".</p>
-   <p>The Proximity Sensor has an associated abstract operation
-to <dfn data-dfn-type="dfn" data-lt="Construct SensorReading Object" data-noexport="" id="construct-sensorreading-object">construct a SensorReading object<a class="self-link" href="#construct-sensorreading-object"></a></dfn> which creates a new <code class="idl"><a data-link-type="idl" href="#proximitysensorreading" id="ref-for-proximitysensorreading-2">ProximitySensorReading</a></code> object and sets its <a class="idl-code" data-link-type="attribute" href="#dom-proximitysensorreading-distance" id="ref-for-dom-proximitysensorreading-distance-1">distance</a> attribute to
-positive infinity.</p>
+   <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a> per <a data-link-type="dfn">sensor</a> of proximity sensors type includes distance,
+max and near value.</p>
    <p><dfn data-dfn-type="dfn" data-noexport="" id="distance">Distance<a class="self-link" href="#distance"></a></dfn> is a value that represents the distance between a device and
 the closest visible surface. Its unit is the centimeter (cm).</p>
    <h2 class="heading settled" data-level="5" id="api"><span class="secno">5. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="proximity-sensor-interface"><span class="secno">5.1. </span><span class="content">The ProximitySensor Interface</span><a class="self-link" href="#proximity-sensor-interface"></a></h3>
 <pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="ProximitySensor" data-dfn-type="constructor" data-export="" data-lt="ProximitySensor(sensorOptions)|ProximitySensor()" id="dom-proximitysensor-proximitysensor">Constructor<a class="self-link" href="#dom-proximitysensor-proximitysensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="ProximitySensor/ProximitySensor(sensorOptions)" data-dfn-type="argument" data-export="" id="dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions">sensorOptions<a class="self-link" href="#dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions"></a></dfn>)]
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="proximitysensor">ProximitySensor</dfn> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor">Sensor</a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#proximitysensorreading" id="ref-for-proximitysensorreading-3">ProximitySensorReading</a>? <dfn class="nv idl-code" data-dfn-for="ProximitySensor" data-dfn-type="attribute" data-export="" data-readonly="" data-type="ProximitySensorReading?" id="dom-proximitysensor-reading">reading<a class="self-link" href="#dom-proximitysensor-reading"></a></dfn>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unrestricted</span> <span class="kt">double</span>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="ProximitySensor" data-dfn-type="attribute" data-export="" data-readonly="" data-type="unrestricted double?" id="dom-proximitysensor-distance">distance</dfn>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unrestricted</span> <span class="kt">double</span>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="ProximitySensor" data-dfn-type="attribute" data-export="" data-readonly="" data-type="unrestricted double?" id="dom-proximitysensor-max">max</dfn>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="ProximitySensor" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean?" id="dom-proximitysensor-near">near</dfn>;
 };
 </pre>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-a-proximitysensor-object">Construct a ProximitySensor Object<a class="self-link" href="#construct-a-proximitysensor-object"></a></dfn> the user agent must invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object">construct a Sensor object</a> abstract operation.</p>
-   <h3 class="heading settled" data-level="5.2" id="proximity-sensor-reading-interface"><span class="secno">5.2. </span><span class="content">The ProximitySensorReading Interface</span><a class="self-link" href="#proximity-sensor-reading-interface"></a></h3>
-<pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="ProximitySensorReading" data-dfn-type="constructor" data-export="" data-lt="ProximitySensorReading(proximitySensorReadingInit)" id="dom-proximitysensorreading-proximitysensorreading">Constructor<a class="self-link" href="#dom-proximitysensorreading-proximitysensorreading"></a></dfn>(<a class="n" data-link-type="idl-name" href="#dictdef-proximitysensorreadinginit" id="ref-for-dictdef-proximitysensorreadinginit-1">ProximitySensorReadingInit</a> <dfn class="nv idl-code" data-dfn-for="ProximitySensorReading/ProximitySensorReading(proximitySensorReadingInit)" data-dfn-type="argument" data-export="" id="dom-proximitysensorreading-proximitysensorreading-proximitysensorreadinginit-proximitysensorreadinginit">proximitySensorReadingInit<a class="self-link" href="#dom-proximitysensorreading-proximitysensorreading-proximitysensorreadinginit-proximitysensorreadinginit"></a></dfn>)]
-<span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="proximitysensorreading">ProximitySensorReading</dfn> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensorreading">SensorReading</a> {
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unrestricted</span> <span class="kt">double</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="ProximitySensorReading" data-dfn-type="attribute" data-export="" data-readonly="" data-type="unrestricted double" id="dom-proximitysensorreading-distance">distance</dfn>;
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unrestricted</span> <span class="kt">double</span> <dfn class="nv dfn-paneled idl-code" data-dfn-for="ProximitySensorReading" data-dfn-type="attribute" data-export="" data-readonly="" data-type="unrestricted double" id="dom-proximitysensorreading-max">max</dfn>;
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span>? <dfn class="nv dfn-paneled idl-code" data-dfn-for="ProximitySensorReading" data-dfn-type="attribute" data-export="" data-readonly="" data-type="boolean?" id="dom-proximitysensorreading-near">near</dfn>;
-};
-
-<span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-proximitysensorreadinginit">ProximitySensorReadingInit</dfn> {
-  <span class="kt">unrestricted</span> <span class="kt">double</span> <dfn class="nv idl-code" data-default="Infinity" data-dfn-for="ProximitySensorReadingInit" data-dfn-type="dict-member" data-export="" data-type="unrestricted double " id="dom-proximitysensorreadinginit-distance">distance<a class="self-link" href="#dom-proximitysensorreadinginit-distance"></a></dfn> = <span class="kt">Infinity</span>;
-  <span class="kt">unrestricted</span> <span class="kt">double</span> <dfn class="nv idl-code" data-default="Infinity" data-dfn-for="ProximitySensorReadingInit" data-dfn-type="dict-member" data-export="" data-type="unrestricted double " id="dom-proximitysensorreadinginit-max">max<a class="self-link" href="#dom-proximitysensorreadinginit-max"></a></dfn> = <span class="kt">Infinity</span>;
-  <span class="kt">boolean</span>? <dfn class="nv idl-code" data-dfn-for="ProximitySensorReadingInit" data-dfn-type="dict-member" data-export="" data-type="boolean? " id="dom-proximitysensorreadinginit-near">near<a class="self-link" href="#dom-proximitysensorreadinginit-near"></a></dfn>;
-};
-</pre>
-   <h4 class="heading settled" data-level="5.2.1" id="proximity-sensor-reading-constructor"><span class="secno">5.2.1. </span><span class="content">The ProximitySensorReading constructor</span><a class="self-link" href="#proximity-sensor-reading-constructor"></a></h4>
-   <h4 class="heading settled" data-level="5.2.2" id="proximity-sensor-reading-attribute-distance"><span class="secno">5.2.2. </span><span class="content">The distance attribute</span><a class="self-link" href="#proximity-sensor-reading-attribute-distance"></a></h4>
-   <p>The <a class="idl-code" data-link-type="attribute" href="#dom-proximitysensorreading-distance" id="ref-for-dom-proximitysensorreading-distance-2">distance</a> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensorreading" id="ref-for-proximitysensorreading-4">ProximitySensorReading</a></code> interface represents the distance between the sensor and the closest visible surface, in centimeters.</p>
-   <h4 class="heading settled" data-level="5.2.3" id="proximity-sensor-reading-attribute-max"><span class="secno">5.2.3. </span><span class="content">The max attribute</span><a class="self-link" href="#proximity-sensor-reading-attribute-max"></a></h4>
-   <p>The <a class="idl-code" data-link-type="attribute" href="#dom-proximitysensorreading-max" id="ref-for-dom-proximitysensorreading-max-1">max</a> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensorreading" id="ref-for-proximitysensorreading-5">ProximitySensorReading</a></code> interface represents the maximum sensing range for the primary proximity sensor, in centimeters.</p>
-   <h4 class="heading settled" data-level="5.2.4" id="proximity-sensor-reading-attribute-near"><span class="secno">5.2.4. </span><span class="content">The near attribute</span><a class="self-link" href="#proximity-sensor-reading-attribute-near"></a></h4>
-   <p>The <a class="idl-code" data-link-type="attribute" href="#dom-proximitysensorreading-near" id="ref-for-dom-proximitysensorreading-near-1">near</a> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensorreading" id="ref-for-proximitysensorreading-6">ProximitySensorReading</a></code> interface represents the presence of a visible surface in the vicinity of the primary proximity sensor.</p>
-   <p class="note" role="note">Note: If the implementation is unable to provide the <code class="idl"><a data-link-type="idl" href="#dom-proximitysensorreading-near" id="ref-for-dom-proximitysensorreading-near-2">near</a></code> value, it could infer the <code class="idl"><a data-link-type="idl" href="#dom-proximitysensorreading-near" id="ref-for-dom-proximitysensorreading-near-3">near</a></code> value from the value of <code class="idl"><a data-link-type="idl" href="#dom-proximitysensorreading-distance" id="ref-for-dom-proximitysensorreading-distance-3">distance</a></code>.
-For example, if <code class="idl"><a data-link-type="idl" href="#dom-proximitysensorreading-distance" id="ref-for-dom-proximitysensorreading-distance-4">distance</a></code> is not equal to <code class="idl"><a data-link-type="idl" href="#dom-proximitysensorreading-max" id="ref-for-dom-proximitysensorreading-max-2">max</a></code> or default value (Infinity),
+   <h4 class="heading settled" data-level="5.1.1" id="proximity-sensor-distance"><span class="secno">5.1.1. </span><span class="content">The distance attribute</span><a class="self-link" href="#proximity-sensor-distance"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-distance" id="ref-for-dom-proximitysensor-distance-1">distance</a></code> distance attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-2">ProximitySensor</a></code> interface represents the distance between the sensor and the closest visible surface, in centimeters.
+In other words, this attribute returns <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["distance"].</p>
+   <h4 class="heading settled" data-level="5.1.2" id="proximity-sensor-max"><span class="secno">5.1.2. </span><span class="content">The max attribute</span><a class="self-link" href="#proximity-sensor-max"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-max" id="ref-for-dom-proximitysensor-max-1">max</a></code> max attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-3">ProximitySensor</a></code> interface represents the maximum sensing range for the primary proximity sensor, in centimeters.
+In other words, this attribute returns <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["max"].</p>
+   <h4 class="heading settled" data-level="5.1.3" id="proximity-sensor-near"><span class="secno">5.1.3. </span><span class="content">The near attribute</span><a class="self-link" href="#proximity-sensor-near"></a></h4>
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near-1">near</a></code> near attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-4">ProximitySensor</a></code> interface represents the presence of a visible surface in the vicinity of the primary proximity sensor.
+In other words, this attribute returns <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["near"].</p>
+   <p class="note" role="note">Note: If the implementation is unable to provide the <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near-2">near</a></code> value, it could infer the <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near-3">near</a></code> value from the value of <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-distance" id="ref-for-dom-proximitysensor-distance-2">distance</a></code>.
+For example, if <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-distance" id="ref-for-dom-proximitysensor-distance-3">distance</a></code> is not equal to <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-max" id="ref-for-dom-proximitysensor-max-2">max</a></code> or default value (Infinity),
 it could imply there is an object in the sensing range.</p>
    <h2 class="heading settled" data-level="6" id="limitations-proximity-sensors"><span class="secno">6. </span><span class="content">Limitations of Proximity Sensors</span><a class="self-link" href="#limitations-proximity-sensors"></a></h2>
    <p>Since most proximity sensors detect electromagnetic radiation (e.g., an infrared light
@@ -1620,59 +1588,28 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <ul class="index">
    <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §8</span>
    <li><a href="#construct-a-proximitysensor-object">Construct a ProximitySensor Object</a><span>, in §5.1</span>
-   <li><a href="#construct-sensorreading-object">Construct SensorReading Object</a><span>, in §4</span>
    <li><a href="#distance">Distance</a><span>, in §4</span>
-   <li>
-    distance
-    <ul>
-     <li><a href="#dom-proximitysensorreading-distance">attribute for ProximitySensorReading</a><span>, in §5.2</span>
-     <li><a href="#dom-proximitysensorreadinginit-distance">dict-member for ProximitySensorReadingInit</a><span>, in §5.2</span>
-    </ul>
-   <li>
-    max
-    <ul>
-     <li><a href="#dom-proximitysensorreading-max">attribute for ProximitySensorReading</a><span>, in §5.2</span>
-     <li><a href="#dom-proximitysensorreadinginit-max">dict-member for ProximitySensorReadingInit</a><span>, in §5.2</span>
-    </ul>
-   <li>
-    near
-    <ul>
-     <li><a href="#dom-proximitysensorreading-near">attribute for ProximitySensorReading</a><span>, in §5.2</span>
-     <li><a href="#dom-proximitysensorreadinginit-near">dict-member for ProximitySensorReadingInit</a><span>, in §5.2</span>
-    </ul>
+   <li><a href="#dom-proximitysensor-distance">distance</a><span>, in §5.1</span>
+   <li><a href="#dom-proximitysensor-max">max</a><span>, in §5.1</span>
+   <li><a href="#dom-proximitysensor-near">near</a><span>, in §5.1</span>
    <li><a href="#proximitysensor">ProximitySensor</a><span>, in §5.1</span>
    <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor()</a><span>, in §5.1</span>
-   <li><a href="#proximitysensorreading">ProximitySensorReading</a><span>, in §5.2</span>
-   <li><a href="#dictdef-proximitysensorreadinginit">ProximitySensorReadingInit</a><span>, in §5.2</span>
-   <li><a href="#dom-proximitysensorreading-proximitysensorreading">ProximitySensorReading(proximitySensorReadingInit)</a><span>, in §5.2</span>
    <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor(sensorOptions)</a><span>, in §5.1</span>
-   <li><a href="#dom-proximitysensor-reading">reading</a><span>, in §5.1</span>
-   <li><a href="#retrieve-the-sensor-permission">retrieve the sensor permission</a><span>, in §4</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
-     <li><a href="https://w3c.github.io/sensors#auto">auto</a>
      <li><a href="https://w3c.github.io/sensors#construct-sensor-object">construct a sensor object</a>
      <li><a href="https://w3c.github.io/sensors#default-sensor">default sensor</a>
-     <li><a href="https://w3c.github.io/sensors#sensor-subclass">sensor subclass</a>
-     <li><a href="https://w3c.github.io/sensors#sensorreading-subclass">sensorreading subclass</a>
-     <li><a href="https://w3c.github.io/sensors#supported-reporting-modes">supported reporting mode</a>
-    </ul>
-   <li>
-    <a data-link-type="biblio">[permissions]</a> defines the following terms:
-    <ul>
-     <li><a href="https://w3c.github.io/permissions/#dfn-associated-permissiondescriptor">associated permissiondescriptor</a>
-     <li><a href="https://w3c.github.io/permissions/#idl-def-Permission">permission</a>
+     <li><a href="https://w3c.github.io/sensors#latest-reading">latest reading</a>
     </ul>
    <li>
     <a data-link-type="biblio">[GENERIC-SENSOR]</a> defines the following terms:
     <ul>
      <li><a href="https://w3c.github.io/sensors/#sensor">Sensor</a>
      <li><a href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a>
-     <li><a href="https://w3c.github.io/sensors/#sensorreading">SensorReading</a>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -1680,8 +1617,6 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <dl>
    <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
    <dd>Tobie Langel; Rick Waldron. <a href="https://w3c.github.io/sensors/">Generic Sensor API</a>. 24 March 2016. WD. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
-   <dt id="biblio-permissions">[PERMISSIONS]
-   <dd>Mounir Lamouri; Marcos Caceres. <a href="https://w3c.github.io/permissions/">The Permissions API</a>. 7 April 2015. WD. URL: <a href="https://w3c.github.io/permissions/">https://w3c.github.io/permissions/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
@@ -1690,20 +1625,9 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl def">[<a class="nv" href="#dom-proximitysensor-proximitysensor">Constructor</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <a class="nv" href="#dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions">sensorOptions</a>)]
 <span class="kt">interface</span> <a class="nv" href="#proximitysensor">ProximitySensor</a> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor">Sensor</a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#proximitysensorreading">ProximitySensorReading</a>? <a class="nv" data-readonly="" data-type="ProximitySensorReading?" href="#dom-proximitysensor-reading">reading</a>;
-};
-
-[<a class="nv" href="#dom-proximitysensorreading-proximitysensorreading">Constructor</a>(<a class="n" data-link-type="idl-name" href="#dictdef-proximitysensorreadinginit">ProximitySensorReadingInit</a> <a class="nv" href="#dom-proximitysensorreading-proximitysensorreading-proximitysensorreadinginit-proximitysensorreadinginit">proximitySensorReadingInit</a>)]
-<span class="kt">interface</span> <a class="nv" href="#proximitysensorreading">ProximitySensorReading</a> : <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensorreading">SensorReading</a> {
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unrestricted</span> <span class="kt">double</span> <a class="nv" data-readonly="" data-type="unrestricted double" href="#dom-proximitysensorreading-distance">distance</a>;
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unrestricted</span> <span class="kt">double</span> <a class="nv" data-readonly="" data-type="unrestricted double" href="#dom-proximitysensorreading-max">max</a>;
-    <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span>? <a class="nv" data-readonly="" data-type="boolean?" href="#dom-proximitysensorreading-near">near</a>;
-};
-
-<span class="kt">dictionary</span> <a class="nv" href="#dictdef-proximitysensorreadinginit">ProximitySensorReadingInit</a> {
-  <span class="kt">unrestricted</span> <span class="kt">double</span> <a class="nv" data-default="Infinity" data-type="unrestricted double " href="#dom-proximitysensorreadinginit-distance">distance</a> = <span class="kt">Infinity</span>;
-  <span class="kt">unrestricted</span> <span class="kt">double</span> <a class="nv" data-default="Infinity" data-type="unrestricted double " href="#dom-proximitysensorreadinginit-max">max</a> = <span class="kt">Infinity</span>;
-  <span class="kt">boolean</span>? <a class="nv" data-type="boolean? " href="#dom-proximitysensorreadinginit-near">near</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unrestricted</span> <span class="kt">double</span>? <a class="nv" data-readonly="" data-type="unrestricted double?" href="#dom-proximitysensor-distance">distance</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">unrestricted</span> <span class="kt">double</span>? <a class="nv" data-readonly="" data-type="unrestricted double?" href="#dom-proximitysensor-max">max</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">boolean</span>? <a class="nv" data-readonly="" data-type="boolean?" href="#dom-proximitysensor-near">near</a>;
 };
 
 </pre>
@@ -1711,43 +1635,29 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <b><a href="#proximitysensor">#proximitysensor</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-proximitysensor-1">4. Model</a>
+    <li><a href="#ref-for-proximitysensor-2">5.1.1. The distance attribute</a>
+    <li><a href="#ref-for-proximitysensor-3">5.1.2. The max attribute</a>
+    <li><a href="#ref-for-proximitysensor-4">5.1.3. The near attribute</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="proximitysensorreading">
-   <b><a href="#proximitysensorreading">#proximitysensorreading</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dom-proximitysensor-distance">
+   <b><a href="#dom-proximitysensor-distance">#dom-proximitysensor-distance</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-proximitysensorreading-1">4. Model</a> <a href="#ref-for-proximitysensorreading-2">(2)</a>
-    <li><a href="#ref-for-proximitysensorreading-3">5.1. The ProximitySensor Interface</a>
-    <li><a href="#ref-for-proximitysensorreading-4">5.2.2. The distance attribute</a>
-    <li><a href="#ref-for-proximitysensorreading-5">5.2.3. The max attribute</a>
-    <li><a href="#ref-for-proximitysensorreading-6">5.2.4. The near attribute</a>
+    <li><a href="#ref-for-dom-proximitysensor-distance-1">5.1.1. The distance attribute</a>
+    <li><a href="#ref-for-dom-proximitysensor-distance-2">5.1.3. The near attribute</a> <a href="#ref-for-dom-proximitysensor-distance-3">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-proximitysensorreading-distance">
-   <b><a href="#dom-proximitysensorreading-distance">#dom-proximitysensorreading-distance</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dom-proximitysensor-max">
+   <b><a href="#dom-proximitysensor-max">#dom-proximitysensor-max</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-proximitysensorreading-distance-1">4. Model</a>
-    <li><a href="#ref-for-dom-proximitysensorreading-distance-2">5.2.2. The distance attribute</a>
-    <li><a href="#ref-for-dom-proximitysensorreading-distance-3">5.2.4. The near attribute</a> <a href="#ref-for-dom-proximitysensorreading-distance-4">(2)</a>
+    <li><a href="#ref-for-dom-proximitysensor-max-1">5.1.2. The max attribute</a>
+    <li><a href="#ref-for-dom-proximitysensor-max-2">5.1.3. The near attribute</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-proximitysensorreading-max">
-   <b><a href="#dom-proximitysensorreading-max">#dom-proximitysensorreading-max</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="dom-proximitysensor-near">
+   <b><a href="#dom-proximitysensor-near">#dom-proximitysensor-near</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-proximitysensorreading-max-1">5.2.3. The max attribute</a>
-    <li><a href="#ref-for-dom-proximitysensorreading-max-2">5.2.4. The near attribute</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-proximitysensorreading-near">
-   <b><a href="#dom-proximitysensorreading-near">#dom-proximitysensorreading-near</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-proximitysensorreading-near-1">5.2.4. The near attribute</a> <a href="#ref-for-dom-proximitysensorreading-near-2">(2)</a> <a href="#ref-for-dom-proximitysensorreading-near-3">(3)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dictdef-proximitysensorreadinginit">
-   <b><a href="#dictdef-proximitysensorreadinginit">#dictdef-proximitysensorreadinginit</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dictdef-proximitysensorreadinginit-1">5.2. The ProximitySensorReading Interface</a>
+    <li><a href="#ref-for-dom-proximitysensor-near-1">5.1.3. The near attribute</a> <a href="#ref-for-dom-proximitysensor-near-2">(2)</a> <a href="#ref-for-dom-proximitysensor-near-3">(3)</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
