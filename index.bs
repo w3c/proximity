@@ -72,13 +72,14 @@ beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
 Model {#model}
 =====
 
-The Proximity Sensor's associated {{Sensor}} subclass is the {{ProximitySensor}} class.
+The proximity sensor's associated {{Sensor}} subclass is the {{ProximitySensor}} class.
 
 The Proximity Sensor has a <a>default sensor</a>,
 which is the device's main proximity detector.
 
-A [=latest reading=] per [=sensor=] of proximity sensors type includes distance,
-max and near value.
+A [=latest reading=] per [=sensor=] of proximity sensor type includes three [=map/entries=]
+whose [=map/keys=] are "distance", "max", "near" and whose [=map/values=] contain {{ProximitySensor/distance!!attribute}}, {{ProximitySensor/max!!attribute}} and {{ProximitySensor/near!!attribute}} values.
+
 
 <dfn>Distance</dfn> is a value that represents the distance between a device and
 the closest visible surface. Its unit is the centimeter (cm).
@@ -104,19 +105,19 @@ To <dfn>Construct a ProximitySensor Object</dfn> the user agent must invoke the
 
 ### The distance attribute ### {#proximity-sensor-distance}
 
-The {{ProximitySensor/distance!!attribute}} distance attribute of the {{ProximitySensor}}
+The {{ProximitySensor/distance!!attribute}} attribute of the {{ProximitySensor}}
 interface represents the distance between the sensor and the closest visible surface, in centimeters.
 In other words, this attribute returns [=latest reading=]["distance"].
 
 ### The max attribute ### {#proximity-sensor-max}
 
-The {{ProximitySensor/max!!attribute}} max</a> attribute of the {{ProximitySensor}}
+The {{ProximitySensor/max!!attribute}} attribute of the {{ProximitySensor}}
 interface represents the maximum sensing range for the primary proximity sensor, in centimeters.
 In other words, this attribute returns [=latest reading=]["max"].
 
 ### The near attribute ### {#proximity-sensor-near}
 
-The {{ProximitySensor/near!!attribute}} near</a> attribute of the {{ProximitySensor}}
+The {{ProximitySensor/near!!attribute}} attribute of the {{ProximitySensor}}
 interface represents the presence of a visible surface in the vicinity of the primary proximity sensor.
 In other words, this attribute returns [=latest reading=]["near"].
 
