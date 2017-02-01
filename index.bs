@@ -18,7 +18,7 @@ Version History: https://github.com/w3c/proximity/commits/gh-pages/index.bs
 Indent: 2
 Repository: w3c/proximity
 Markup Shorthands: markdown on
-Inline Github Issues: true
+Inline Github Issues: title
 !Issue Tracking: <a href="https://github.com/w3c/proximity/issues">Issues</a>
 !Test Suite: <a href="https://github.com/w3c/web-platform-tests/tree/master/proximity">web-platform-tests on GitHub</a>
 Boilerplate: omit issues-index, omit conformance
@@ -28,7 +28,7 @@ Default Biblio Status: current
 urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
   type: dfn
     text: high-level
-    text: sensor subclass
+    text: sensor
     text: latest reading
     text: default sensor
     text: construct a sensor object; url: construct-sensor-object
