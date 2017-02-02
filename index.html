@@ -1430,7 +1430,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Proximity Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-01">1 February 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-02-02">2 February 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1551,9 +1551,13 @@ beyond those described in the Generic Sensor API <a data-link-type="biblio" href
    <p>The proximity sensor’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-1">ProximitySensor</a></code> class.</p>
    <p>The Proximity Sensor has a <a data-link-type="dfn" href="https://w3c.github.io/sensors#default-sensor">default sensor</a>,
 which is the device’s main proximity detector.</p>
-   <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a> per <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor">sensor</a> of proximity sensor type includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key">keys</a> are "distance", "max", "near" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value">values</a> contain <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-distance" id="ref-for-dom-proximitysensor-distance-1">distance</a></code>, <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-max" id="ref-for-dom-proximitysensor-max-1">max</a></code> and <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near-1">near</a></code> values.</p>
-   <p><dfn data-dfn-type="dfn" data-noexport="" id="distance">Distance<a class="self-link" href="#distance"></a></dfn> is a value that represents the distance between a device and
+   <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a> per <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor">sensor</a> of proximity sensor type includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key">keys</a> are "distance", "max", "near" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value">values</a> contain <a data-link-type="dfn" href="#distance" id="ref-for-distance-1">distance</a>, <a data-link-type="dfn" href="#max" id="ref-for-max-1">max</a> and <a data-link-type="dfn" href="#near" id="ref-for-near-1">near</a> values.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="distance">distance</dfn> is a value that represents the distance between a device and
 the closest visible surface. Its unit is the centimeter (cm).</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="max">max</dfn> is a value that represents the maximum sensing range of the
+main proximity detector, in centimeters.</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="near">near</dfn> is a value that represent the presence of a visible surface
+in the vicinity of the main proximity detector.</p>
    <h2 class="heading settled" data-level="5" id="api"><span class="secno">5. </span><span class="content">API</span><a class="self-link" href="#api"></a></h2>
    <h3 class="heading settled" data-level="5.1" id="proximity-sensor-interface"><span class="secno">5.1. </span><span class="content">The ProximitySensor Interface</span><a class="self-link" href="#proximity-sensor-interface"></a></h3>
 <pre class="idl highlight def">[<dfn class="nv idl-code" data-dfn-for="ProximitySensor" data-dfn-type="constructor" data-export="" data-lt="ProximitySensor(sensorOptions)|ProximitySensor()" id="dom-proximitysensor-proximitysensor">Constructor<a class="self-link" href="#dom-proximitysensor-proximitysensor"></a></dfn>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions">SensorOptions</a> <dfn class="nv idl-code" data-dfn-for="ProximitySensor/ProximitySensor(sensorOptions)" data-dfn-type="argument" data-export="" id="dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions">sensorOptions<a class="self-link" href="#dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions"></a></dfn>)]
@@ -1565,16 +1569,16 @@ the closest visible surface. Its unit is the centimeter (cm).</p>
 </pre>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-a-proximitysensor-object">Construct a ProximitySensor Object<a class="self-link" href="#construct-a-proximitysensor-object"></a></dfn> the user agent must invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object">construct a Sensor object</a> abstract operation.</p>
    <h4 class="heading settled" data-level="5.1.1" id="proximity-sensor-distance"><span class="secno">5.1.1. </span><span class="content">The distance attribute</span><a class="self-link" href="#proximity-sensor-distance"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-distance" id="ref-for-dom-proximitysensor-distance-2">distance</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-2">ProximitySensor</a></code> interface represents the distance between the sensor and the closest visible surface, in centimeters.
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-distance" id="ref-for-dom-proximitysensor-distance-1">distance</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-2">ProximitySensor</a></code> interface represents the <a data-link-type="dfn" href="#distance" id="ref-for-distance-2">distance</a> value.
 In other words, this attribute returns <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["distance"].</p>
    <h4 class="heading settled" data-level="5.1.2" id="proximity-sensor-max"><span class="secno">5.1.2. </span><span class="content">The max attribute</span><a class="self-link" href="#proximity-sensor-max"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-max" id="ref-for-dom-proximitysensor-max-2">max</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-3">ProximitySensor</a></code> interface represents the maximum sensing range for the primary proximity sensor, in centimeters.
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-max" id="ref-for-dom-proximitysensor-max-1">max</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-3">ProximitySensor</a></code> interface represents the <a data-link-type="dfn" href="#max" id="ref-for-max-2">max</a> value.
 In other words, this attribute returns <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["max"].</p>
    <h4 class="heading settled" data-level="5.1.3" id="proximity-sensor-near"><span class="secno">5.1.3. </span><span class="content">The near attribute</span><a class="self-link" href="#proximity-sensor-near"></a></h4>
-   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near-2">near</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-4">ProximitySensor</a></code> interface represents the presence of a visible surface in the vicinity of the primary proximity sensor.
+   <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near-1">near</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor-4">ProximitySensor</a></code> interface represents the <a data-link-type="dfn" href="#near" id="ref-for-near-2">near</a> value.
 In other words, this attribute returns <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading">latest reading</a>["near"].</p>
-   <p class="note" role="note"><span>Note:</span> If the implementation is unable to provide the <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near-3">near</a></code> value, it could infer the <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near-4">near</a></code> value from the value of <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-distance" id="ref-for-dom-proximitysensor-distance-3">distance</a></code>.
-For example, if <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-distance" id="ref-for-dom-proximitysensor-distance-4">distance</a></code> is not equal to <code class="idl"><a data-link-type="idl" href="#dom-proximitysensor-max" id="ref-for-dom-proximitysensor-max-3">max</a></code> or default value (Infinity),
+   <p class="note" role="note"><span>Note:</span> If the implementation is unable to provide the <a data-link-type="dfn" href="#near" id="ref-for-near-3">near</a> value, it could infer the <a data-link-type="dfn" href="#near" id="ref-for-near-4">near</a> value from the value of <a data-link-type="dfn" href="#distance" id="ref-for-distance-3">distance</a>.
+For example, if <a data-link-type="dfn" href="#distance" id="ref-for-distance-4">distance</a> is not equal to <a data-link-type="dfn" href="#max" id="ref-for-max-3">max</a> or default value (Infinity),
 it could imply there is an object in the sensing range.</p>
    <h2 class="heading settled" data-level="6" id="limitations-proximity-sensors"><span class="secno">6. </span><span class="content">Limitations of Proximity Sensors</span><a class="self-link" href="#limitations-proximity-sensors"></a></h2>
    <p>Since most proximity sensors detect electromagnetic radiation (e.g., an infrared light
@@ -1612,10 +1616,24 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <ul class="index">
    <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §8</span>
    <li><a href="#construct-a-proximitysensor-object">Construct a ProximitySensor Object</a><span>, in §5.1</span>
-   <li><a href="#distance">Distance</a><span>, in §4</span>
-   <li><a href="#dom-proximitysensor-distance">distance</a><span>, in §5.1</span>
-   <li><a href="#dom-proximitysensor-max">max</a><span>, in §5.1</span>
-   <li><a href="#dom-proximitysensor-near">near</a><span>, in §5.1</span>
+   <li>
+    distance
+    <ul>
+     <li><a href="#distance">definition of</a><span>, in §4</span>
+     <li><a href="#dom-proximitysensor-distance">attribute for ProximitySensor</a><span>, in §5.1</span>
+    </ul>
+   <li>
+    max
+    <ul>
+     <li><a href="#max">definition of</a><span>, in §4</span>
+     <li><a href="#dom-proximitysensor-max">attribute for ProximitySensor</a><span>, in §5.1</span>
+    </ul>
+   <li>
+    near
+    <ul>
+     <li><a href="#near">definition of</a><span>, in §4</span>
+     <li><a href="#dom-proximitysensor-near">attribute for ProximitySensor</a><span>, in §5.1</span>
+    </ul>
    <li><a href="#proximitysensor">ProximitySensor</a><span>, in §5.1</span>
    <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor()</a><span>, in §5.1</span>
    <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor(sensorOptions)</a><span>, in §5.1</span>
@@ -1665,6 +1683,29 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
 };
 
 </pre>
+  <aside class="dfn-panel" data-for="distance">
+   <b><a href="#distance">#distance</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-distance-1">4. Model</a>
+    <li><a href="#ref-for-distance-2">5.1.1. The distance attribute</a>
+    <li><a href="#ref-for-distance-3">5.1.3. The near attribute</a> <a href="#ref-for-distance-4">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="max">
+   <b><a href="#max">#max</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-max-1">4. Model</a>
+    <li><a href="#ref-for-max-2">5.1.2. The max attribute</a>
+    <li><a href="#ref-for-max-3">5.1.3. The near attribute</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="near">
+   <b><a href="#near">#near</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-near-1">4. Model</a>
+    <li><a href="#ref-for-near-2">5.1.3. The near attribute</a> <a href="#ref-for-near-3">(2)</a> <a href="#ref-for-near-4">(3)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="proximitysensor">
    <b><a href="#proximitysensor">#proximitysensor</a></b><b>Referenced in:</b>
    <ul>
@@ -1677,24 +1718,19 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <aside class="dfn-panel" data-for="dom-proximitysensor-distance">
    <b><a href="#dom-proximitysensor-distance">#dom-proximitysensor-distance</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-proximitysensor-distance-1">4. Model</a>
-    <li><a href="#ref-for-dom-proximitysensor-distance-2">5.1.1. The distance attribute</a>
-    <li><a href="#ref-for-dom-proximitysensor-distance-3">5.1.3. The near attribute</a> <a href="#ref-for-dom-proximitysensor-distance-4">(2)</a>
+    <li><a href="#ref-for-dom-proximitysensor-distance-1">5.1.1. The distance attribute</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-proximitysensor-max">
    <b><a href="#dom-proximitysensor-max">#dom-proximitysensor-max</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-proximitysensor-max-1">4. Model</a>
-    <li><a href="#ref-for-dom-proximitysensor-max-2">5.1.2. The max attribute</a>
-    <li><a href="#ref-for-dom-proximitysensor-max-3">5.1.3. The near attribute</a>
+    <li><a href="#ref-for-dom-proximitysensor-max-1">5.1.2. The max attribute</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-proximitysensor-near">
    <b><a href="#dom-proximitysensor-near">#dom-proximitysensor-near</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-proximitysensor-near-1">4. Model</a>
-    <li><a href="#ref-for-dom-proximitysensor-near-2">5.1.3. The near attribute</a> <a href="#ref-for-dom-proximitysensor-near-3">(2)</a> <a href="#ref-for-dom-proximitysensor-near-4">(3)</a>
+    <li><a href="#ref-for-dom-proximitysensor-near-1">5.1.3. The near attribute</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */
