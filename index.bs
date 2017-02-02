@@ -78,11 +78,18 @@ The Proximity Sensor has a <a>default sensor</a>,
 which is the device's main proximity detector.
 
 A [=latest reading=] per [=sensor=] of proximity sensor type includes three [=map/entries=]
-whose [=map/keys=] are "distance", "max", "near" and whose [=map/values=] contain {{ProximitySensor/distance!!attribute}}, {{ProximitySensor/max!!attribute}} and {{ProximitySensor/near!!attribute}} values.
+whose [=map/keys=] are "distance", "max", "near" and whose [=map/values=] contain [=distance=],
+[=max=] and [=near=] values.
 
 
-<dfn>Distance</dfn> is a value that represents the distance between a device and
+The <dfn>distance</dfn> is a value that represents the distance between a device and
 the closest visible surface. Its unit is the centimeter (cm).
+
+The <dfn>max</dfn> is a value that represents the maximum sensing range of the
+main proximity detector, in centimeters.
+
+The <dfn>near</dfn> is a value that represent the presence of a visible surface
+in the vicinity of the main proximity detector.
 
 API {#api}
 ===
@@ -106,24 +113,24 @@ To <dfn>Construct a ProximitySensor Object</dfn> the user agent must invoke the
 ### The distance attribute ### {#proximity-sensor-distance}
 
 The {{ProximitySensor/distance!!attribute}} attribute of the {{ProximitySensor}}
-interface represents the distance between the sensor and the closest visible surface, in centimeters.
+interface represents the [=distance=] value.
 In other words, this attribute returns [=latest reading=]["distance"].
 
 ### The max attribute ### {#proximity-sensor-max}
 
 The {{ProximitySensor/max!!attribute}} attribute of the {{ProximitySensor}}
-interface represents the maximum sensing range for the primary proximity sensor, in centimeters.
+interface represents the [=max=] value.
 In other words, this attribute returns [=latest reading=]["max"].
 
 ### The near attribute ### {#proximity-sensor-near}
 
 The {{ProximitySensor/near!!attribute}} attribute of the {{ProximitySensor}}
-interface represents the presence of a visible surface in the vicinity of the primary proximity sensor.
+interface represents the [=near=] value.
 In other words, this attribute returns [=latest reading=]["near"].
 
 
-Note: If the implementation is unable to provide the {{near}} value, it could infer the {{near}} value from the value of {{distance}}.
-For example, if {{distance}} is not equal to {{max}} or default value (Infinity),
+Note: If the implementation is unable to provide the [=near=] value, it could infer the [=near=] value from the value of [=distance=].
+For example, if [=distance=] is not equal to [=max=] or default value (Infinity),
 it could imply there is an object in the sensing range.
 
 
