@@ -1,6 +1,6 @@
 <pre class="metadata">
 Title: Proximity Sensor
-Level: 1
+Level: none
 Status: ED
 ED: https://w3c.github.io/proximity/
 Shortname: proximity
