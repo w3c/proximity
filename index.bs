@@ -98,7 +98,7 @@ The ProximitySensor Interface {#proximity-sensor-interface}
 --------------------------------
 
 <pre class="idl">
-  [Constructor(optional SensorOptions sensorOptions)]
+  [Constructor(optional SensorOptions sensorOptions), Exposed=Window]
   interface ProximitySensor : Sensor {
     readonly attribute unrestricted double? distance;
     readonly attribute unrestricted double? max;
