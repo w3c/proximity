@@ -32,6 +32,7 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: latest reading
     text: default sensor
     text: construct a sensor object; url: construct-sensor-object
+    text: sensor type
 </pre>
 
 Introduction {#intro}
@@ -72,12 +73,12 @@ beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
 Model {#model}
 =====
 
-The proximity sensor's associated {{Sensor}} subclass is the {{ProximitySensor}} class.
+The <dfn>Proximity Sensor</dfn> <a>sensor type</a>'s associated {{Sensor}} subclass is the {{ProximitySensor}} class.
 
-The Proximity Sensor has a <a>default sensor</a>,
+The <a>Proximity Sensor</a> has a <a>default sensor</a>,
 which is the device's main proximity detector.
 
-A [=latest reading=] per [=sensor=] of proximity sensor type includes three [=map/entries=]
+A [=latest reading=] for a {{Sensor}} of <a>Proximity Sensor</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "distance", "max", "near" and whose [=map/values=] contain [=distance=],
 [=max=] and [=near=] values.
 
