@@ -1541,7 +1541,7 @@ more like presence detection, than an absolute value for the distance.</p>
 <pre class="highlight"><span class="kd">let</span> sensor <span class="o">=</span> <span class="k">new</span> ProximitySensor<span class="p">();</span>
 sensor<span class="p">.</span>start<span class="p">();</span>
 
-sensor<span class="p">.</span>onchange <span class="o">=</span> <span class="p">()</span> <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>sensor<span class="p">.</span>distance<span class="p">);</span>
+sensor<span class="p">.</span>onreading <span class="o">=</span> <span class="p">()</span> <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>sensor<span class="p">.</span>distance<span class="p">);</span>
 
 sensor<span class="p">.</span>onerror <span class="o">=</span> event <span class="o">=></span> console<span class="p">.</span>log<span class="p">(</span>event<span class="p">.</span>error<span class="p">.</span>name<span class="p">,</span> event<span class="p">.</span>error<span class="p">.</span>message<span class="p">);</span>
 </pre>
