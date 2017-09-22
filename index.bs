@@ -57,7 +57,7 @@ Examples {#examples}
     let sensor = new ProximitySensor();
     sensor.start();
 
-    sensor.onchange = () => console.log(sensor.distance);
+    sensor.onreading = () => console.log(sensor.distance);
 
     sensor.onerror = event => console.log(event.error.name, event.error.message);
 
