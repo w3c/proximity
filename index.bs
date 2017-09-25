@@ -101,8 +101,8 @@ The ProximitySensor Interface {#proximity-sensor-interface}
 <pre class="idl">
   [Constructor(optional SensorOptions sensorOptions), Exposed=Window]
   interface ProximitySensor : Sensor {
-    readonly attribute unrestricted double? distance;
-    readonly attribute unrestricted double? max;
+    readonly attribute double? distance;
+    readonly attribute double? max;
     readonly attribute boolean? near;
   };
 </pre>
@@ -114,26 +114,24 @@ To <dfn>Construct a ProximitySensor Object</dfn> the user agent must invoke the
 ### The distance attribute ### {#proximity-sensor-distance}
 
 The {{ProximitySensor/distance!!attribute}} attribute of the {{ProximitySensor}}
-interface represents the [=distance=] value.
-In other words, this attribute returns [=latest reading=]["distance"].
+interface returns the result of invoking [=get value from latest reading=] with
+<emu-val>this</emu-val> and "distance" as arguments.
 
 ### The max attribute ### {#proximity-sensor-max}
 
 The {{ProximitySensor/max!!attribute}} attribute of the {{ProximitySensor}}
-interface represents the [=max=] value.
-In other words, this attribute returns [=latest reading=]["max"].
+interface returns the result of invoking [=get value from latest reading=] with
+<emu-val>this</emu-val> and "max" as arguments.
 
 ### The near attribute ### {#proximity-sensor-near}
 
 The {{ProximitySensor/near!!attribute}} attribute of the {{ProximitySensor}}
-interface represents the [=near=] value.
-In other words, this attribute returns [=latest reading=]["near"].
+interface returns the result of invoking [=get value from latest reading=] with
+<emu-val>this</emu-val> and "near" as arguments.
 
-
-Note: If the implementation is unable to provide the [=near=] value, it could infer the [=near=] value from the value of [=distance=].
-For example, if [=distance=] is not equal to [=max=] or default value (Infinity),
-it could imply there is an object in the sensing range.
-
+Note: If the implementation is unable to provide the [=near=] value, it could infer the [=near=]
+value from the value of [=distance=]. For example, if [=distance=] is not equal to [=max=], it
+could imply there is an object in the sensing range.
 
 Limitations of Proximity Sensors {#limitations-proximity-sensors}
 ========================
