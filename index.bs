@@ -118,6 +118,8 @@ The {{ProximitySensor/distance!!attribute}} attribute of the {{ProximitySensor}}
 interface returns the result of invoking [=get value from latest reading=] with
 <emu-val>this</emu-val> and "distance" as arguments.
 
+If the physical object is outside the <a>sensing range</a>, the attribute must return null.
+
 ### The max attribute ### {#proximity-sensor-max}
 
 The {{ProximitySensor/max!!attribute}} attribute of the {{ProximitySensor}}
@@ -129,6 +131,8 @@ interface returns the result of invoking [=get value from latest reading=] with
 The {{ProximitySensor/near!!attribute}} attribute of the {{ProximitySensor}}
 interface returns the result of invoking [=get value from latest reading=] with
 <emu-val>this</emu-val> and "near" as arguments.
+
+If the physical object is outside the <a>sensing range</a>, the attribute must return null.
 
 Note: If the implementation is unable to provide the [=near=] value, it could infer the [=near=]
 value from the value of [=distance=]. For example, if [=distance=] is not equal to [=max=], it
