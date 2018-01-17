@@ -12,7 +12,7 @@ Former Editor: Dzung D Tran, Intel Corporation, https://intel.com/
 Group: dap
 Abstract:
   This specification defines a concrete sensor interface to monitor
-  the presence of nearby objects without physical contact.
+  the presence of nearby physical objects without physical contact.
 Version History: https://github.com/w3c/proximity/commits/gh-pages/index.bs
 !Bug Reports: <a href="https://www.github.com/w3c/proximity/issues/new">via the w3c/proximity repository on GitHub</a>
 Indent: 2
@@ -45,7 +45,7 @@ from the sensor to the closest visible surface. [[#limitations-proximity-sensors
 describes more about the potential limitations, why the precise distance value
 reported by different devices can be different, due to differences in detection
 method, sensor construction, etc.  Moreover some proximity sensors might be only
-able to provide just a boolean to indicate if there is an object which is near,
+able to provide just a boolean to indicate if there is a physical object which is near,
 more like presence detection, than an absolute value for the distance.
 
 
@@ -84,9 +84,10 @@ whose [=map/keys=] are "distance", "max", "near" and whose [=map/values=] contai
 
 
 The <dfn>distance</dfn> is a value that represents the distance between a device and
-the closest visible surface. Its unit is the centimeter (cm).
+the closest visible surface of the physical object within the <dfn>sensing range</dfn>.
+Its unit is the centimeter (cm).
 
-The <dfn>max</dfn> is a value that represents the maximum sensing range of the
+The <dfn>max</dfn> is a value that represents the maximum <a>sensing range</a> of the
 main proximity detector, in centimeters.
 
 The <dfn>near</dfn> is a value that represent the presence of a visible surface
@@ -131,7 +132,7 @@ interface returns the result of invoking [=get value from latest reading=] with
 
 Note: If the implementation is unable to provide the [=near=] value, it could infer the [=near=]
 value from the value of [=distance=]. For example, if [=distance=] is not equal to [=max=], it
-could imply there is an object in the sensing range.
+could imply there is a physical object in the sensing range.
 
 Limitations of Proximity Sensors {#limitations-proximity-sensors}
 ========================
@@ -140,10 +141,10 @@ Since most proximity sensors detect electromagnetic radiation (e.g., an infrared
 or a magnetic field), certain material properties can interfere with the sensor's
 ability to sense the presence of a physical object. Things that can interfere with
 a sensor include, but are not limited to, the material's translucency, reflectiveness,
-color, temperature, chemical composition, and even the angle at which the object
+color, temperature, chemical composition, and even the angle at which the physical object
 is reflecting the radiation back at the sensor. As such, proximity sensors
 should not be relied on as a means to measure distance. The only thing that can
-be deduced from a proximity sensor is that an object is somewhere in the
+be deduced from a proximity sensor is that a physical object is somewhere in the
 distance between the minimum sensing distance and the maximum sensing distance
 with some degree of certainty.
 
