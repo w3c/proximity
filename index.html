@@ -1185,7 +1185,7 @@ Possible extra rowspan handling
   </style>
   <meta content="Bikeshed version 6aa3aaa1336714f1530c976b6df9a86c683d5968" name="generator">
   <link href="https://www.w3.org/TR/proximity/" rel="canonical">
-  <meta content="9394eb1359105cd4957f203bae020c0ec75bc169" name="document-revision">
+  <meta content="87bfda6d714c35e78bf681627545157831d43423" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1580,7 +1580,7 @@ in the vicinity of the main proximity detector.</p>
    <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near">near</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor③">ProximitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading②">get value from latest reading</a> with <emu-val>this</emu-val> and "near" as arguments.</p>
    <p>If the physical object is outside the <a data-link-type="dfn" href="#sensing-range" id="ref-for-sensing-range②">sensing range</a>, the attribute must return null.</p>
    <p class="note" role="note"><span>Note:</span> If the implementation is unable to provide the <a data-link-type="dfn" href="#near" id="ref-for-near①">near</a> value, it could infer the <a data-link-type="dfn" href="#near" id="ref-for-near②">near</a> value from the value of <a data-link-type="dfn" href="#distance" id="ref-for-distance①">distance</a>. For example, if <a data-link-type="dfn" href="#distance" id="ref-for-distance②">distance</a> is not equal to <a data-link-type="dfn" href="#max" id="ref-for-max①">max</a>, it
-could imply there is a physical object in the sensing range.</p>
+could imply there is a physical object in the <a data-link-type="dfn" href="#sensing-range" id="ref-for-sensing-range③">sensing range</a>.</p>
    <h2 class="heading settled" data-level="6" id="limitations-proximity-sensors"><span class="secno">6. </span><span class="content">Limitations of Proximity Sensors</span><a class="self-link" href="#limitations-proximity-sensors"></a></h2>
    <p>Since most proximity sensors detect electromagnetic radiation (e.g., an infrared light
 or a magnetic field), certain material properties can interfere with the sensor’s
@@ -1709,7 +1709,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-sensing-range">4. Model</a>
     <li><a href="#ref-for-sensing-range①">5.1.1. The distance attribute</a>
-    <li><a href="#ref-for-sensing-range②">5.1.3. The near attribute</a>
+    <li><a href="#ref-for-sensing-range②">5.1.3. The near attribute</a> <a href="#ref-for-sensing-range③">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="max">

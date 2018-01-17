@@ -136,7 +136,7 @@ If the physical object is outside the <a>sensing range</a>, the attribute must r
 
 Note: If the implementation is unable to provide the [=near=] value, it could infer the [=near=]
 value from the value of [=distance=]. For example, if [=distance=] is not equal to [=max=], it
-could imply there is a physical object in the sensing range.
+could imply there is a physical object in the <a>sensing range</a>.
 
 Limitations of Proximity Sensors {#limitations-proximity-sensors}
 ========================
