@@ -1183,9 +1183,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 2d63ad75df4c3282ed7d8d3fb42b0c483a131ce1" name="generator">
+  <meta content="Bikeshed version 6aa3aaa1336714f1530c976b6df9a86c683d5968" name="generator">
   <link href="https://www.w3.org/TR/proximity/" rel="canonical">
-  <meta content="b6f7bc302addfccaec306fcff297bd026e864d74" name="document-revision">
+  <meta content="87bfda6d714c35e78bf681627545157831d43423" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1432,7 +1432,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Proximity Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-10-16">16 October 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2018-01-17">17 January 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1460,14 +1460,14 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2017 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2018 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>This specification defines a concrete sensor interface to monitor
 
-the presence of nearby objects without physical contact.</p>
+the presence of nearby physical objects without physical contact.</p>
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="sotd"><span class="content">Status of this document</span></h2>
   <div data-fill-with="status">
@@ -1533,7 +1533,7 @@ proximity sensor. The proximity level is reported as the distance (in centimeter
 from the sensor to the closest visible surface. <a href="#limitations-proximity-sensors">§6 Limitations of Proximity Sensors</a> describes more about the potential limitations, why the precise distance value
 reported by different devices can be different, due to differences in detection
 method, sensor construction, etc.  Moreover some proximity sensors might be only
-able to provide just a boolean to indicate if there is an object which is near,
+able to provide just a boolean to indicate if there is a physical object which is near,
 more like presence detection, than an absolute value for the distance.</p>
    <h2 class="heading settled" data-level="2" id="examples"><span class="secno">2. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="example" id="example-fbf52dff">
@@ -1555,8 +1555,9 @@ beyond those described in the Generic Sensor API <a data-link-type="biblio" href
 which is the device’s main proximity detector.</p>
    <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading">latest reading</a> for a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor①">Sensor</a></code> of <a data-link-type="dfn" href="#proximity-sensor" id="ref-for-proximity-sensor①">Proximity Sensor</a> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type①">sensor type</a> includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key">keys</a> are "distance", "max", "near" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value">values</a> contain <a data-link-type="dfn" href="#distance" id="ref-for-distance">distance</a>, <a data-link-type="dfn" href="#max" id="ref-for-max">max</a> and <a data-link-type="dfn" href="#near" id="ref-for-near">near</a> values.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="distance">distance</dfn> is a value that represents the distance between a device and
-the closest visible surface. Its unit is the centimeter (cm).</p>
-   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="max">max</dfn> is a value that represents the maximum sensing range of the
+the closest visible surface of the physical object within the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="sensing-range">sensing range</dfn>.
+Its unit is the centimeter (cm).</p>
+   <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="max">max</dfn> is a value that represents the maximum <a data-link-type="dfn" href="#sensing-range" id="ref-for-sensing-range">sensing range</a> of the
 main proximity detector, in centimeters.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="near">near</dfn> is a value that represent the presence of a visible surface
 in the vicinity of the main proximity detector.</p>
@@ -1572,21 +1573,23 @@ in the vicinity of the main proximity detector.</p>
    <p>To <dfn data-dfn-type="dfn" data-noexport="" id="construct-a-proximitysensor-object">Construct a ProximitySensor Object<a class="self-link" href="#construct-a-proximitysensor-object"></a></dfn> the user agent must invoke the <a data-link-type="dfn" href="https://w3c.github.io/sensors#construct-sensor-object" id="ref-for-construct-sensor-object">construct a Sensor object</a> abstract operation.</p>
    <h4 class="heading settled" data-level="5.1.1" id="proximity-sensor-distance"><span class="secno">5.1.1. </span><span class="content">The distance attribute</span><a class="self-link" href="#proximity-sensor-distance"></a></h4>
    <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-distance" id="ref-for-dom-proximitysensor-distance">distance</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor①">ProximitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading">get value from latest reading</a> with <emu-val>this</emu-val> and "distance" as arguments.</p>
+   <p>If the physical object is outside the <a data-link-type="dfn" href="#sensing-range" id="ref-for-sensing-range①">sensing range</a>, the attribute must return null.</p>
    <h4 class="heading settled" data-level="5.1.2" id="proximity-sensor-max"><span class="secno">5.1.2. </span><span class="content">The max attribute</span><a class="self-link" href="#proximity-sensor-max"></a></h4>
    <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-max" id="ref-for-dom-proximitysensor-max">max</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor②">ProximitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading①">get value from latest reading</a> with <emu-val>this</emu-val> and "max" as arguments.</p>
    <h4 class="heading settled" data-level="5.1.3" id="proximity-sensor-near"><span class="secno">5.1.3. </span><span class="content">The near attribute</span><a class="self-link" href="#proximity-sensor-near"></a></h4>
    <p>The <code class="idl"><a class="idl-code" data-link-type="attribute" href="#dom-proximitysensor-near" id="ref-for-dom-proximitysensor-near">near</a></code> attribute of the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor③">ProximitySensor</a></code> interface returns the result of invoking <a data-link-type="dfn" href="https://w3c.github.io/sensors/#get-value-from-latest-reading" id="ref-for-get-value-from-latest-reading②">get value from latest reading</a> with <emu-val>this</emu-val> and "near" as arguments.</p>
+   <p>If the physical object is outside the <a data-link-type="dfn" href="#sensing-range" id="ref-for-sensing-range②">sensing range</a>, the attribute must return null.</p>
    <p class="note" role="note"><span>Note:</span> If the implementation is unable to provide the <a data-link-type="dfn" href="#near" id="ref-for-near①">near</a> value, it could infer the <a data-link-type="dfn" href="#near" id="ref-for-near②">near</a> value from the value of <a data-link-type="dfn" href="#distance" id="ref-for-distance①">distance</a>. For example, if <a data-link-type="dfn" href="#distance" id="ref-for-distance②">distance</a> is not equal to <a data-link-type="dfn" href="#max" id="ref-for-max①">max</a>, it
-could imply there is an object in the sensing range.</p>
+could imply there is a physical object in the <a data-link-type="dfn" href="#sensing-range" id="ref-for-sensing-range③">sensing range</a>.</p>
    <h2 class="heading settled" data-level="6" id="limitations-proximity-sensors"><span class="secno">6. </span><span class="content">Limitations of Proximity Sensors</span><a class="self-link" href="#limitations-proximity-sensors"></a></h2>
    <p>Since most proximity sensors detect electromagnetic radiation (e.g., an infrared light
 or a magnetic field), certain material properties can interfere with the sensor’s
 ability to sense the presence of a physical object. Things that can interfere with
 a sensor include, but are not limited to, the material’s translucency, reflectiveness,
-color, temperature, chemical composition, and even the angle at which the object
+color, temperature, chemical composition, and even the angle at which the physical object
 is reflecting the radiation back at the sensor. As such, proximity sensors
 should not be relied on as a means to measure distance. The only thing that can
-be deduced from a proximity sensor is that an object is somewhere in the
+be deduced from a proximity sensor is that a physical object is somewhere in the
 distance between the minimum sensing distance and the maximum sensing distance
 with some degree of certainty.</p>
    <h2 class="heading settled" data-level="7" id="acknowledgements"><span class="secno">7. </span><span class="content">Acknowledgements</span><a class="self-link" href="#acknowledgements"></a></h2>
@@ -1633,9 +1636,10 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><a href="#dom-proximitysensor-near">attribute for ProximitySensor</a><span>, in §5.1</span>
     </ul>
    <li><a href="#proximitysensor">ProximitySensor</a><span>, in §5.1</span>
-   <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor()</a><span>, in §5.1</span>
    <li><a href="#proximity-sensor">Proximity Sensor</a><span>, in §4</span>
+   <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor()</a><span>, in §5.1</span>
    <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor(sensorOptions)</a><span>, in §5.1</span>
+   <li><a href="#sensing-range">sensing range</a><span>, in §4</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
@@ -1698,6 +1702,14 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <ul>
     <li><a href="#ref-for-distance">4. Model</a>
     <li><a href="#ref-for-distance①">5.1.3. The near attribute</a> <a href="#ref-for-distance②">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="sensing-range">
+   <b><a href="#sensing-range">#sensing-range</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-sensing-range">4. Model</a>
+    <li><a href="#ref-for-sensing-range①">5.1.1. The distance attribute</a>
+    <li><a href="#ref-for-sensing-range②">5.1.3. The near attribute</a> <a href="#ref-for-sensing-range③">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="max">
