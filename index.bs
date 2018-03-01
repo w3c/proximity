@@ -35,6 +35,10 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: initialize a sensor object; url: initialize-a-sensor-object
     text: sensor type
     text: check sensor policy-controlled features; url: check-sensor-policy-controlled-features
+    text: sensor readings; url: sensor-readings
+    text: fingerprinting; url: device-fingerprinting
+    text: user identifying; url: user-identifying
+    text: mitigation strategies; url: mitigation-strategies
 </pre>
 <pre class="link-defaults">
 spec:infra;
@@ -80,8 +84,16 @@ Examples {#examples}
 Security and Privacy Considerations {#security-and-privacy}
 ===================================
 
-There are no specific security and privacy considerations
-beyond those described in the Generic Sensor API [[!GENERIC-SENSOR]].
+Proximity sensor provides information about closeness of the sensor to nearby objects,
+thus, may expose privacy sensitive information for [=user identifying=] and/or
+[=fingerprinting=] attacks.
+
+To mitigate these, user agents should use one or both of the following [=mitigation strategies=]:
+  - [=reduce accuracy=] of a [=sensor reading=]
+  - [=limit maximum sampling frequency=]
+
+These mitigation strategies complement the [=mitigation strategies|generic mitigations=]
+defined in the Generic Sensor API [[!GENERIC-SENSOR]].
 
 Model {#model}
 =====
