@@ -198,7 +198,7 @@ testing a user agent's implementation of {{ProximitySensor}} API.
 
 The {{ProximitySensor}} class has an associated [=mock sensor type=] which is
 <a for="MockSensorType" enum-value>"proximity"</a>, its [=mock sensor reading values=]
-dictionary is defined as follow:
+dictionary is defined as follows:
 
 <pre class="idl">
   dictionary ProximityReadingValues {
