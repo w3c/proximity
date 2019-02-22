@@ -5,7 +5,7 @@ Status: ED
 ED: https://w3c.github.io/proximity/
 Shortname: proximity
 TR: https://www.w3.org/TR/proximity/
-Previous Version: https://www.w3.org/TR/2015/WD-proximity-20150903/
+Previous Version: https://www.w3.org/TR/2016/WD-proximity-20160719/
 Editor: Anssi Kostiainen 41974, Intel Corporation, https://intel.com/
 Editor: Rijubrata Bhaumik 80407, Intel Corporation, https://intel.com/
 Former Editor: Dzung D Tran, Intel Corporation, https://intel.com/
