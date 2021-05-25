@@ -1,11 +1,13 @@
-# Workflow based on the w3c/spec-prod action example to deploy to GitHub Pages:
-# https://github.com/w3c/spec-prod/blob/main/docs/examples.md#deploy-to-github-pages
+# Workflow based on the w3c/spec-prod action example to deploy to W3C using Echidna:
+# https://github.com/w3c/spec-prod/blob/main/docs/examples.md#deploy-to-w3c-using-echidna
 
 name: CI
+
 on:
   pull_request: {}
   push:
     branches: [main]
+
 jobs:
   main:
     name: Build, Validate and Deploy
@@ -15,3 +17,9 @@ jobs:
       - uses: w3c/spec-prod@v2
         with:
           GH_PAGES_BRANCH: gh-pages
+          W3C_ECHIDNA_TOKEN: ${{ secrets.ECHIDNA_TOKEN }}
+          # Replace following with appropriate value. See options.md for details.
+          W3C_WG_DECISION_URL: https://www.w3.org/2021/04/07-dap-minutes.html#r01
+          W3C_BUILD_OVERRIDE: |
+            specStatus: WD
+            shortName: proximity
