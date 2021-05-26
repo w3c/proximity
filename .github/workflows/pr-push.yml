@@ -21,4 +21,4 @@ jobs:
           W3C_WG_DECISION_URL: https://www.w3.org/2021/04/07-dap-minutes.html#r01
           W3C_BUILD_OVERRIDE: |
             status: WD
-            shortame: proximity
+            shortname: proximity
