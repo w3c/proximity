@@ -21,5 +21,5 @@ jobs:
           # Replace following with appropriate value. See options.md for details.
           W3C_WG_DECISION_URL: https://www.w3.org/2021/04/07-dap-minutes.html#r01
           W3C_BUILD_OVERRIDE: |
-            specStatus: WD
-            shortName: proximity
+            status: WD
+            shortname: proximity
