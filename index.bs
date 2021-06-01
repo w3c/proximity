@@ -19,7 +19,7 @@ Status Text:
   horizontal reviews took place. Similarly, the group is pursuing an update to the
   Technical Architecture Group review for this specification to account for the
   latest architectural review practices.
-Version History: https://github.com/w3c/proximity/commits/gh-pages/index.bs
+Version History: https://github.com/w3c/proximity/commits/main/index.bs
 !Bug Reports: <a href="https://www.github.com/w3c/proximity/issues/new">via the w3c/proximity repository on GitHub</a>
 Indent: 2
 Repository: w3c/proximity
