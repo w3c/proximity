@@ -5,9 +5,9 @@
   <title>Proximity Sensor</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
-  <meta content="Bikeshed version 800b43329, updated Tue May 25 14:13:32 2021 -0700" name="generator">
+  <meta content="Bikeshed version 4f053d00e, updated Tue Aug 10 14:13:32 2021 -0700" name="generator">
   <link href="https://www.w3.org/TR/proximity/" rel="canonical">
-  <meta content="dae79c4effd27bb9605090f9d7270621308a223a" name="document-revision">
+  <meta content="38858d9b1672e5a43204b49342ccf63ebdf5bbf1" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -579,7 +579,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Proximity Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-06-08">8 June 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-08-16">16 August 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -629,18 +629,16 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    <p> This document was produced by the <a href="https://www.w3.org/das/">Devices and Sensors Working Group</a>. </p>
    <p> This document was produced by a group operating under
 	the <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/">W3C Patent Policy</a>.
-	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
+	W3C maintains a <a href="https://www.w3.org/groups/wg/das/ipr" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
 	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
    <p> This document is governed by the <a href="https://www.w3.org/2020/Process-20200915/" id="w3c_process_revision">15 September 2020 W3C Process Document</a>. </p>
    <p></p>
-   <p>The Devices and Sensors Working Group is pursuing modern security and privacy
+   <p>The Devices and Sensors Working Group will perform a round of self-review and
 
-reviews for this specification in consideration of the amount of change in both
-this specification and in privacy and security review practices since the
-horizontal reviews took place. Similarly, the group is pursuing an update to the
-Technical Architecture Group review for this specification to account for the
-latest architectural review practices.</p>
+revisions on the security and privacy aspects of the API before
+requesting horizontal review. Existing security and privacy issues can
+be found <a href="https://www.w3.org/PM/horizontal/review.html?shortname=proximity-sensor">here</a>.</p>
   </div>
   <div data-fill-with="at-risk"></div>
   <nav data-fill-with="table-of-contents" id="toc">
@@ -723,7 +721,7 @@ thus, may expose privacy sensitive information for <a data-link-type="dfn" href=
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="proximity-sensor">Proximity Sensor</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type">sensor type</a>’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor">ProximitySensor</a></code> class.</p>
    <p>The <a data-link-type="dfn" href="#proximity-sensor" id="ref-for-proximity-sensor">Proximity Sensor</a> has a <a data-link-type="dfn" href="https://w3c.github.io/sensors#default-sensor" id="ref-for-default-sensor">default sensor</a>,
 which is the device’s main proximity detector.</p>
-   <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading">latest reading</a> for a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor①">Sensor</a></code> of <a data-link-type="dfn" href="#proximity-sensor" id="ref-for-proximity-sensor①">Proximity Sensor</a> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type①">sensor type</a> includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key">keys</a> are "distance", "max", "near" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value">values</a> contain <a data-link-type="dfn" href="#distance" id="ref-for-distance">distance</a>, <a data-link-type="dfn" href="#max" id="ref-for-max">max</a> and <a data-link-type="dfn" href="#near" id="ref-for-near">near</a> values.</p>
+   <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading">latest reading</a> for a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor①">Sensor</a></code> of <a data-link-type="dfn" href="#proximity-sensor" id="ref-for-proximity-sensor①">Proximity Sensor</a> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type①">sensor type</a> includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-keys" id="ref-for-map-getting-the-keys">keys</a> are "distance", "max", "near" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-values" id="ref-for-map-getting-the-values">values</a> contain <a data-link-type="dfn" href="#distance" id="ref-for-distance">distance</a>, <a data-link-type="dfn" href="#max" id="ref-for-max">max</a> and <a data-link-type="dfn" href="#near" id="ref-for-near">near</a> values.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="distance">distance</dfn> is a value that represents the distance between a device and
 the closest visible surface of the physical object within the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sensing-range">sensing range</dfn>.
 Its unit is the centimeter (cm).</p>
@@ -825,37 +823,37 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
-   <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §10</span>
-   <li><a href="#construct-a-proximity-sensor-object">Construct a proximity sensor object</a><span>, in §6</span>
-   <li><a href="#dom-proximitysensor-proximitysensor">constructor()</a><span>, in §5.1</span>
-   <li><a href="#dom-proximitysensor-proximitysensor">constructor(sensorOptions)</a><span>, in §5.1</span>
+   <li><a href="#conformant-user-agent">conformant user agent</a><span>, in § 10</span>
+   <li><a href="#construct-a-proximity-sensor-object">Construct a proximity sensor object</a><span>, in § 6</span>
+   <li><a href="#dom-proximitysensor-proximitysensor">constructor()</a><span>, in § 5.1</span>
+   <li><a href="#dom-proximitysensor-proximitysensor">constructor(sensorOptions)</a><span>, in § 5.1</span>
    <li>
     distance
     <ul>
-     <li><a href="#dom-proximitysensor-distance">attribute for ProximitySensor</a><span>, in §5.1</span>
-     <li><a href="#distance">definition of</a><span>, in §4</span>
-     <li><a href="#dom-proximityreadingvalues-distance">dict-member for ProximityReadingValues</a><span>, in §7.1</span>
+     <li><a href="#dom-proximitysensor-distance">attribute for ProximitySensor</a><span>, in § 5.1</span>
+     <li><a href="#distance">definition of</a><span>, in § 4</span>
+     <li><a href="#dom-proximityreadingvalues-distance">dict-member for ProximityReadingValues</a><span>, in § 7.1</span>
     </ul>
    <li>
     max
     <ul>
-     <li><a href="#dom-proximitysensor-max">attribute for ProximitySensor</a><span>, in §5.1</span>
-     <li><a href="#max">definition of</a><span>, in §4</span>
-     <li><a href="#dom-proximityreadingvalues-max">dict-member for ProximityReadingValues</a><span>, in §7.1</span>
+     <li><a href="#dom-proximitysensor-max">attribute for ProximitySensor</a><span>, in § 5.1</span>
+     <li><a href="#max">definition of</a><span>, in § 4</span>
+     <li><a href="#dom-proximityreadingvalues-max">dict-member for ProximityReadingValues</a><span>, in § 7.1</span>
     </ul>
    <li>
     near
     <ul>
-     <li><a href="#dom-proximitysensor-near">attribute for ProximitySensor</a><span>, in §5.1</span>
-     <li><a href="#near">definition of</a><span>, in §4</span>
-     <li><a href="#dom-proximityreadingvalues-near">dict-member for ProximityReadingValues</a><span>, in §7.1</span>
+     <li><a href="#dom-proximitysensor-near">attribute for ProximitySensor</a><span>, in § 5.1</span>
+     <li><a href="#near">definition of</a><span>, in § 4</span>
+     <li><a href="#dom-proximityreadingvalues-near">dict-member for ProximityReadingValues</a><span>, in § 7.1</span>
     </ul>
-   <li><a href="#dictdef-proximityreadingvalues">ProximityReadingValues</a><span>, in §7.1</span>
-   <li><a href="#proximity-sensor">Proximity Sensor</a><span>, in §4</span>
-   <li><a href="#proximitysensor">ProximitySensor</a><span>, in §5.1</span>
-   <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor()</a><span>, in §5.1</span>
-   <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor(sensorOptions)</a><span>, in §5.1</span>
-   <li><a href="#sensing-range">sensing range</a><span>, in §4</span>
+   <li><a href="#dictdef-proximityreadingvalues">ProximityReadingValues</a><span>, in § 7.1</span>
+   <li><a href="#proximity-sensor">Proximity Sensor</a><span>, in § 4</span>
+   <li><a href="#proximitysensor">ProximitySensor</a><span>, in § 5.1</span>
+   <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor()</a><span>, in § 5.1</span>
+   <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor(sensorOptions)</a><span>, in § 5.1</span>
+   <li><a href="#sensing-range">sensing range</a><span>, in § 4</span>
   </ul>
   <aside class="dfn-panel" data-for="term-for-dom-mocksensortype-proximity">
    <a href="https://w3c.github.io/sensors/#dom-mocksensortype-proximity">https://w3c.github.io/sensors/#dom-mocksensortype-proximity</a><b>Referenced in:</b>
@@ -975,16 +973,16 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-map-entry">4. Model</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-map-key">
-   <a href="https://infra.spec.whatwg.org/#map-key">https://infra.spec.whatwg.org/#map-key</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-map-getting-the-keys">
+   <a href="https://infra.spec.whatwg.org/#map-getting-the-keys">https://infra.spec.whatwg.org/#map-getting-the-keys</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-map-key">4. Model</a>
+    <li><a href="#ref-for-map-getting-the-keys">4. Model</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-map-value">
-   <a href="https://infra.spec.whatwg.org/#map-value">https://infra.spec.whatwg.org/#map-value</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-map-getting-the-values">
+   <a href="https://infra.spec.whatwg.org/#map-getting-the-values">https://infra.spec.whatwg.org/#map-getting-the-values</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-map-value">4. Model</a>
+    <li><a href="#ref-for-map-getting-the-values">4. Model</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-DOMException">
@@ -1059,8 +1057,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-map-entry">entry</span>
-     <li><span class="dfn-paneled" id="term-for-map-key">key</span>
-     <li><span class="dfn-paneled" id="term-for-map-value">value</span>
+     <li><span class="dfn-paneled" id="term-for-map-getting-the-keys">keys</span>
+     <li><span class="dfn-paneled" id="term-for-map-getting-the-values">values</span>
     </ul>
    <li>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
@@ -1078,13 +1076,13 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-generic-sensor">[GENERIC-SENSOR]
-   <dd>Rick Waldron. <a href="https://w3c.github.io/sensors/">Generic Sensor API</a>. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
+   <dd>Rick Waldron; et al. <a href="https://w3c.github.io/sensors/"><cite>Generic Sensor API</cite></a>. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
    <dt id="biblio-infra">[INFRA]
-   <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
+   <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-rfc2119">[RFC2119]
-   <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+   <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
-   <dd>Boris Zbarsky. <a href="https://heycam.github.io/webidl/">Web IDL</a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
+   <dd>Boris Zbarsky. <a href="https://heycam.github.io/webidl/"><cite>Web IDL</cite></a>. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#SecureContext"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
