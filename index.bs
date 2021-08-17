@@ -15,9 +15,9 @@ Abstract:
 Status Text:
   The Devices and Sensors Working Group will perform a round of self-review and
   revisions on the security and privacy aspects of the API before
-  requesting horizontal review. Existing security and privacy issues can
-  be found <a
-  href="https://www.w3.org/PM/horizontal/review.html?shortname=proximity-sensor">here</a>.
+  requesting horizontal review. Existing <a
+  href="https://www.w3.org/PM/horizontal/review.html?shortname=proximity-sensor">security
+  and privacy issues</a> are available.
 Version History: https://github.com/w3c/proximity/commits/main/index.bs
 !Bug Reports: <a href="https://www.github.com/w3c/proximity/issues/new">via the w3c/proximity repository on GitHub</a>
 Indent: 2
