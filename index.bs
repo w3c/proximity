@@ -111,6 +111,10 @@ The <dfn>Proximity Sensor</dfn> <a>sensor type</a>'s associated {{Sensor}} subcl
 The <a>Proximity Sensor</a> has a <a>default sensor</a>,
 which is the device's main proximity detector.
 
+The <a>Proximity Sensor</a> has an associated [=sensor permission name=], which is <a for="PermissionName" enum-value>"proximity"</a>.
+
+The <a>Proximity Sensor</a> is a [=policy-controlled feature=] identified by the string "proximity-sensor". Its [=default allowlist=] is `'self'`.
+
 A [=latest reading=] for a {{Sensor}} of <a>Proximity Sensor</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "distance", "max", "near" and whose [=map/values=] contain [=distance=],
 [=max=] and [=near=] values.
