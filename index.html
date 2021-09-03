@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
   <meta content="Bikeshed version 4f053d00e, updated Tue Aug 10 14:13:32 2021 -0700" name="generator">
   <link href="https://www.w3.org/TR/proximity/" rel="canonical">
-  <meta content="a354e4b29c77b1b2c9b932c76b23830d1667673f" name="document-revision">
+  <meta content="0bb2c9452b869ee92fd0c0557cf4347684ae5cb0" name="document-revision">
 <style>/* style-autolinks */
 
 .css.css, .property.property, .descriptor.descriptor {
@@ -579,7 +579,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Proximity Sensor</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-08-17">17 August 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="profile-and-date"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-09-03">3 September 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -721,7 +721,9 @@ thus, may expose privacy sensitive information for <a data-link-type="dfn" href=
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="proximity-sensor">Proximity Sensor</dfn> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type">sensor type</a>’s associated <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor">Sensor</a></code> subclass is the <code class="idl"><a data-link-type="idl" href="#proximitysensor" id="ref-for-proximitysensor">ProximitySensor</a></code> class.</p>
    <p>The <a data-link-type="dfn" href="#proximity-sensor" id="ref-for-proximity-sensor">Proximity Sensor</a> has a <a data-link-type="dfn" href="https://w3c.github.io/sensors#default-sensor" id="ref-for-default-sensor">default sensor</a>,
 which is the device’s main proximity detector.</p>
-   <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading">latest reading</a> for a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor①">Sensor</a></code> of <a data-link-type="dfn" href="#proximity-sensor" id="ref-for-proximity-sensor①">Proximity Sensor</a> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type①">sensor type</a> includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-keys" id="ref-for-map-getting-the-keys">keys</a> are "distance", "max", "near" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-values" id="ref-for-map-getting-the-values">values</a> contain <a data-link-type="dfn" href="#distance" id="ref-for-distance">distance</a>, <a data-link-type="dfn" href="#max" id="ref-for-max">max</a> and <a data-link-type="dfn" href="#near" id="ref-for-near">near</a> values.</p>
+   <p>The <a data-link-type="dfn" href="#proximity-sensor" id="ref-for-proximity-sensor①">Proximity Sensor</a> has an associated <a data-link-type="dfn" href="https://w3c.github.io/sensors/#sensor-permission-names" id="ref-for-sensor-permission-names">sensor permission name</a>, which is <a class="idl-code" data-link-type="enum-value">"proximity"</a>.</p>
+   <p>The <a data-link-type="dfn" href="#proximity-sensor" id="ref-for-proximity-sensor②">Proximity Sensor</a> is a <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature" id="ref-for-policy-controlled-feature">policy-controlled feature</a> identified by the string "proximity-sensor". Its <a data-link-type="dfn" href="https://w3c.github.io/webappsec-permissions-policy/#default-allowlist" id="ref-for-default-allowlist">default allowlist</a> is <code>'self'</code>.</p>
+   <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading">latest reading</a> for a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor①">Sensor</a></code> of <a data-link-type="dfn" href="#proximity-sensor" id="ref-for-proximity-sensor③">Proximity Sensor</a> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type①">sensor type</a> includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-keys" id="ref-for-map-getting-the-keys">keys</a> are "distance", "max", "near" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-values" id="ref-for-map-getting-the-values">values</a> contain <a data-link-type="dfn" href="#distance" id="ref-for-distance">distance</a>, <a data-link-type="dfn" href="#max" id="ref-for-max">max</a> and <a data-link-type="dfn" href="#near" id="ref-for-near">near</a> values.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="distance">distance</dfn> is a value that represents the distance between a device and
 the closest visible surface of the physical object within the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="sensing-range">sensing range</dfn>.
 Its unit is the centimeter (cm).</p>
@@ -949,6 +951,12 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
     <li><a href="#ref-for-reduce-accuracy">3. Security and Privacy Considerations</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-sensor-permission-names">
+   <a href="https://w3c.github.io/sensors/#sensor-permission-names">https://w3c.github.io/sensors/#sensor-permission-names</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-sensor-permission-names">4. Model</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-sensor-readings">
    <a href="https://w3c.github.io/sensors#sensor-readings">https://w3c.github.io/sensors#sensor-readings</a><b>Referenced in:</b>
    <ul>
@@ -983,6 +991,18 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <a href="https://infra.spec.whatwg.org/#map-getting-the-values">https://infra.spec.whatwg.org/#map-getting-the-values</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-map-getting-the-values">4. Model</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-default-allowlist">
+   <a href="https://w3c.github.io/webappsec-permissions-policy/#default-allowlist">https://w3c.github.io/webappsec-permissions-policy/#default-allowlist</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-default-allowlist">4. Model</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-policy-controlled-feature">
+   <a href="https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature">https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-policy-controlled-feature">4. Model</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-DOMException">
@@ -1049,6 +1069,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><span class="dfn-paneled" id="term-for-mock-sensor-reading-values">mock sensor reading values</span>
      <li><span class="dfn-paneled" id="term-for-mock-sensor-type">mock sensor type</span>
      <li><span class="dfn-paneled" id="term-for-reduce-accuracy">reduce accuracy</span>
+     <li><span class="dfn-paneled" id="term-for-sensor-permission-names">sensor permission names</span>
      <li><span class="dfn-paneled" id="term-for-sensor-readings">sensor readings</span>
      <li><span class="dfn-paneled" id="term-for-sensor-type">sensor type</span>
      <li><span class="dfn-paneled" id="term-for-user-identifying">user identifying</span>
@@ -1059,6 +1080,12 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><span class="dfn-paneled" id="term-for-map-entry">entry</span>
      <li><span class="dfn-paneled" id="term-for-map-getting-the-keys">keys</span>
      <li><span class="dfn-paneled" id="term-for-map-getting-the-values">values</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[permissions-policy-1]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="term-for-default-allowlist">default allowlist</span>
+     <li><span class="dfn-paneled" id="term-for-policy-controlled-feature">policy-controlled feature</span>
     </ul>
    <li>
     <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
@@ -1079,6 +1106,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <dd>Rick Waldron; et al. <a href="https://w3c.github.io/sensors/"><cite>Generic Sensor API</cite></a>. URL: <a href="https://w3c.github.io/sensors/">https://w3c.github.io/sensors/</a>
    <dt id="biblio-infra">[INFRA]
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
+   <dt id="biblio-permissions-policy-1">[PERMISSIONS-POLICY-1]
+   <dd>Ian Clelland. <a href="https://w3c.github.io/webappsec-permissions-policy/"><cite>Permissions Policy</cite></a>. URL: <a href="https://w3c.github.io/webappsec-permissions-policy/">https://w3c.github.io/webappsec-permissions-policy/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
    <dt id="biblio-webidl">[WEBIDL]
@@ -1103,7 +1132,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
   <aside class="dfn-panel" data-for="proximity-sensor">
    <b><a href="#proximity-sensor">#proximity-sensor</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-proximity-sensor">4. Model</a> <a href="#ref-for-proximity-sensor①">(2)</a>
+    <li><a href="#ref-for-proximity-sensor">4. Model</a> <a href="#ref-for-proximity-sensor①">(2)</a> <a href="#ref-for-proximity-sensor②">(3)</a> <a href="#ref-for-proximity-sensor③">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="distance">
