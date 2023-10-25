@@ -217,15 +217,15 @@ The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/e
 
     1.  Let |reading| be a new [=sensor reading=].
     1.  Let |keys| be the [=/list=] « "`distance`", "`max`" ».
-    1.  [=map/For each=] |keys| of [=/list=]
-        1.  Let |value| be the result of [=parse single-value number reading=] with |parameters| and |keys|.
+    1.  [=list/For each=] |key| of |keys|
+        1.  Let |value| be the result of [=parse single-value number reading=] with |parameters| and |key|.
             1.  If |value| is **undefined**.
                 1.  Return **undefined**.
         1.  [=map/Set=] |reading|[|keys|] to |value|[|keys|].
     1.  Let |near| be the result of invoking [=get a property=] from |parameters| with "near".
         1. If |near|'s type is not Boolean
             1.  Return **undefined**.
-        1.  [=map/Set=] reading["near"] to |near|.
+        1.  [=map/Set=] |reading|["near"] to |near|.
     1.  Return |reading|.
 </div>
 
