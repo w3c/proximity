@@ -43,6 +43,9 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: fingerprinting; url: device-fingerprinting
     text: user identifying; url: user-identifying
     text: mitigation strategies; url: mitigation-strategies
+urlPrefix: https://w3c.github.io/webdriver/; spec: WEBDRIVER2
+  type: dfn
+    text: get a property; url: dfn-getting-properties
 </pre>
 <pre class="link-defaults">
 spec:infra;
@@ -203,7 +206,7 @@ The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/e
 : [=map/key=]
 :: "`proximity`"
 : [=map/value=]
-:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/virtual sensor type=] is [=Proximity Sensor=] and [=reading parsing algorithm=] is [=proximity reading parsing algorithm=].
+:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/virtual sensor type=] is [=Proximity Sensor=] and [=reading parsing algorithm=] is the [=proximity reading parsing algorithm=].
 
 <h3 dfn>Proximity reading parsing algorithm</h3>
 <div algorithm="proximity reading parsing algorithm">
@@ -213,13 +216,18 @@ The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/e
     :: A [=sensor reading=] or **undefined**
 
     1.  Let |reading| be a new [=sensor reading=].
-    1.  Let |value| be a new [=sensor reading=].
-    1. Let |key| be the [=/list=] « "`distance`", "`max`", "`near`" ».
-    1.  [=map/For each=] |key| → let |value| be the result of [=parse single-value number reading=] with |parameters| and |key|.
-        1.  If |value| is "undefined".
-            1.  Return "undefined".
-        1.  [=map/Set=] |reading|[|key|] to |value|.
+    1.  Let |keys| be the [=/list=] « "`distance`", "`max`" ».
+    1.  [=map/For each=] |keys| of [=/list=]
+        1.  Let |value| be the result of [=parse single-value number reading=] with |parameters| and |keys|.
+            1.  If |value| is **undefined**.
+                1.  Return **undefined**.
+        1.  [=map/Set=] |reading|[|keys|] to |value|[|keys|].
+    1.  Let |near| be the result of invoking [=get a property=] from |parameters| with "near".
+        1. If |near|'s type is not Boolean
+            1.  Return **undefined**.
+        1.  [=map/Set=] reading["near"] to |near|.
     1.  Return |reading|.
+</div>
 
 Limitations of Proximity Sensors {#limitations-proximity-sensors}
 ========================
