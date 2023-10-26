@@ -102,22 +102,30 @@ To mitigate these, user agents should use one or both of the following [=mitigat
 These mitigation strategies complement the [=mitigation strategies|generic mitigations=]
 defined in the Generic Sensor API [[!GENERIC-SENSOR]].
 
+Permissions Policy integration {#permissions-policy-integration}
+==============================
+
+This specification defines a [=policy-controlled feature=] identified by the string "<code><dfn data-lt="proximity-sensor-feature" export>proximity-sensor</dfn></code>". Its [=default allowlist=] is "`self`".
+
 Model {#model}
 =====
 
-The <dfn>Proximity Sensor</dfn> <a>sensor type</a>'s associated {{Sensor}} subclass is the {{ProximitySensor}} class.
+The <dfn id="proximity-sensor-sensor-type">Proximity Sensor</dfn> <a>sensor type</a> has the following associated data:
 
-The <a>Proximity Sensor</a> has a <a>default sensor</a>,
-which is the device's main proximity detector.
-
-The <a>Proximity Sensor</a> has an associated [=sensor permission name=], which is <a for="PermissionName" enum-value>"proximity"</a>.
-
-The <a>Proximity Sensor</a> is a [=policy-controlled feature=] identified by the string "proximity-sensor". Its [=default allowlist=] is `'self'`.
+ : [=Extension sensor interface=]
+ :: {{ProximitySensor}}
+ : [=Sensor permission names=]
+ :: "<code><dfn permission export>proximity</dfn></code>"
+ : [=Sensor feature names=]
+ :: "[=proximity-sensor-feature|proximity-sensor=]"
+ : [=powerful feature/Permission revocation algorithm=]
+ :: Invoke the [=generic sensor permission revocation algorithm=] with "<code><a permission>proximity</a></code>".
+ : [=Default sensor=]
+ :: The device's main proximity detector.
 
 A [=latest reading=] for a {{Sensor}} of <a>Proximity Sensor</a> <a>sensor type</a> includes three [=map/entries=]
 whose [=map/keys=] are "distance", "max", "near" and whose [=map/values=] contain [=distance=],
 [=max=] and [=near=] values.
-
 
 The <dfn>distance</dfn> is a value that represents the distance between a device and
 the closest visible surface of the physical object within the <dfn>sensing range</dfn>.
