@@ -43,9 +43,9 @@ urlPrefix: https://w3c.github.io/sensors; spec: GENERIC-SENSOR
     text: fingerprinting; url: device-fingerprinting
     text: user identifying; url: user-identifying
     text: mitigation strategies; url: mitigation-strategies
-    text: automation
-    text: mock sensor type
-    text: mock sensor reading values
+urlPrefix: https://w3c.github.io/webdriver/; spec: WEBDRIVER2
+  type: dfn
+    text: get a property; url: dfn-getting-properties
 </pre>
 <pre class="link-defaults">
 spec:infra;
@@ -199,23 +199,35 @@ Abstract Operations {#abstract-operations}
 
 Automation {#automation}
 ==========
-This section extends the [=automation=] section defined in the Generic Sensor API [[GENERIC-SENSOR]]
-to provide mocking information about the proximity level for the purposes of
-testing a user agent's implementation of {{ProximitySensor}} API.
 
-<h3 id="mock-proximity-sensor-type">Mock Sensor Type</h3>
+This section extends [[GENERIC-SENSOR#automation]] by providing [=Proximity Sensor=]-specific virtual sensor metadata.
 
-The {{ProximitySensor}} class has an associated [=mock sensor type=] which is
-<a for="MockSensorType" enum-value>"proximity"</a>, its [=mock sensor reading values=]
-dictionary is defined as follows:
+The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/entry=]:
+: [=map/key=]
+:: "`proximity`"
+: [=map/value=]
+:: A [=virtual sensor metadata=] whose [=virtual sensor metadata/virtual sensor type=] is [=Proximity Sensor=] and [=reading parsing algorithm=] is the [=proximity reading parsing algorithm=].
 
-<pre class="idl">
-  dictionary ProximityReadingValues {
-    required double? distance;
-    required double? max;
-    required boolean? near;
-  };
-</pre>
+<h3 dfn>Proximity reading parsing algorithm</h3>
+<div algorithm="proximity reading parsing algorithm">
+    : input
+    :: |parameters|, a JSON {{Object}}
+    : output
+    :: A [=sensor reading=] or **undefined**
+
+    1.  Let |reading| be a new [=sensor reading=].
+    1.  Let |keys| be the [=/list=] « "`distance`", "`max`" ».
+    1.  [=list/For each=] |key| of |keys|
+        1.  Let |value| be the result of invoking [=parse single-value number reading=] with |parameters| and |key|.
+            1.  If |value| is **undefined**.
+                1.  Return **undefined**.
+        1.  [=map/Set=] |reading|[|key|] to |value|[|key|].
+    1.  Let |near| be the result of invoking [=get a property=] from |parameters| with "`near`".
+        1. If |near|'s type is not Boolean
+            1.  Return **undefined**.
+        1.  [=map/Set=] |reading|["`near`"] to |near|.
+    1.  Return |reading|.
+</div>
 
 Limitations of Proximity Sensors {#limitations-proximity-sensors}
 ========================
