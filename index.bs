@@ -221,7 +221,7 @@ The [=per-type virtual sensor metadata=] [=map=] must have the following [=map/e
         1.  Let |value| be the result of invoking [=parse single-value number reading=] with |parameters| and |key|.
             1.  If |value| is **undefined**.
                 1.  Return **undefined**.
-        1.  [=map/Set=] |reading|[|keys|] to |value|[|keys|].
+        1.  [=map/Set=] |reading|[|key|] to |value|[|key|].
     1.  Let |near| be the result of invoking [=get a property=] from |parameters| with "`near`".
         1. If |near|'s type is not Boolean
             1.  Return **undefined**.
