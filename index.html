@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
   <link href="https://www.w3.org/TR/proximity/" rel="canonical">
-  <meta content="576057f55613c978068a5de0352507a2567ae450" name="document-revision">
+  <meta content="d9ead973774d7803a820fbe2ba65e61886d44bf3" name="document-revision">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -669,7 +669,7 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Proximity Sensor</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-10-26">26 October 2023</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2023-11-27">27 November 2023</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -698,7 +698,7 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2023 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/copyright-software" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2023 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
@@ -725,7 +725,7 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
 	W3C maintains a <a href="https://www.w3.org/groups/wg/das/ipr" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
 	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="https://www.w3.org/2023/Process-20230612/" id="w3c_process_revision">12 June 2023 W3C Process Document</a>. </p>
+   <p> This document is governed by the <a href="https://www.w3.org/2023/Process-20231103/" id="w3c_process_revision">03 November 2023 W3C Process Document</a>. </p>
    <p></p>
    <p>The Devices and Sensors Working Group will perform a round of self-review and
 
@@ -831,6 +831,9 @@ thus, may expose privacy sensitive information for <a data-link-type="dfn" href=
     <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors#default-sensor" id="ref-for-default-sensor">Default sensor</a>
     <dd data-md>
      <p>The device’s main proximity detector.</p>
+    <dt data-md><a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-type" id="ref-for-virtual-sensor-type">Virtual sensor type</a>
+    <dd data-md>
+     <p>"<code><dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="proximity virtual sensor type" data-noexport id="proximity-virtual-sensor-type">proximity</dfn></code>"</p>
    </dl>
    <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors#latest-reading" id="ref-for-latest-reading">latest reading</a> for a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor">Sensor</a></code> of <a data-link-type="dfn" href="#proximity-sensor-sensor-type" id="ref-for-proximity-sensor-sensor-type">Proximity Sensor</a> <a data-link-type="dfn" href="https://w3c.github.io/sensors#sensor-type" id="ref-for-sensor-type①">sensor type</a> includes three <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-entry" id="ref-for-map-entry">entries</a> whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-keys" id="ref-for-map-getting-the-keys">keys</a> are "distance", "max", "near" and whose <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-getting-the-values" id="ref-for-map-getting-the-values">values</a> contain <a data-link-type="dfn" href="#distance" id="ref-for-distance">distance</a>, <a data-link-type="dfn" href="#max" id="ref-for-max">max</a> and <a data-link-type="dfn" href="#near" id="ref-for-near">near</a> values.</p>
    <p>The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="distance">distance</dfn> is a value that represents the distance between a device and
@@ -895,10 +898,10 @@ could imply there is a physical object in the <a data-link-type="dfn" href="#sen
    <dl>
     <dt data-md><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-key" id="ref-for-map-key">key</a>
     <dd data-md>
-     <p>"<code>proximity</code>"</p>
+     <p>"<code><a data-link-type="dfn" href="#proximity-virtual-sensor-type" id="ref-for-proximity-virtual-sensor-type">proximity</a></code>"</p>
     <dt data-md><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#map-value" id="ref-for-map-value">value</a>
     <dd data-md>
-     <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-metadata" id="ref-for-virtual-sensor-metadata">virtual sensor metadata</a> whose <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-metadata-virtual-sensor-type" id="ref-for-virtual-sensor-metadata-virtual-sensor-type">virtual sensor type</a> is <a data-link-type="dfn" href="#proximity-sensor-sensor-type" id="ref-for-proximity-sensor-sensor-type②">Proximity Sensor</a> and <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm" id="ref-for-virtual-sensor-metadata-reading-parsing-algorithm">reading parsing algorithm</a> is the <a data-link-type="dfn" href="#proximity-reading-parsing-algorithm" id="ref-for-proximity-reading-parsing-algorithm">proximity reading parsing algorithm</a>.</p>
+     <p>A <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-metadata" id="ref-for-virtual-sensor-metadata">virtual sensor metadata</a> whose <a data-link-type="dfn" href="https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm" id="ref-for-virtual-sensor-metadata-reading-parsing-algorithm">reading parsing algorithm</a> is the <a data-link-type="dfn" href="#proximity-reading-parsing-algorithm" id="ref-for-proximity-reading-parsing-algorithm">proximity reading parsing algorithm</a>.</p>
    </dl>
    <h3 class="heading settled dfn-paneled" data-dfn-type="dfn" data-level="8.1" data-lt="Proximity reading parsing algorithm" data-noexport id="proximity-reading-parsing-algorithm"><span class="secno">8.1. </span><span class="content">Proximity reading parsing algorithm</span><a class="self-link" href="#proximity-reading-parsing-algorithm" id="ref-for-proximity-reading-parsing-algorithm①"></a></h3>
    <div class="algorithm" data-algorithm="proximity reading parsing algorithm">
@@ -1010,6 +1013,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
    <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor()</a><span>, in § 6.1</span>
    <li><a href="#proximity-sensor-feature">proximity-sensor-feature</a><span>, in § 4</span>
    <li><a href="#dom-proximitysensor-proximitysensor">ProximitySensor(sensorOptions)</a><span>, in § 6.1</span>
+   <li><a href="#proximity-virtual-sensor-type">proximity virtual sensor type</a><span>, in § 5</span>
    <li><a href="#sensing-range">sensing range</a><span>, in § 5</span>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -1042,7 +1046,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><span class="dfn-paneled" id="44637b0a">sensor type</span>
      <li><span class="dfn-paneled" id="34c25f36">user identifying</span>
      <li><span class="dfn-paneled" id="bb15fee5">virtual sensor metadata</span>
-     <li><span class="dfn-paneled" id="d5e5825c">virtual sensor type</span>
+     <li><span class="dfn-paneled" id="4fa114dd">virtual sensor type</span>
     </ul>
    <li>
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
@@ -1444,7 +1448,7 @@ window.dfnpanelData['5afb8cab'] = {"dfnID": "5afb8cab", "url": "https://w3c.gith
 window.dfnpanelData['44637b0a'] = {"dfnID": "44637b0a", "url": "https://w3c.github.io/sensors#sensor-type", "dfnText": "sensor type", "refSections": [{"refs": [{"id": "ref-for-sensor-type"}, {"id": "ref-for-sensor-type\u2460"}], "title": "5. Model"}], "external": true};
 window.dfnpanelData['34c25f36'] = {"dfnID": "34c25f36", "url": "https://w3c.github.io/sensors#user-identifying", "dfnText": "user identifying", "refSections": [{"refs": [{"id": "ref-for-user-identifying"}], "title": "3. Security and Privacy Considerations"}], "external": true};
 window.dfnpanelData['bb15fee5'] = {"dfnID": "bb15fee5", "url": "https://w3c.github.io/sensors/#virtual-sensor-metadata", "dfnText": "virtual sensor metadata", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-metadata"}], "title": "8. Automation"}], "external": true};
-window.dfnpanelData['d5e5825c'] = {"dfnID": "d5e5825c", "url": "https://w3c.github.io/sensors/#virtual-sensor-metadata-virtual-sensor-type", "dfnText": "virtual sensor type", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-metadata-virtual-sensor-type"}], "title": "8. Automation"}], "external": true};
+window.dfnpanelData['4fa114dd'] = {"dfnID": "4fa114dd", "url": "https://w3c.github.io/sensors/#virtual-sensor-type", "dfnText": "virtual sensor type", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-type"}], "title": "5. Model"}], "external": true};
 window.dfnpanelData['8958b003'] = {"dfnID": "8958b003", "url": "https://infra.spec.whatwg.org/#map-entry", "dfnText": "entry", "refSections": [{"refs": [{"id": "ref-for-map-entry"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-map-entry\u2460"}], "title": "8. Automation"}], "external": true};
 window.dfnpanelData['16d07e10'] = {"dfnID": "16d07e10", "url": "https://infra.spec.whatwg.org/#list-iterate", "dfnText": "for each", "refSections": [{"refs": [{"id": "ref-for-list-iterate"}], "title": "8.1. Proximity reading parsing algorithm"}], "external": true};
 window.dfnpanelData['d14a6f26'] = {"dfnID": "d14a6f26", "url": "https://infra.spec.whatwg.org/#map-key", "dfnText": "key", "refSections": [{"refs": [{"id": "ref-for-map-key"}], "title": "8. Automation"}], "external": true};
@@ -1466,8 +1470,9 @@ window.dfnpanelData['5372cca8'] = {"dfnID": "5372cca8", "url": "https://webidl.s
 window.dfnpanelData['8c800cdf'] = {"dfnID": "8c800cdf", "url": "https://webidl.spec.whatwg.org/#idl-double", "dfnText": "double", "refSections": [{"refs": [{"id": "ref-for-idl-double"}, {"id": "ref-for-idl-double\u2460"}], "title": "6.1. The ProximitySensor Interface"}], "external": true};
 window.dfnpanelData['b4cfa5ce'] = {"dfnID": "b4cfa5ce", "url": "https://webidl.spec.whatwg.org/#dfn-throw", "dfnText": "throw", "refSections": [{"refs": [{"id": "ref-for-dfn-throw"}], "title": "7.1. Construct a proximity sensor object"}], "external": true};
 window.dfnpanelData['proximity-sensor-feature'] = {"dfnID": "proximity-sensor-feature", "url": "#proximity-sensor-feature", "dfnText": "proximity-sensor", "refSections": [{"refs": [{"id": "ref-for-proximity-sensor-feature"}], "title": "5. Model"}], "external": false};
-window.dfnpanelData['proximity-sensor-sensor-type'] = {"dfnID": "proximity-sensor-sensor-type", "url": "#proximity-sensor-sensor-type", "dfnText": "Proximity Sensor", "refSections": [{"refs": [{"id": "ref-for-proximity-sensor-sensor-type"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-proximity-sensor-sensor-type\u2460"}, {"id": "ref-for-proximity-sensor-sensor-type\u2461"}], "title": "8. Automation"}], "external": false};
+window.dfnpanelData['proximity-sensor-sensor-type'] = {"dfnID": "proximity-sensor-sensor-type", "url": "#proximity-sensor-sensor-type", "dfnText": "Proximity Sensor", "refSections": [{"refs": [{"id": "ref-for-proximity-sensor-sensor-type"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-proximity-sensor-sensor-type\u2460"}], "title": "8. Automation"}], "external": false};
 window.dfnpanelData['permissiondef-proximity'] = {"dfnID": "permissiondef-proximity", "url": "#permissiondef-proximity", "dfnText": "proximity", "refSections": [{"refs": [{"id": "ref-for-permissiondef-proximity"}], "title": "5. Model"}], "external": false};
+window.dfnpanelData['proximity-virtual-sensor-type'] = {"dfnID": "proximity-virtual-sensor-type", "url": "#proximity-virtual-sensor-type", "dfnText": "proximity", "refSections": [{"refs": [{"id": "ref-for-proximity-virtual-sensor-type"}], "title": "8. Automation"}], "external": false};
 window.dfnpanelData['distance'] = {"dfnID": "distance", "url": "#distance", "dfnText": "distance", "refSections": [{"refs": [{"id": "ref-for-distance"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-distance\u2460"}, {"id": "ref-for-distance\u2461"}], "title": "6.1.3. The near attribute"}], "external": false};
 window.dfnpanelData['sensing-range'] = {"dfnID": "sensing-range", "url": "#sensing-range", "dfnText": "sensing range", "refSections": [{"refs": [{"id": "ref-for-sensing-range"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-sensing-range\u2460"}], "title": "6.1.1. The distance attribute"}, {"refs": [{"id": "ref-for-sensing-range\u2461"}, {"id": "ref-for-sensing-range\u2462"}], "title": "6.1.3. The near attribute"}], "external": false};
 window.dfnpanelData['max'] = {"dfnID": "max", "url": "#max", "dfnText": "max", "refSections": [{"refs": [{"id": "ref-for-max"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-max\u2460"}], "title": "6.1.3. The near attribute"}], "external": false};
