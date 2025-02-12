@@ -5,9 +5,11 @@
   <title>Proximity Sensor</title>
   <meta content="ED" name="w3c-status">
   <link href="https://www.w3.org/StyleSheets/TR/2021/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 82ce88815, updated Thu Sep 7 16:33:55 2023 -0700" name="generator">
+  <meta content="Bikeshed version 97a1608be, updated Mon Feb 3 16:09:34 2025 -0800" name="generator">
   <link href="https://www.w3.org/TR/proximity/" rel="canonical">
-  <meta content="dea60dc36d6ebdf60ae50e9ce103dcedda612bdf" name="document-revision">
+  <meta content="453a6b61f7b50d08a556c85d4bf563be1902e7f4" name="revision">
+  <meta content="dark light" name="color-scheme">
+  <link href="https://www.w3.org/StyleSheets/TR/2021/dark.css" media="(prefers-color-scheme: dark)" rel="stylesheet" type="text/css">
 <style>/* Boilerplate: style-autolinks */
 .css.css, .property.property, .descriptor.descriptor {
     color: var(--a-normal-text);
@@ -79,7 +81,6 @@ pre .property::before, pre .property::after {
 }
 </style>
 <style>/* Boilerplate: style-colors */
-
 /* Any --*-text not paired with a --*-bg is assumed to have a transparent bg */
 :root {
     color-scheme: light dark;
@@ -333,11 +334,15 @@ figcaption:not(.no-marker)::before {
 :root {
     --dfnpanel-bg: #ddd;
     --dfnpanel-text: var(--text);
+    --dfnpanel-target-bg: #ffc;
+    --dfnpanel-target-outline: orange;
 }
 @media (prefers-color-scheme: dark) {
     :root {
         --dfnpanel-bg: #222;
         --dfnpanel-text: var(--text);
+        --dfnpanel-target-bg: #333;
+        --dfnpanel-target-outline: silver;
     }
 }
 .dfn-panel {
@@ -360,11 +365,13 @@ figcaption:not(.no-marker)::before {
 .dfn-panel > b { display: block; }
 .dfn-panel a { color: var(--dfnpanel-text); }
 .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel a:focus {
+    outline: 5px auto Highlight;
+    outline: 5px auto -webkit-focus-ring-color;
+}
 .dfn-panel > b + b { margin-top: 0.25em; }
 .dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
 .dfn-panel li a {
-    white-space: pre;
-    display: inline-block;
     max-width: calc(300px - 1.5em - 1em);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -373,67 +380,84 @@ figcaption:not(.no-marker)::before {
 .dfn-panel.activated {
     display: inline-block;
     position: fixed;
-    left: .5em;
+    left: 8px;
     bottom: 2em;
     margin: 0 auto;
     max-width: calc(100vw - 1.5em - .4em - .5em);
     max-height: 30vh;
+    transition: left 1s ease-out, bottom 1s ease-out;
 }
 
-.dfn-paneled[role="button"] { cursor: pointer; }
+.dfn-panel .link-item:hover {
+    text-decoration: underline;
+}
+.dfn-panel .link-item .copy-icon {
+    opacity: 0;
+}
+.dfn-panel .link-item:hover .copy-icon,
+.dfn-panel .link-item .copy-icon:focus {
+    opacity: 1;
+}
+
+.dfn-panel .copy-icon {
+    display: inline-block;
+    margin-right: 0.5em;
+    width: 0.85em;
+    height: 1em;
+    border-radius: 3px;
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.dfn-panel .copy-icon .icon {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.dfn-panel .copy-icon .icon::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    background-color: #ccc;
+    opacity: 0.25;
+    transform: translate(3px, -3px);
+}
+
+.dfn-panel .copy-icon:active .icon::before {
+    opacity: 1;
+}
+
+.dfn-paneled[role="button"] { cursor: help; }
+
+.highlighted {
+    animation: target-fade 3s;
+}
+
+@keyframes target-fade {
+    from {
+        background-color: var(--dfnpanel-target-bg);
+        outline: 5px solid var(--dfnpanel-target-outline);
+    }
+    to {
+        color: var(--a-normal-text);
+        background-color: transparent;
+        outline: transparent;
+    }
+}
 </style>
-<style>/* Boilerplate: style-dfn-panel */
-:root {
-    --dfnpanel-bg: #ddd;
-    --dfnpanel-text: var(--text);
+<style>/* Boilerplate: style-idl-highlighting */
+pre.idl.highlight {
+    background: var(--borderedblock-bg, var(--def-bg));
 }
-@media (prefers-color-scheme: dark) {
-    :root {
-        --dfnpanel-bg: #222;
-        --dfnpanel-text: var(--text);
-    }
-}
-.dfn-panel {
-    position: absolute;
-    z-index: 35;
-    width: 20em;
-    width: 300px;
-    height: auto;
-    max-height: 500px;
-    overflow: auto;
-    padding: 0.5em 0.75em;
-    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-    background: var(--dfnpanel-bg);
-    color: var(--dfnpanel-text);
-    border: outset 0.2em;
-    white-space: normal; /* in case it's moved into a pre */
-}
-.dfn-panel:not(.on) { display: none; }
-.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
-.dfn-panel > b { display: block; }
-.dfn-panel a { color: var(--dfnpanel-text); }
-.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-.dfn-panel > b + b { margin-top: 0.25em; }
-.dfn-panel ul { padding: 0 0 0 1em; list-style: none; }
-.dfn-panel li a {
-    white-space: pre;
-    display: inline-block;
-    max-width: calc(300px - 1.5em - 1em);
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.dfn-panel.activated {
-    display: inline-block;
-    position: fixed;
-    left: .5em;
-    bottom: 2em;
-    margin: 0 auto;
-    max-width: calc(100vw - 1.5em - .4em - .5em);
-    max-height: 30vh;
-}
-
-.dfn-paneled[role="button"] { cursor: pointer; }
 </style>
 <style>/* Boilerplate: style-issues */
 a[href].issue-return {
@@ -454,8 +478,40 @@ a[href].issue-return {
     margin-bottom: 0;
 }
 </style>
-<style>/* Boilerplate: style-selflinks */
+<style>/* Boilerplate: style-ref-hints */
+:root {
+    --ref-hint-bg: #ddd;
+    --ref-hint-text: var(--text);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --ref-hint-bg: #222;
+        --ref-hint-text: var(--text);
+    }
+}
 
+.ref-hint {
+    display: inline-block;
+    position: absolute;
+    z-index: 35;
+    width: 20em;
+    width: 300px;
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.5em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: var(--ref-hint-bg);
+    color: var(--ref-hint-text);
+    border: outset 0.2em;
+    white-space: normal; /* in case it's moved into a pre */
+}
+
+.ref-hint * { margin: 0; padding: 0; text-indent: 0; }
+
+.ref-hint ul { padding: 0 0 0 1em; list-style: none; }
+</style>
+<style>/* Boilerplate: style-selflinks */
 :root {
     --selflink-text: white;
     --selflink-bg: gray;
@@ -515,14 +571,6 @@ a.self-link::before            { content: "¶"; }
 dfn > a.self-link::before      { content: "#"; }
 </style>
 <style>/* Boilerplate: style-syntax-highlighting */
-
-            pre.idl.highlight {
-                background: var(--borderedblock-bg, var(--def-bg));
-            }
-            
-</style>
-<style>/* Boilerplate: style-syntax-highlighting */
-
 code.highlight { padding: .1em; border-radius: .3em; }
 pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em 0; overflow: auto; border-radius: 0; }
 
@@ -579,7 +627,6 @@ c-[vc] { color: #0077aa } /* Name.Variable.Class */
 c-[vg] { color: #0077aa } /* Name.Variable.Global */
 c-[vi] { color: #0077aa } /* Name.Variable.Instance */
 c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
-
 
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
@@ -655,21 +702,43 @@ D50 2deg illuminant, L in [0,100], a and b in [-128, 128]
 4 = lab(85,5,15)
 5 = lab(85,-10,-50)
 6 = lab(85,35,-15)
+
+For darkmode:
+0 = oklab(50%   0%  108%)
+1 = oklab(50% -51%   51%)
+2 = oklab(50% -64%  -20%)
+3 = oklab(50%   6%   19%)
+4 = oklab(50% -12%  -64%)
+5 = oklab(50%  44%  -19%)  
+6 = oklab(50% 102%   38%)
 */
-var { cursor: pointer; }
-var.selected0 { background-color: #F4D200; box-shadow: 0 0 0 2px #F4D200; }
-var.selected1 { background-color: #FF87A2; box-shadow: 0 0 0 2px #FF87A2; }
-var.selected2 { background-color: #96E885; box-shadow: 0 0 0 2px #96E885; }
-var.selected3 { background-color: #3EEED2; box-shadow: 0 0 0 2px #3EEED2; }
-var.selected4 { background-color: #EACFB6; box-shadow: 0 0 0 2px #EACFB6; }
-var.selected5 { background-color: #82DDFF; box-shadow: 0 0 0 2px #82DDFF; }
-var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
+
+[data-algorithm] var { cursor: pointer; }
+var[data-var-color] { background-color: var(--var-bg); box-shadow: 0 0 0 2px var(--var-bg); }
+
+var[data-var-color] { --var-bg: #F4D200; }
+var[data-var-color="1"] { --var-bg: #FF87A2; }
+var[data-var-color="2"] { --var-bg: #96E885; }
+var[data-var-color="3"] { --var-bg: #3EEED2; }
+var[data-var-color="4"] { --var-bg: #EACFB6; }
+var[data-var-color="5"] { --var-bg: #82DDFF; }
+var[data-var-color="6"] { --var-vg: #FFBCF2; }
+
+@media (prefers-color-scheme: dark) {
+	var[data-var-color] { --var-bg: #bc1a00; }
+	var[data-var-color="1"] { --var-bg: #007f00; }
+	var[data-var-color="2"] { --var-bg: #008698; }
+	var[data-var-color="3"] { --var-bg: #7f5b2b; }
+	var[data-var-color="4"] { --var-bg: #004df3; }
+	var[data-var-color="5"] { --var-bg: #a1248a; }
+	var[data-var-color="6"] { --var-vg: #ff0000; }
+}
 </style>
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Proximity Sensor</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2024-01-05">5 January 2024</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types/#ED">Editor’s Draft</a>, <time class="dt-updated" datetime="2025-02-12">12 February 2025</time></p>
    <details open>
     <summary>More details about this document</summary>
     <div data-fill-with="spec-metadata">
@@ -698,14 +767,13 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
     </div>
    </details>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2024 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/policies/#copyright">Copyright</a> © 2025 <a href="https://www.w3.org/">World Wide Web Consortium</a>. <abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup> <a href="https://www.w3.org/policies/#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/policies/#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/copyright/software-license/" rel="license" title="W3C Software and Document License">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
    <p>This specification defines a concrete sensor interface to monitor
-
-  the presence of nearby physical objects without physical contact.</p>
+the presence of nearby physical objects without physical contact.</p>
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="sotd"><span class="content">Status of this document</span></h2>
   <div data-fill-with="status">
@@ -719,16 +787,15 @@ var.selected6 { background-color: #FFBCF2; box-shadow: 0 0 0 2px #FFBCF2; }
 	preferably like this:
 	“[proximity] <em>…summary of comment…</em>”.
 	All comments are welcome. </p>
-   <p> This document was produced by the <a href="https://www.w3.org/groups/wg/das">Devices and Sensors Working Group</a>. </p>
+   <p> This document was published by the <a href="https://www.w3.org/groups/wg/das">Devices and Sensors Working Group</a>. </p>
    <p> This document was produced by a group operating under
-	the <a href="https://www.w3.org/Consortium/Patent-Policy/">W3C Patent Policy</a>.
+	the <a href="https://www.w3.org/policies/patent-policy/">W3C Patent Policy</a>.
 	W3C maintains a <a href="https://www.w3.org/groups/wg/das/ipr" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
-	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20200915/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="https://www.w3.org/2023/Process-20231103/" id="w3c_process_revision">03 November 2023 W3C Process Document</a>. </p>
+	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/policies/patent-policy/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/policies/patent-policy/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
+   <p> This document is governed by the <a href="https://www.w3.org/policies/process/20231103/" id="w3c_process_revision">03 November 2023 W3C Process Document</a>. </p>
    <p></p>
    <p>The Devices and Sensors Working Group will perform a round of self-review and
-
 revisions on the security and privacy aspects of the API before
 requesting horizontal review. Existing <a href="https://www.w3.org/PM/horizontal/review.html?shortname=proximity-sensor">security
 and privacy issues</a> are available.</p>
@@ -798,6 +865,7 @@ sensor<c- p>.</c->start<c- p>();</c->
 sensor<c- p>.</c->onreading <c- o>=</c-> <c- p>()</c-> <c- p>=></c-> console<c- p>.</c->log<c- p>(</c->sensor<c- p>.</c->distance<c- p>);</c->
 
 sensor<c- p>.</c->onerror <c- o>=</c-> event <c- p>=></c-> console<c- p>.</c->log<c- p>(</c->event<c- p>.</c->error<c- p>.</c->name<c- p>,</c-> event<c- p>.</c->error<c- p>.</c->message<c- p>);</c->
+
 </pre>
    </div>
    <h2 class="heading settled" data-level="3" id="security-and-privacy"><span class="secno">3. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#security-and-privacy"></a></h2>
@@ -847,7 +915,7 @@ in the vicinity of the main proximity detector.</p>
    <h3 class="heading settled" data-level="6.1" id="proximity-sensor-interface"><span class="secno">6.1. </span><span class="content">The ProximitySensor Interface</span><a class="self-link" href="#proximity-sensor-interface"></a></h3>
 <pre class="idl highlight def">[<a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#SecureContext" id="ref-for-SecureContext"><c- g>SecureContext</c-></a>, <a class="idl-code" data-link-type="extended-attribute" href="https://webidl.spec.whatwg.org/#Exposed" id="ref-for-Exposed"><c- g>Exposed</c-></a>=<c- n>Window</c->]
 <c- b>interface</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="interface" data-export id="proximitysensor"><code><c- g>ProximitySensor</c-></code></dfn> : <a data-link-type="idl-name" href="https://w3c.github.io/sensors/#sensor" id="ref-for-sensor①"><c- n>Sensor</c-></a> {
-  <dfn class="idl-code" data-dfn-for="ProximitySensor" data-dfn-type="constructor" data-export data-lt="ProximitySensor(sensorOptions)|constructor(sensorOptions)|ProximitySensor()|constructor()" id="dom-proximitysensor-proximitysensor"><code><c- g>constructor</c-></code><a class="self-link" href="#dom-proximitysensor-proximitysensor"></a></dfn>(<c- b>optional</c-> <a data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions"><c- n>SensorOptions</c-></a> <dfn class="idl-code" data-dfn-for="ProximitySensor/ProximitySensor(sensorOptions), ProximitySensor/constructor(sensorOptions), ProximitySensor/ProximitySensor(), ProximitySensor/constructor()" data-dfn-type="argument" data-export id="dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code><a class="self-link" href="#dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions"></a></dfn> = {});
+  <dfn class="dfn-paneled idl-code" data-dfn-for="ProximitySensor" data-dfn-type="constructor" data-export data-lt="ProximitySensor(sensorOptions)|constructor(sensorOptions)|ProximitySensor()|constructor()" id="dom-proximitysensor-proximitysensor"><code><c- g>constructor</c-></code></dfn>(<c- b>optional</c-> <a data-link-type="idl-name" href="https://w3c.github.io/sensors/#dictdef-sensoroptions" id="ref-for-dictdef-sensoroptions"><c- n>SensorOptions</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="ProximitySensor/ProximitySensor(sensorOptions), ProximitySensor/constructor(sensorOptions), ProximitySensor/ProximitySensor(), ProximitySensor/constructor()" data-dfn-type="argument" data-export id="dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions"><code><c- g>sensorOptions</c-></code></dfn> = {});
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double"><c- b>double</c-></a>? <dfn class="dfn-paneled idl-code" data-dfn-for="ProximitySensor" data-dfn-type="attribute" data-export data-readonly data-type="double?" id="dom-proximitysensor-distance"><code><c- g>distance</c-></code></dfn>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-double" id="ref-for-idl-double①"><c- b>double</c-></a>? <dfn class="dfn-paneled idl-code" data-dfn-for="ProximitySensor" data-dfn-type="attribute" data-export data-readonly data-type="double?" id="dom-proximitysensor-max"><code><c- g>max</c-></code></dfn>;
   <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://webidl.spec.whatwg.org/#idl-boolean" id="ref-for-idl-boolean"><c- b>boolean</c-></a>? <dfn class="dfn-paneled idl-code" data-dfn-for="ProximitySensor" data-dfn-type="attribute" data-export data-readonly data-type="boolean?" id="dom-proximitysensor-near"><code><c- g>near</c-></code></dfn>;
@@ -975,12 +1043,12 @@ However, for readability, these words do not appear in all uppercase
 letters in this specification.</p>
    <p>All of the text of this specification is normative except sections
 explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">[RFC2119]</a></p>
-   <p>A <dfn data-dfn-type="dfn" data-noexport id="conformant-user-agent">conformant user agent<a class="self-link" href="#conformant-user-agent"></a></dfn> must implement all the requirements
+   <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="conformant-user-agent">conformant user agent</dfn> must implement all the requirements
 listed in this specification that are applicable to user agents.</p>
    <p>The IDL fragments in this specification must be interpreted as required for
 conforming IDL fragments, as described in the Web IDL specification. <a data-link-type="biblio" href="#biblio-webidl" title="Web IDL Standard">[WEBIDL]</a></p>
   </main>
-<script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
+  <script src="https://www.w3.org/scripts/TR/2021/fixup.js"></script>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
   <ul class="index">
@@ -1032,7 +1100,7 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
      <li><span class="dfn-paneled" id="80862307">default sensor</span>
      <li><span class="dfn-paneled" id="beb7996f">extension sensor interface</span>
      <li><span class="dfn-paneled" id="4e835b4e">fingerprinting</span>
-     <li><span class="dfn-paneled" id="a09cf46b">generic sensor permission revocation algorithm</span>
+     <li><span class="dfn-paneled" id="a09cf46b">Generic Sensor permission revocation algorithm</span>
      <li><span class="dfn-paneled" id="fd4ad34f">get value from latest reading</span>
      <li><span class="dfn-paneled" id="b152f730">initialize a sensor object</span>
      <li><span class="dfn-paneled" id="3e7f3108">latest reading</span>
@@ -1119,372 +1187,8 @@ conforming IDL fragments, as described in the Web IDL specification. <a data-lin
 };
 
 </pre>
-<script>/* Boilerplate: script-dfn-panel */
-"use strict";
-{
-    const dfnsJson = window.dfnsJson || {};
-
-    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
-        return mk.aside({
-            class: "dfn-panel",
-            id: `infopanel-for-${dfnID}`,
-            "data-for": dfnID,
-            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
-            },
-            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
-                `Info about the '${dfnText}' ${external?"external":""} reference.`),
-            mk.a({href:url}, url),
-            mk.b({}, "Referenced in:"),
-            mk.ul({},
-                ...refSections.map(section=>
-                    mk.li({},
-                        ...section.refs.map((ref, refI)=>
-                            [
-                                mk.a({
-                                    href: `#${ref.id}`
-                                    },
-                                    (refI == 0) ? section.title : `(${refI + 1})`
-                                ),
-                                " ",
-                            ]
-                        ),
-                    ),
-                ),
-            ),
-        );
-    }
-
-    function genAllDfnPanels() {
-        for(const panelData of Object.values(window.dfnpanelData)) {
-            const dfnID = panelData.dfnID;
-            const dfn = document.getElementById(dfnID);
-            if(!dfn) {
-                console.log(`Can't find dfn#${dfnID}.`, panelData);
-            } else {
-                const panel = genDfnPanel(panelData);
-                append(document.body, panel);
-                insertDfnPopupAction(dfn, panel)
-            }
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", ()=>{
-        genAllDfnPanels();
-
-        // Add popup behavior to all dfns to show the corresponding dfn-panel.
-        var dfns = queryAll('.dfn-paneled');
-        for(let dfn of dfns) { ; }
-
-        document.body.addEventListener("click", (e) => {
-            // If not handled already, just hide all dfn panels.
-            hideAllDfnPanels();
-        });
-    })
-
-
-    function hideAllDfnPanels() {
-        // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
-    }
-
-    function showDfnPanel(dfnPanel, dfn) {
-        hideAllDfnPanels(); // Only display one at this time.
-        dfn.setAttribute("aria-expanded", "true");
-        dfnPanel.classList.add("on");
-        dfnPanel.style.left = "5px";
-        dfnPanel.style.top = "0px";
-        const panelRect = dfnPanel.getBoundingClientRect();
-        const panelWidth = panelRect.right - panelRect.left;
-        if (panelRect.right > document.body.scrollWidth) {
-            // Panel's overflowing the screen.
-            // Just drop it below the dfn and flip it rightward instead.
-            // This still wont' fix things if the screen is *really* wide,
-            // but fixing that's a lot harder without 'anchor()'.
-            dfnPanel.style.top = "1.5em";
-            dfnPanel.style.left = "auto";
-            dfnPanel.style.right = "0px";
-        }
-    }
-
-    function pinDfnPanel(dfnPanel) {
-        // Switch it to "activated" state, which pins it.
-        dfnPanel.classList.add("activated");
-        dfnPanel.style.left = null;
-        dfnPanel.style.top = null;
-    }
-
-    function hideDfnPanel(dfnPanel, dfn) {
-        if(!dfn) {
-            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
-        }
-        dfn.setAttribute("aria-expanded", "false")
-        dfnPanel.classList.remove("on");
-        dfnPanel.classList.remove("activated");
-    }
-
-    function toggleDfnPanel(dfnPanel, dfn) {
-        if(dfnPanel.classList.contains("on")) {
-            hideDfnPanel(dfnPanel, dfn);
-        } else {
-            showDfnPanel(dfnPanel, dfn);
-        }
-    }
-
-    function insertDfnPopupAction(dfn, dfnPanel) {
-        // Find dfn panel
-        const panelWrapper = document.createElement('span');
-        panelWrapper.appendChild(dfnPanel);
-        panelWrapper.style.position = "relative";
-        panelWrapper.style.height = "0px";
-        dfn.insertAdjacentElement("afterend", panelWrapper);
-        dfn.setAttribute('role', 'button');
-        dfn.setAttribute('aria-expanded', 'false')
-        dfn.tabIndex = 0;
-        dfn.classList.add('has-dfn-panel');
-        dfn.addEventListener('click', (event) => {
-            showDfnPanel(dfnPanel, dfn);
-            event.stopPropagation();
-        });
-        dfn.addEventListener('keypress', (event) => {
-            const kc = event.keyCode;
-            // 32->Space, 13->Enter
-            if(kc == 32 || kc == 13) {
-                toggleDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        });
-
-        dfnPanel.addEventListener('click', (event) => {
-            if (event.target.nodeName == 'A') {
-                pinDfnPanel(dfnPanel);
-            }
-            event.stopPropagation();
-        });
-
-        dfnPanel.addEventListener('keydown', (event) => {
-            if(event.keyCode == 27) { // Escape key
-                hideDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        })
-    }
-}
-</script>
-<script>/* Boilerplate: script-dfn-panel */
-"use strict";
-{
-    const dfnsJson = window.dfnsJson || {};
-
-    function genDfnPanel({dfnID, url, dfnText, refSections, external}) {
-        return mk.aside({
-            class: "dfn-panel",
-            id: `infopanel-for-${dfnID}`,
-            "data-for": dfnID,
-            "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
-            },
-            mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
-                `Info about the '${dfnText}' ${external?"external":""} reference.`),
-            mk.a({href:url}, url),
-            mk.b({}, "Referenced in:"),
-            mk.ul({},
-                ...refSections.map(section=>
-                    mk.li({},
-                        ...section.refs.map((ref, refI)=>
-                            [
-                                mk.a({
-                                    href: `#${ref.id}`
-                                    },
-                                    (refI == 0) ? section.title : `(${refI + 1})`
-                                ),
-                                " ",
-                            ]
-                        ),
-                    ),
-                ),
-            ),
-        );
-    }
-
-    function genAllDfnPanels() {
-        for(const panelData of Object.values(window.dfnpanelData)) {
-            const dfnID = panelData.dfnID;
-            const dfn = document.getElementById(dfnID);
-            if(!dfn) {
-                console.log(`Can't find dfn#${dfnID}.`, panelData);
-            } else {
-                const panel = genDfnPanel(panelData);
-                append(document.body, panel);
-                insertDfnPopupAction(dfn, panel)
-            }
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", ()=>{
-        genAllDfnPanels();
-
-        // Add popup behavior to all dfns to show the corresponding dfn-panel.
-        var dfns = queryAll('.dfn-paneled');
-        for(let dfn of dfns) { ; }
-
-        document.body.addEventListener("click", (e) => {
-            // If not handled already, just hide all dfn panels.
-            hideAllDfnPanels();
-        });
-    })
-
-
-    function hideAllDfnPanels() {
-        // Turn off any currently "on" or "activated" panels.
-        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>hideDfnPanel(el));
-    }
-
-    function showDfnPanel(dfnPanel, dfn) {
-        hideAllDfnPanels(); // Only display one at this time.
-        dfn.setAttribute("aria-expanded", "true");
-        dfnPanel.classList.add("on");
-        dfnPanel.style.left = "5px";
-        dfnPanel.style.top = "0px";
-        const panelRect = dfnPanel.getBoundingClientRect();
-        const panelWidth = panelRect.right - panelRect.left;
-        if (panelRect.right > document.body.scrollWidth) {
-            // Panel's overflowing the screen.
-            // Just drop it below the dfn and flip it rightward instead.
-            // This still wont' fix things if the screen is *really* wide,
-            // but fixing that's a lot harder without 'anchor()'.
-            dfnPanel.style.top = "1.5em";
-            dfnPanel.style.left = "auto";
-            dfnPanel.style.right = "0px";
-        }
-    }
-
-    function pinDfnPanel(dfnPanel) {
-        // Switch it to "activated" state, which pins it.
-        dfnPanel.classList.add("activated");
-        dfnPanel.style.left = null;
-        dfnPanel.style.top = null;
-    }
-
-    function hideDfnPanel(dfnPanel, dfn) {
-        if(!dfn) {
-            dfn = document.getElementById(dfnPanel.getAttribute("data-for"));
-        }
-        dfn.setAttribute("aria-expanded", "false")
-        dfnPanel.classList.remove("on");
-        dfnPanel.classList.remove("activated");
-    }
-
-    function toggleDfnPanel(dfnPanel, dfn) {
-        if(dfnPanel.classList.contains("on")) {
-            hideDfnPanel(dfnPanel, dfn);
-        } else {
-            showDfnPanel(dfnPanel, dfn);
-        }
-    }
-
-    function insertDfnPopupAction(dfn, dfnPanel) {
-        // Find dfn panel
-        const panelWrapper = document.createElement('span');
-        panelWrapper.appendChild(dfnPanel);
-        panelWrapper.style.position = "relative";
-        panelWrapper.style.height = "0px";
-        dfn.insertAdjacentElement("afterend", panelWrapper);
-        dfn.setAttribute('role', 'button');
-        dfn.setAttribute('aria-expanded', 'false')
-        dfn.tabIndex = 0;
-        dfn.classList.add('has-dfn-panel');
-        dfn.addEventListener('click', (event) => {
-            showDfnPanel(dfnPanel, dfn);
-            event.stopPropagation();
-        });
-        dfn.addEventListener('keypress', (event) => {
-            const kc = event.keyCode;
-            // 32->Space, 13->Enter
-            if(kc == 32 || kc == 13) {
-                toggleDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        });
-
-        dfnPanel.addEventListener('click', (event) => {
-            if (event.target.nodeName == 'A') {
-                pinDfnPanel(dfnPanel);
-            }
-            event.stopPropagation();
-        });
-
-        dfnPanel.addEventListener('keydown', (event) => {
-            if(event.keyCode == 27) { // Escape key
-                hideDfnPanel(dfnPanel, dfn);
-                event.stopPropagation();
-                event.preventDefault();
-            }
-        })
-    }
-}
-</script>
-<script>/* Boilerplate: script-dfn-panel-json */
-window.dfnpanelData = {};
-window.dfnpanelData['a6e67972'] = {"dfnID": "a6e67972", "url": "https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object-objects", "dfnText": "Object", "refSections": [{"refs": [{"id": "ref-for-sec-object-objects"}], "title": "8.1. Proximity reading parsing algorithm"}], "external": true};
-window.dfnpanelData['1b956603'] = {"dfnID": "1b956603", "url": "https://w3c.github.io/sensors/#sensor", "dfnText": "Sensor", "refSections": [{"refs": [{"id": "ref-for-sensor"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-sensor\u2460"}], "title": "6.1. The ProximitySensor Interface"}], "external": true};
-window.dfnpanelData['207de9db'] = {"dfnID": "207de9db", "url": "https://w3c.github.io/sensors/#dictdef-sensoroptions", "dfnText": "SensorOptions", "refSections": [{"refs": [{"id": "ref-for-dictdef-sensoroptions"}], "title": "6.1. The ProximitySensor Interface"}, {"refs": [{"id": "ref-for-dictdef-sensoroptions\u2460"}], "title": "7.1. Construct a proximity sensor object"}], "external": true};
-window.dfnpanelData['120b5cd7'] = {"dfnID": "120b5cd7", "url": "https://w3c.github.io/sensors#check-sensor-policy-controlled-features", "dfnText": "check sensor policy-controlled features", "refSections": [{"refs": [{"id": "ref-for-check-sensor-policy-controlled-features"}], "title": "7.1. Construct a proximity sensor object"}], "external": true};
-window.dfnpanelData['80862307'] = {"dfnID": "80862307", "url": "https://w3c.github.io/sensors#default-sensor", "dfnText": "default sensor", "refSections": [{"refs": [{"id": "ref-for-default-sensor"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['beb7996f'] = {"dfnID": "beb7996f", "url": "https://w3c.github.io/sensors/#extension-sensor-interface", "dfnText": "extension sensor interface", "refSections": [{"refs": [{"id": "ref-for-extension-sensor-interface"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['4e835b4e'] = {"dfnID": "4e835b4e", "url": "https://w3c.github.io/sensors#device-fingerprinting", "dfnText": "fingerprinting", "refSections": [{"refs": [{"id": "ref-for-device-fingerprinting"}], "title": "3. Security and Privacy Considerations"}], "external": true};
-window.dfnpanelData['a09cf46b'] = {"dfnID": "a09cf46b", "url": "https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm", "dfnText": "generic sensor permission revocation algorithm", "refSections": [{"refs": [{"id": "ref-for-generic-sensor-permission-revocation-algorithm"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['fd4ad34f'] = {"dfnID": "fd4ad34f", "url": "https://w3c.github.io/sensors/#get-value-from-latest-reading", "dfnText": "get value from latest reading", "refSections": [{"refs": [{"id": "ref-for-get-value-from-latest-reading"}], "title": "6.1.1. The distance attribute"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2460"}], "title": "6.1.2. The max attribute"}, {"refs": [{"id": "ref-for-get-value-from-latest-reading\u2461"}], "title": "6.1.3. The near attribute"}], "external": true};
-window.dfnpanelData['b152f730'] = {"dfnID": "b152f730", "url": "https://w3c.github.io/sensors#initialize-a-sensor-object", "dfnText": "initialize a sensor object", "refSections": [{"refs": [{"id": "ref-for-initialize-a-sensor-object"}], "title": "7.1. Construct a proximity sensor object"}], "external": true};
-window.dfnpanelData['3e7f3108'] = {"dfnID": "3e7f3108", "url": "https://w3c.github.io/sensors#latest-reading", "dfnText": "latest reading", "refSections": [{"refs": [{"id": "ref-for-latest-reading"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['fefc23b8'] = {"dfnID": "fefc23b8", "url": "https://w3c.github.io/sensors#mitigation-strategies", "dfnText": "mitigation strategies", "refSections": [{"refs": [{"id": "ref-for-mitigation-strategies"}, {"id": "ref-for-mitigation-strategies\u2460"}], "title": "3. Security and Privacy Considerations"}], "external": true};
-window.dfnpanelData['c1bbb186'] = {"dfnID": "c1bbb186", "url": "https://w3c.github.io/sensors/#parse-single-value-number-reading", "dfnText": "parse single-value number reading", "refSections": [{"refs": [{"id": "ref-for-parse-single-value-number-reading"}], "title": "8.1. Proximity reading parsing algorithm"}], "external": true};
-window.dfnpanelData['5d47b5a4'] = {"dfnID": "5d47b5a4", "url": "https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata", "dfnText": "per-type virtual sensor metadata", "refSections": [{"refs": [{"id": "ref-for-per-type-virtual-sensor-metadata"}], "title": "8. Automation"}], "external": true};
-window.dfnpanelData['611c5008'] = {"dfnID": "611c5008", "url": "https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm", "dfnText": "reading parsing algorithm", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-metadata-reading-parsing-algorithm"}], "title": "8. Automation"}], "external": true};
-window.dfnpanelData['7470ffcc'] = {"dfnID": "7470ffcc", "url": "https://w3c.github.io/sensors/#sensor-feature-names", "dfnText": "sensor feature names", "refSections": [{"refs": [{"id": "ref-for-sensor-feature-names"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['80bf03eb'] = {"dfnID": "80bf03eb", "url": "https://w3c.github.io/sensors/#sensor-permission-names", "dfnText": "sensor permission names", "refSections": [{"refs": [{"id": "ref-for-sensor-permission-names"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['5afb8cab'] = {"dfnID": "5afb8cab", "url": "https://w3c.github.io/sensors/#sensor-reading", "dfnText": "sensor reading", "refSections": [{"refs": [{"id": "ref-for-sensor-reading"}], "title": "3. Security and Privacy Considerations"}, {"refs": [{"id": "ref-for-sensor-reading\u2460"}, {"id": "ref-for-sensor-reading\u2461"}], "title": "8.1. Proximity reading parsing algorithm"}], "external": true};
-window.dfnpanelData['44637b0a'] = {"dfnID": "44637b0a", "url": "https://w3c.github.io/sensors#sensor-type", "dfnText": "sensor type", "refSections": [{"refs": [{"id": "ref-for-sensor-type"}, {"id": "ref-for-sensor-type\u2460"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['34c25f36'] = {"dfnID": "34c25f36", "url": "https://w3c.github.io/sensors#user-identifying", "dfnText": "user identifying", "refSections": [{"refs": [{"id": "ref-for-user-identifying"}], "title": "3. Security and Privacy Considerations"}], "external": true};
-window.dfnpanelData['bb15fee5'] = {"dfnID": "bb15fee5", "url": "https://w3c.github.io/sensors/#virtual-sensor-metadata", "dfnText": "virtual sensor metadata", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-metadata"}], "title": "8. Automation"}], "external": true};
-window.dfnpanelData['4fa114dd'] = {"dfnID": "4fa114dd", "url": "https://w3c.github.io/sensors/#virtual-sensor-type", "dfnText": "virtual sensor type", "refSections": [{"refs": [{"id": "ref-for-virtual-sensor-type"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['8958b003'] = {"dfnID": "8958b003", "url": "https://infra.spec.whatwg.org/#map-entry", "dfnText": "entry", "refSections": [{"refs": [{"id": "ref-for-map-entry"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-map-entry\u2460"}], "title": "8. Automation"}], "external": true};
-window.dfnpanelData['16d07e10'] = {"dfnID": "16d07e10", "url": "https://infra.spec.whatwg.org/#list-iterate", "dfnText": "for each", "refSections": [{"refs": [{"id": "ref-for-list-iterate"}], "title": "8.1. Proximity reading parsing algorithm"}], "external": true};
-window.dfnpanelData['d14a6f26'] = {"dfnID": "d14a6f26", "url": "https://infra.spec.whatwg.org/#map-key", "dfnText": "key", "refSections": [{"refs": [{"id": "ref-for-map-key"}], "title": "8. Automation"}], "external": true};
-window.dfnpanelData['31db57e6'] = {"dfnID": "31db57e6", "url": "https://infra.spec.whatwg.org/#map-getting-the-keys", "dfnText": "keys", "refSections": [{"refs": [{"id": "ref-for-map-getting-the-keys"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['649608b9'] = {"dfnID": "649608b9", "url": "https://infra.spec.whatwg.org/#list", "dfnText": "list", "refSections": [{"refs": [{"id": "ref-for-list"}], "title": "8.1. Proximity reading parsing algorithm"}], "external": true};
-window.dfnpanelData['3fca5a9e'] = {"dfnID": "3fca5a9e", "url": "https://infra.spec.whatwg.org/#ordered-map", "dfnText": "map", "refSections": [{"refs": [{"id": "ref-for-ordered-map"}], "title": "8. Automation"}], "external": true};
-window.dfnpanelData['0e6b2056'] = {"dfnID": "0e6b2056", "url": "https://infra.spec.whatwg.org/#map-set", "dfnText": "set", "refSections": [{"refs": [{"id": "ref-for-map-set"}, {"id": "ref-for-map-set\u2460"}], "title": "8.1. Proximity reading parsing algorithm"}], "external": true};
-window.dfnpanelData['802b0fdd'] = {"dfnID": "802b0fdd", "url": "https://infra.spec.whatwg.org/#map-value", "dfnText": "value", "refSections": [{"refs": [{"id": "ref-for-map-value"}], "title": "8. Automation"}], "external": true};
-window.dfnpanelData['12d6b9a8'] = {"dfnID": "12d6b9a8", "url": "https://infra.spec.whatwg.org/#map-getting-the-values", "dfnText": "values", "refSections": [{"refs": [{"id": "ref-for-map-getting-the-values"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['409a61ca'] = {"dfnID": "409a61ca", "url": "https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm", "dfnText": "permission revocation algorithm", "refSections": [{"refs": [{"id": "ref-for-dfn-permission-revocation-algorithm"}], "title": "5. Model"}], "external": true};
-window.dfnpanelData['1570624a'] = {"dfnID": "1570624a", "url": "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist", "dfnText": "default allowlist", "refSections": [{"refs": [{"id": "ref-for-policy-controlled-feature-default-allowlist"}], "title": "4. Permissions Policy integration"}], "external": true};
-window.dfnpanelData['cc890cc1'] = {"dfnID": "cc890cc1", "url": "https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature", "dfnText": "policy-controlled feature", "refSections": [{"refs": [{"id": "ref-for-policy-controlled-feature"}], "title": "4. Permissions Policy integration"}], "external": true};
-window.dfnpanelData['fa818daf'] = {"dfnID": "fa818daf", "url": "https://w3c.github.io/webdriver/#dfn-getting-properties", "dfnText": "get a property", "refSections": [{"refs": [{"id": "ref-for-dfn-getting-properties"}], "title": "8.1. Proximity reading parsing algorithm"}], "external": true};
-window.dfnpanelData['dca2de17'] = {"dfnID": "dca2de17", "url": "https://webidl.spec.whatwg.org/#idl-DOMException", "dfnText": "DOMException", "refSections": [{"refs": [{"id": "ref-for-idl-DOMException"}], "title": "7.1. Construct a proximity sensor object"}], "external": true};
-window.dfnpanelData['889e932f'] = {"dfnID": "889e932f", "url": "https://webidl.spec.whatwg.org/#Exposed", "dfnText": "Exposed", "refSections": [{"refs": [{"id": "ref-for-Exposed"}], "title": "6.1. The ProximitySensor Interface"}], "external": true};
-window.dfnpanelData['b75bb3bd'] = {"dfnID": "b75bb3bd", "url": "https://webidl.spec.whatwg.org/#SecureContext", "dfnText": "SecureContext", "refSections": [{"refs": [{"id": "ref-for-SecureContext"}], "title": "6.1. The ProximitySensor Interface"}], "external": true};
-window.dfnpanelData['c3e881ef'] = {"dfnID": "c3e881ef", "url": "https://webidl.spec.whatwg.org/#securityerror", "dfnText": "SecurityError", "refSections": [{"refs": [{"id": "ref-for-securityerror"}], "title": "7.1. Construct a proximity sensor object"}], "external": true};
-window.dfnpanelData['5372cca8'] = {"dfnID": "5372cca8", "url": "https://webidl.spec.whatwg.org/#idl-boolean", "dfnText": "boolean", "refSections": [{"refs": [{"id": "ref-for-idl-boolean"}], "title": "6.1. The ProximitySensor Interface"}], "external": true};
-window.dfnpanelData['8c800cdf'] = {"dfnID": "8c800cdf", "url": "https://webidl.spec.whatwg.org/#idl-double", "dfnText": "double", "refSections": [{"refs": [{"id": "ref-for-idl-double"}, {"id": "ref-for-idl-double\u2460"}], "title": "6.1. The ProximitySensor Interface"}], "external": true};
-window.dfnpanelData['b4cfa5ce'] = {"dfnID": "b4cfa5ce", "url": "https://webidl.spec.whatwg.org/#dfn-throw", "dfnText": "throw", "refSections": [{"refs": [{"id": "ref-for-dfn-throw"}], "title": "7.1. Construct a proximity sensor object"}], "external": true};
-window.dfnpanelData['proximity-sensor-feature'] = {"dfnID": "proximity-sensor-feature", "url": "#proximity-sensor-feature", "dfnText": "proximity-sensor", "refSections": [{"refs": [{"id": "ref-for-proximity-sensor-feature"}], "title": "5. Model"}], "external": false};
-window.dfnpanelData['proximity-sensor-sensor-type'] = {"dfnID": "proximity-sensor-sensor-type", "url": "#proximity-sensor-sensor-type", "dfnText": "Proximity Sensor", "refSections": [{"refs": [{"id": "ref-for-proximity-sensor-sensor-type"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-proximity-sensor-sensor-type\u2460"}], "title": "8. Automation"}], "external": false};
-window.dfnpanelData['permissiondef-proximity'] = {"dfnID": "permissiondef-proximity", "url": "#permissiondef-proximity", "dfnText": "proximity", "refSections": [{"refs": [{"id": "ref-for-permissiondef-proximity"}], "title": "5. Model"}], "external": false};
-window.dfnpanelData['proximity-virtual-sensor-type'] = {"dfnID": "proximity-virtual-sensor-type", "url": "#proximity-virtual-sensor-type", "dfnText": "proximity", "refSections": [{"refs": [{"id": "ref-for-proximity-virtual-sensor-type"}], "title": "8. Automation"}], "external": false};
-window.dfnpanelData['distance'] = {"dfnID": "distance", "url": "#distance", "dfnText": "distance", "refSections": [{"refs": [{"id": "ref-for-distance"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-distance\u2460"}, {"id": "ref-for-distance\u2461"}], "title": "6.1.3. The near attribute"}], "external": false};
-window.dfnpanelData['sensing-range'] = {"dfnID": "sensing-range", "url": "#sensing-range", "dfnText": "sensing range", "refSections": [{"refs": [{"id": "ref-for-sensing-range"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-sensing-range\u2460"}], "title": "6.1.1. The distance attribute"}, {"refs": [{"id": "ref-for-sensing-range\u2461"}, {"id": "ref-for-sensing-range\u2462"}], "title": "6.1.3. The near attribute"}], "external": false};
-window.dfnpanelData['max'] = {"dfnID": "max", "url": "#max", "dfnText": "max", "refSections": [{"refs": [{"id": "ref-for-max"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-max\u2460"}], "title": "6.1.3. The near attribute"}], "external": false};
-window.dfnpanelData['near'] = {"dfnID": "near", "url": "#near", "dfnText": "near", "refSections": [{"refs": [{"id": "ref-for-near"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-near\u2460"}, {"id": "ref-for-near\u2461"}], "title": "6.1.3. The near attribute"}], "external": false};
-window.dfnpanelData['proximitysensor'] = {"dfnID": "proximitysensor", "url": "#proximitysensor", "dfnText": "ProximitySensor", "refSections": [{"refs": [{"id": "ref-for-proximitysensor"}], "title": "5. Model"}, {"refs": [{"id": "ref-for-proximitysensor\u2460"}], "title": "6.1. The ProximitySensor Interface"}, {"refs": [{"id": "ref-for-proximitysensor\u2461"}], "title": "6.1.1. The distance attribute"}, {"refs": [{"id": "ref-for-proximitysensor\u2462"}], "title": "6.1.2. The max attribute"}, {"refs": [{"id": "ref-for-proximitysensor\u2463"}], "title": "6.1.3. The near attribute"}, {"refs": [{"id": "ref-for-proximitysensor\u2464"}, {"id": "ref-for-proximitysensor\u2465"}, {"id": "ref-for-proximitysensor\u2466"}], "title": "7.1. Construct a proximity sensor object"}], "external": false};
-window.dfnpanelData['dom-proximitysensor-distance'] = {"dfnID": "dom-proximitysensor-distance", "url": "#dom-proximitysensor-distance", "dfnText": "distance", "refSections": [{"refs": [{"id": "ref-for-dom-proximitysensor-distance"}], "title": "6.1.1. The distance attribute"}], "external": false};
-window.dfnpanelData['dom-proximitysensor-max'] = {"dfnID": "dom-proximitysensor-max", "url": "#dom-proximitysensor-max", "dfnText": "max", "refSections": [{"refs": [{"id": "ref-for-dom-proximitysensor-max"}], "title": "6.1.2. The max attribute"}], "external": false};
-window.dfnpanelData['dom-proximitysensor-near'] = {"dfnID": "dom-proximitysensor-near", "url": "#dom-proximitysensor-near", "dfnText": "near", "refSections": [{"refs": [{"id": "ref-for-dom-proximitysensor-near"}], "title": "6.1.3. The near attribute"}], "external": false};
-window.dfnpanelData['construct-a-proximity-sensor-object'] = {"dfnID": "construct-a-proximity-sensor-object", "url": "#construct-a-proximity-sensor-object", "dfnText": "7.1. Construct a proximity sensor object", "refSections": [{"refs": [{"id": "ref-for-construct-a-proximity-sensor-object"}], "title": "6.1. The ProximitySensor Interface"}, {"refs": [{"id": "ref-for-construct-a-proximity-sensor-object"}], "title": "7.1. Construct a proximity sensor object"}], "external": false};
-window.dfnpanelData['proximity-reading-parsing-algorithm'] = {"dfnID": "proximity-reading-parsing-algorithm", "url": "#proximity-reading-parsing-algorithm", "dfnText": "8.1. Proximity reading parsing algorithm", "refSections": [{"refs": [{"id": "ref-for-proximity-reading-parsing-algorithm"}], "title": "8. Automation"}, {"refs": [{"id": "ref-for-proximity-reading-parsing-algorithm"}], "title": "8.1. Proximity reading parsing algorithm"}], "external": false};
-</script>
 <script>/* Boilerplate: script-dom-helper */
+"use strict";
 function query(sel) { return document.querySelector(sel); }
 
 function queryAll(sel) { return [...document.querySelectorAll(sel)]; }
@@ -1678,103 +1382,796 @@ function parseHTML(markup) {
 		el.innerHTML = markup;
 		return el.content;
 	}
+}</script>
+<script>/* Boilerplate: script-dfn-panel */
+"use strict";
+{
+let dfnPanelData = {
+"0e6b2056": {"dfnID":"0e6b2056","dfnText":"set","external":true,"refSections":[{"refs":[{"id":"ref-for-map-set"},{"id":"ref-for-map-set\u2460"}],"title":"8.1. Proximity reading parsing algorithm"}],"url":"https://infra.spec.whatwg.org/#map-set"},
+"120b5cd7": {"dfnID":"120b5cd7","dfnText":"check sensor policy-controlled features","external":true,"refSections":[{"refs":[{"id":"ref-for-check-sensor-policy-controlled-features"}],"title":"7.1. Construct a proximity sensor object"}],"url":"https://w3c.github.io/sensors#check-sensor-policy-controlled-features"},
+"12d6b9a8": {"dfnID":"12d6b9a8","dfnText":"values","external":true,"refSections":[{"refs":[{"id":"ref-for-map-getting-the-values"}],"title":"5. Model"}],"url":"https://infra.spec.whatwg.org/#map-getting-the-values"},
+"1570624a": {"dfnID":"1570624a","dfnText":"default allowlist","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-controlled-feature-default-allowlist"}],"title":"4. Permissions Policy integration"}],"url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist"},
+"16d07e10": {"dfnID":"16d07e10","dfnText":"for each","external":true,"refSections":[{"refs":[{"id":"ref-for-list-iterate"}],"title":"8.1. Proximity reading parsing algorithm"}],"url":"https://infra.spec.whatwg.org/#list-iterate"},
+"1b956603": {"dfnID":"1b956603","dfnText":"Sensor","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor"}],"title":"5. Model"},{"refs":[{"id":"ref-for-sensor\u2460"}],"title":"6.1. The ProximitySensor Interface"}],"url":"https://w3c.github.io/sensors/#sensor"},
+"207de9db": {"dfnID":"207de9db","dfnText":"SensorOptions","external":true,"refSections":[{"refs":[{"id":"ref-for-dictdef-sensoroptions"}],"title":"6.1. The ProximitySensor Interface"},{"refs":[{"id":"ref-for-dictdef-sensoroptions\u2460"}],"title":"7.1. Construct a proximity sensor object"}],"url":"https://w3c.github.io/sensors/#dictdef-sensoroptions"},
+"31db57e6": {"dfnID":"31db57e6","dfnText":"keys","external":true,"refSections":[{"refs":[{"id":"ref-for-map-getting-the-keys"}],"title":"5. Model"}],"url":"https://infra.spec.whatwg.org/#map-getting-the-keys"},
+"34c25f36": {"dfnID":"34c25f36","dfnText":"user identifying","external":true,"refSections":[{"refs":[{"id":"ref-for-user-identifying"}],"title":"3. Security and Privacy Considerations"}],"url":"https://w3c.github.io/sensors#user-identifying"},
+"3e7f3108": {"dfnID":"3e7f3108","dfnText":"latest reading","external":true,"refSections":[{"refs":[{"id":"ref-for-latest-reading"}],"title":"5. Model"}],"url":"https://w3c.github.io/sensors#latest-reading"},
+"3fca5a9e": {"dfnID":"3fca5a9e","dfnText":"map","external":true,"refSections":[{"refs":[{"id":"ref-for-ordered-map"}],"title":"8. Automation"}],"url":"https://infra.spec.whatwg.org/#ordered-map"},
+"409a61ca": {"dfnID":"409a61ca","dfnText":"permission revocation algorithm","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-permission-revocation-algorithm"}],"title":"5. Model"}],"url":"https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm"},
+"44637b0a": {"dfnID":"44637b0a","dfnText":"sensor type","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor-type"},{"id":"ref-for-sensor-type\u2460"}],"title":"5. Model"}],"url":"https://w3c.github.io/sensors#sensor-type"},
+"4e835b4e": {"dfnID":"4e835b4e","dfnText":"fingerprinting","external":true,"refSections":[{"refs":[{"id":"ref-for-device-fingerprinting"}],"title":"3. Security and Privacy Considerations"}],"url":"https://w3c.github.io/sensors#device-fingerprinting"},
+"4fa114dd": {"dfnID":"4fa114dd","dfnText":"virtual sensor type","external":true,"refSections":[{"refs":[{"id":"ref-for-virtual-sensor-type"}],"title":"5. Model"}],"url":"https://w3c.github.io/sensors/#virtual-sensor-type"},
+"5372cca8": {"dfnID":"5372cca8","dfnText":"boolean","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-boolean"}],"title":"6.1. The ProximitySensor Interface"}],"url":"https://webidl.spec.whatwg.org/#idl-boolean"},
+"5afb8cab": {"dfnID":"5afb8cab","dfnText":"sensor reading","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor-reading"}],"title":"3. Security and Privacy Considerations"},{"refs":[{"id":"ref-for-sensor-reading\u2460"},{"id":"ref-for-sensor-reading\u2461"}],"title":"8.1. Proximity reading parsing algorithm"}],"url":"https://w3c.github.io/sensors/#sensor-reading"},
+"5d47b5a4": {"dfnID":"5d47b5a4","dfnText":"per-type virtual sensor metadata","external":true,"refSections":[{"refs":[{"id":"ref-for-per-type-virtual-sensor-metadata"}],"title":"8. Automation"}],"url":"https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata"},
+"611c5008": {"dfnID":"611c5008","dfnText":"reading parsing algorithm","external":true,"refSections":[{"refs":[{"id":"ref-for-virtual-sensor-metadata-reading-parsing-algorithm"}],"title":"8. Automation"}],"url":"https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm"},
+"649608b9": {"dfnID":"649608b9","dfnText":"list","external":true,"refSections":[{"refs":[{"id":"ref-for-list"}],"title":"8.1. Proximity reading parsing algorithm"}],"url":"https://infra.spec.whatwg.org/#list"},
+"7470ffcc": {"dfnID":"7470ffcc","dfnText":"sensor feature names","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor-feature-names"}],"title":"5. Model"}],"url":"https://w3c.github.io/sensors/#sensor-feature-names"},
+"802b0fdd": {"dfnID":"802b0fdd","dfnText":"value","external":true,"refSections":[{"refs":[{"id":"ref-for-map-value"}],"title":"8. Automation"}],"url":"https://infra.spec.whatwg.org/#map-value"},
+"80862307": {"dfnID":"80862307","dfnText":"default sensor","external":true,"refSections":[{"refs":[{"id":"ref-for-default-sensor"}],"title":"5. Model"}],"url":"https://w3c.github.io/sensors#default-sensor"},
+"80bf03eb": {"dfnID":"80bf03eb","dfnText":"sensor permission names","external":true,"refSections":[{"refs":[{"id":"ref-for-sensor-permission-names"}],"title":"5. Model"}],"url":"https://w3c.github.io/sensors/#sensor-permission-names"},
+"889e932f": {"dfnID":"889e932f","dfnText":"Exposed","external":true,"refSections":[{"refs":[{"id":"ref-for-Exposed"}],"title":"6.1. The ProximitySensor Interface"}],"url":"https://webidl.spec.whatwg.org/#Exposed"},
+"8958b003": {"dfnID":"8958b003","dfnText":"entry","external":true,"refSections":[{"refs":[{"id":"ref-for-map-entry"}],"title":"5. Model"},{"refs":[{"id":"ref-for-map-entry\u2460"}],"title":"8. Automation"}],"url":"https://infra.spec.whatwg.org/#map-entry"},
+"8c800cdf": {"dfnID":"8c800cdf","dfnText":"double","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-double"},{"id":"ref-for-idl-double\u2460"}],"title":"6.1. The ProximitySensor Interface"}],"url":"https://webidl.spec.whatwg.org/#idl-double"},
+"a09cf46b": {"dfnID":"a09cf46b","dfnText":"Generic Sensor permission revocation algorithm","external":true,"refSections":[{"refs":[{"id":"ref-for-generic-sensor-permission-revocation-algorithm"}],"title":"5. Model"}],"url":"https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm"},
+"a6e67972": {"dfnID":"a6e67972","dfnText":"Object","external":true,"refSections":[{"refs":[{"id":"ref-for-sec-object-objects"}],"title":"8.1. Proximity reading parsing algorithm"}],"url":"https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object-objects"},
+"b152f730": {"dfnID":"b152f730","dfnText":"initialize a sensor object","external":true,"refSections":[{"refs":[{"id":"ref-for-initialize-a-sensor-object"}],"title":"7.1. Construct a proximity sensor object"}],"url":"https://w3c.github.io/sensors#initialize-a-sensor-object"},
+"b4cfa5ce": {"dfnID":"b4cfa5ce","dfnText":"throw","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-throw"}],"title":"7.1. Construct a proximity sensor object"}],"url":"https://webidl.spec.whatwg.org/#dfn-throw"},
+"b75bb3bd": {"dfnID":"b75bb3bd","dfnText":"SecureContext","external":true,"refSections":[{"refs":[{"id":"ref-for-SecureContext"}],"title":"6.1. The ProximitySensor Interface"}],"url":"https://webidl.spec.whatwg.org/#SecureContext"},
+"bb15fee5": {"dfnID":"bb15fee5","dfnText":"virtual sensor metadata","external":true,"refSections":[{"refs":[{"id":"ref-for-virtual-sensor-metadata"}],"title":"8. Automation"}],"url":"https://w3c.github.io/sensors/#virtual-sensor-metadata"},
+"beb7996f": {"dfnID":"beb7996f","dfnText":"extension sensor interface","external":true,"refSections":[{"refs":[{"id":"ref-for-extension-sensor-interface"}],"title":"5. Model"}],"url":"https://w3c.github.io/sensors/#extension-sensor-interface"},
+"c1bbb186": {"dfnID":"c1bbb186","dfnText":"parse single-value number reading","external":true,"refSections":[{"refs":[{"id":"ref-for-parse-single-value-number-reading"}],"title":"8.1. Proximity reading parsing algorithm"}],"url":"https://w3c.github.io/sensors/#parse-single-value-number-reading"},
+"c3e881ef": {"dfnID":"c3e881ef","dfnText":"SecurityError","external":true,"refSections":[{"refs":[{"id":"ref-for-securityerror"}],"title":"7.1. Construct a proximity sensor object"}],"url":"https://webidl.spec.whatwg.org/#securityerror"},
+"cc890cc1": {"dfnID":"cc890cc1","dfnText":"policy-controlled feature","external":true,"refSections":[{"refs":[{"id":"ref-for-policy-controlled-feature"}],"title":"4. Permissions Policy integration"}],"url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"},
+"conformant-user-agent": {"dfnID":"conformant-user-agent","dfnText":"conformant user agent","external":false,"refSections":[],"url":"#conformant-user-agent"},
+"construct-a-proximity-sensor-object": {"dfnID":"construct-a-proximity-sensor-object","dfnText":"7.1. Construct a proximity sensor object","external":false,"refSections":[{"refs":[{"id":"ref-for-construct-a-proximity-sensor-object"}],"title":"6.1. The ProximitySensor Interface"},{"refs":[{"id":"ref-for-construct-a-proximity-sensor-object"}],"title":"7.1. Construct a proximity sensor object"}],"url":"#construct-a-proximity-sensor-object"},
+"d14a6f26": {"dfnID":"d14a6f26","dfnText":"key","external":true,"refSections":[{"refs":[{"id":"ref-for-map-key"}],"title":"8. Automation"}],"url":"https://infra.spec.whatwg.org/#map-key"},
+"dca2de17": {"dfnID":"dca2de17","dfnText":"DOMException","external":true,"refSections":[{"refs":[{"id":"ref-for-idl-DOMException"}],"title":"7.1. Construct a proximity sensor object"}],"url":"https://webidl.spec.whatwg.org/#idl-DOMException"},
+"distance": {"dfnID":"distance","dfnText":"distance","external":false,"refSections":[{"refs":[{"id":"ref-for-distance"}],"title":"5. Model"},{"refs":[{"id":"ref-for-distance\u2460"},{"id":"ref-for-distance\u2461"}],"title":"6.1.3. The near attribute"}],"url":"#distance"},
+"dom-proximitysensor-distance": {"dfnID":"dom-proximitysensor-distance","dfnText":"distance","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-proximitysensor-distance"}],"title":"6.1.1. The distance attribute"}],"url":"#dom-proximitysensor-distance"},
+"dom-proximitysensor-max": {"dfnID":"dom-proximitysensor-max","dfnText":"max","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-proximitysensor-max"}],"title":"6.1.2. The max attribute"}],"url":"#dom-proximitysensor-max"},
+"dom-proximitysensor-near": {"dfnID":"dom-proximitysensor-near","dfnText":"near","external":false,"refSections":[{"refs":[{"id":"ref-for-dom-proximitysensor-near"}],"title":"6.1.3. The near attribute"}],"url":"#dom-proximitysensor-near"},
+"dom-proximitysensor-proximitysensor": {"dfnID":"dom-proximitysensor-proximitysensor","dfnText":"constructor","external":false,"refSections":[],"url":"#dom-proximitysensor-proximitysensor"},
+"dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions": {"dfnID":"dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions","dfnText":"sensorOptions","external":false,"refSections":[],"url":"#dom-proximitysensor-proximitysensor-sensoroptions-sensoroptions"},
+"fa818daf": {"dfnID":"fa818daf","dfnText":"get a property","external":true,"refSections":[{"refs":[{"id":"ref-for-dfn-getting-properties"}],"title":"8.1. Proximity reading parsing algorithm"}],"url":"https://w3c.github.io/webdriver/#dfn-getting-properties"},
+"fd4ad34f": {"dfnID":"fd4ad34f","dfnText":"get value from latest reading","external":true,"refSections":[{"refs":[{"id":"ref-for-get-value-from-latest-reading"}],"title":"6.1.1. The distance attribute"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2460"}],"title":"6.1.2. The max attribute"},{"refs":[{"id":"ref-for-get-value-from-latest-reading\u2461"}],"title":"6.1.3. The near attribute"}],"url":"https://w3c.github.io/sensors/#get-value-from-latest-reading"},
+"fefc23b8": {"dfnID":"fefc23b8","dfnText":"mitigation strategies","external":true,"refSections":[{"refs":[{"id":"ref-for-mitigation-strategies"},{"id":"ref-for-mitigation-strategies\u2460"}],"title":"3. Security and Privacy Considerations"}],"url":"https://w3c.github.io/sensors#mitigation-strategies"},
+"max": {"dfnID":"max","dfnText":"max","external":false,"refSections":[{"refs":[{"id":"ref-for-max"}],"title":"5. Model"},{"refs":[{"id":"ref-for-max\u2460"}],"title":"6.1.3. The near attribute"}],"url":"#max"},
+"near": {"dfnID":"near","dfnText":"near","external":false,"refSections":[{"refs":[{"id":"ref-for-near"}],"title":"5. Model"},{"refs":[{"id":"ref-for-near\u2460"},{"id":"ref-for-near\u2461"}],"title":"6.1.3. The near attribute"}],"url":"#near"},
+"permissiondef-proximity": {"dfnID":"permissiondef-proximity","dfnText":"proximity","external":false,"refSections":[{"refs":[{"id":"ref-for-permissiondef-proximity"}],"title":"5. Model"}],"url":"#permissiondef-proximity"},
+"proximity-reading-parsing-algorithm": {"dfnID":"proximity-reading-parsing-algorithm","dfnText":"8.1. Proximity reading parsing algorithm","external":false,"refSections":[{"refs":[{"id":"ref-for-proximity-reading-parsing-algorithm"}],"title":"8. Automation"},{"refs":[{"id":"ref-for-proximity-reading-parsing-algorithm"}],"title":"8.1. Proximity reading parsing algorithm"}],"url":"#proximity-reading-parsing-algorithm"},
+"proximity-sensor-feature": {"dfnID":"proximity-sensor-feature","dfnText":"proximity-sensor","external":false,"refSections":[{"refs":[{"id":"ref-for-proximity-sensor-feature"}],"title":"5. Model"}],"url":"#proximity-sensor-feature"},
+"proximity-sensor-sensor-type": {"dfnID":"proximity-sensor-sensor-type","dfnText":"Proximity Sensor","external":false,"refSections":[{"refs":[{"id":"ref-for-proximity-sensor-sensor-type"}],"title":"5. Model"},{"refs":[{"id":"ref-for-proximity-sensor-sensor-type\u2460"}],"title":"8. Automation"}],"url":"#proximity-sensor-sensor-type"},
+"proximity-virtual-sensor-type": {"dfnID":"proximity-virtual-sensor-type","dfnText":"proximity","external":false,"refSections":[{"refs":[{"id":"ref-for-proximity-virtual-sensor-type"}],"title":"8. Automation"}],"url":"#proximity-virtual-sensor-type"},
+"proximitysensor": {"dfnID":"proximitysensor","dfnText":"ProximitySensor","external":false,"refSections":[{"refs":[{"id":"ref-for-proximitysensor"}],"title":"5. Model"},{"refs":[{"id":"ref-for-proximitysensor\u2460"}],"title":"6.1. The ProximitySensor Interface"},{"refs":[{"id":"ref-for-proximitysensor\u2461"}],"title":"6.1.1. The distance attribute"},{"refs":[{"id":"ref-for-proximitysensor\u2462"}],"title":"6.1.2. The max attribute"},{"refs":[{"id":"ref-for-proximitysensor\u2463"}],"title":"6.1.3. The near attribute"},{"refs":[{"id":"ref-for-proximitysensor\u2464"},{"id":"ref-for-proximitysensor\u2465"},{"id":"ref-for-proximitysensor\u2466"}],"title":"7.1. Construct a proximity sensor object"}],"url":"#proximitysensor"},
+"sensing-range": {"dfnID":"sensing-range","dfnText":"sensing range","external":false,"refSections":[{"refs":[{"id":"ref-for-sensing-range"}],"title":"5. Model"},{"refs":[{"id":"ref-for-sensing-range\u2460"}],"title":"6.1.1. The distance attribute"},{"refs":[{"id":"ref-for-sensing-range\u2461"},{"id":"ref-for-sensing-range\u2462"}],"title":"6.1.3. The near attribute"}],"url":"#sensing-range"},
+};
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    genAllDfnPanels();
+
+    document.body.addEventListener("click", (e) => {
+        // If not handled already, just hide all dfn panels.
+        hideAllDfnPanels();
+    });
+});
+
+window.addEventListener("resize", () => {
+    // Pin any visible dfn panel
+    queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(el=>positionDfnPanel(el));
+});
+
+function genAllDfnPanels() {
+    for(const panelData of Object.values(dfnPanelData)) {
+        const dfnID = panelData.dfnID;
+        const dfn = document.getElementById(dfnID);
+        if(!dfn) {
+            console.log(`Can't find dfn#${dfnID}.`, panelData);
+            continue;
+        }
+        dfn.panelData = panelData;
+        insertDfnPopupAction(dfn);
+    }
+}
+
+function genDfnPanel(dfn, { dfnID, url, dfnText, refSections, external }) {
+    const dfnPanel = mk.aside({
+        class: "dfn-panel on",
+        id: `infopanel-for-${dfnID}`,
+        "data-for": dfnID,
+        "aria-labelled-by":`infopaneltitle-for-${dfnID}`,
+        },
+        mk.span({id:`infopaneltitle-for-${dfnID}`, style:"display:none"},
+            `Info about the '${dfnText}' ${external?"external":""} reference.`),
+        mk.a({href:url, class:"dfn-link"}, url),
+        refSections.length == 0 ? [] :
+            mk.b({}, "Referenced in:"),
+            mk.ul({},
+                ...refSections.map(section=>
+                    mk.li({},
+                        ...section.refs.map((ref, refI)=>
+                            [
+                                mk.a({ href: `#${ref.id}` },
+                                    (refI == 0) ? section.title : `(${refI + 1})`
+                                ),
+                                " ",
+                            ]
+                        ),
+                    ),
+                ),
+            ),
+        genLinkingSyntaxes(dfn),
+    );
+
+    dfnPanel.addEventListener('click', (event) => {
+        if (event.target.nodeName == 'A') {
+            scrollToTargetAndHighlight(event);
+            pinDfnPanel(dfnPanel);
+        }
+        event.stopPropagation();
+        refocusOnTarget(event);
+    });
+    dfnPanel.addEventListener('keydown', (event) => {
+        if(event.keyCode == 27) { // Escape key
+            hideDfnPanel({dfnPanel});
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    });
+
+    dfnPanel.dfn = dfn;
+    dfn.dfnPanel = dfnPanel;
+    return dfnPanel;
+}
+
+
+
+function hideAllDfnPanels() {
+    // Delete the currently-active dfn panel.
+    queryAll(".dfn-panel").forEach(dfnPanel=>hideDfnPanel({dfnPanel}));
+}
+
+function showDfnPanel(dfn) {
+    hideAllDfnPanels(); // Only display one at a time.
+
+    dfn.setAttribute("aria-expanded", "true");
+
+    const dfnPanel = genDfnPanel(dfn, dfn.panelData);
+
+    // Give the dfn a unique tabindex, and then
+    // give all the tabbable panel bits successive indexes.
+    let tabIndex = 100;
+    dfn.tabIndex = tabIndex++;
+    const tabbable = dfnPanel.querySelectorAll(":is(a, button)");
+    for (const el of tabbable) {
+        el.tabIndex = tabIndex++;
+    }
+
+    append(document.body, dfnPanel);
+    positionDfnPanel(dfnPanel);
+}
+
+function positionDfnPanel(dfnPanel) {
+    const dfn = dfnPanel.dfn;
+    const dfnPos = getBounds(dfn);
+    dfnPanel.style.top = dfnPos.bottom + "px";
+    dfnPanel.style.left = dfnPos.left + "px";
+
+    const panelPos = dfnPanel.getBoundingClientRect();
+    const panelMargin = 8;
+    const maxRight = document.body.parentNode.clientWidth - panelMargin;
+    if (panelPos.right > maxRight) {
+        const overflowAmount = panelPos.right - maxRight;
+        const newLeft = Math.max(panelMargin, dfnPos.left - overflowAmount);
+        dfnPanel.style.left = newLeft + "px";
+    }
+}
+
+function pinDfnPanel(dfnPanel) {
+    // Switch it to "activated" state, which pins it.
+    dfnPanel.classList.add("activated");
+    dfnPanel.style.position = "fixed";
+    dfnPanel.style.left = null;
+    dfnPanel.style.top = null;
+}
+
+function hideDfnPanel({dfn, dfnPanel}) {
+    if(!dfnPanel) dfnPanel = dfn.dfnPanel;
+    if(!dfn) dfn = dfnPanel.dfn;
+    dfn.dfnPanel = undefined;
+    dfnPanel.dfn = undefined;
+    dfn.setAttribute("aria-expanded", "false");
+    dfn.tabIndex = undefined;
+    dfnPanel.remove()
+}
+
+function toggleDfnPanel(dfn) {
+    if(dfn.dfnPanel) {
+        hideDfnPanel(dfn);
+    } else {
+        showDfnPanel(dfn);
+    }
+}
+
+function insertDfnPopupAction(dfn) {
+    dfn.setAttribute('role', 'button');
+    dfn.setAttribute('aria-expanded', 'false')
+    dfn.tabIndex = 0;
+    dfn.classList.add('has-dfn-panel');
+    dfn.addEventListener('click', (event) => {
+        toggleDfnPanel(dfn);
+        event.stopPropagation();
+    });
+    dfn.addEventListener('keypress', (event) => {
+        const kc = event.keyCode;
+        // 32->Space, 13->Enter
+        if(kc == 32 || kc == 13) {
+            toggleDfnPanel(dfn);
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    });
+}
+
+function refocusOnTarget(event) {
+    const target = event.target;
+    setTimeout(() => {
+        // Refocus on the event.target element.
+        // This is needed after browser scrolls to the destination.
+        target.focus();
+    });
+}
+
+// TODO: shared util
+// Returns the root-level absolute position {left and top} of element.
+function getBounds(el, relativeTo=document.body) {
+    const relativeRect = relativeTo.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const top = elRect.top - relativeRect.top;
+    const left = elRect.left - relativeRect.left;
+    return {
+        top,
+        left,
+        bottom: top + elRect.height,
+        right: left + elRect.width,
+    }
+}
+
+function scrollToTargetAndHighlight(event) {
+    let hash = event.target.hash;
+    if (hash) {
+        hash = decodeURIComponent(hash.substring(1));
+        const dest = document.getElementById(hash);
+        if (dest) {
+            dest.classList.add('highlighted');
+            setTimeout(() => dest.classList.remove('highlighted'), 1000);
+        }
+    }
+}
+
+// Functions, divided by link type, that wrap an autolink's
+// contents with the appropriate outer syntax.
+// Alternately, a string naming another type they format
+// the same as.
+function needsFor(type) {
+    switch(type) {
+        case "descriptor":
+        case "value":
+        case "element-attr":
+        case "attr-value":
+        case "element-state":
+        case "method":
+        case "constructor":
+        case "argument":
+        case "attribute":
+        case "const":
+        case "dict-member":
+        case "event":
+        case "enum-value":
+        case "stringifier":
+        case "serializer":
+        case "iterator":
+        case "maplike":
+        case "setlike":
+        case "state":
+        case "mode":
+        case "context":
+        case "facet": return true;
+
+        default: return false;
+    }
+}
+function refusesFor(type) {
+    switch(type) {
+        case "property":
+        case "element":
+        case "interface":
+        case "namespace":
+        case "callback":
+        case "dictionary":
+        case "enum":
+        case "exception":
+        case "typedef":
+        case "http-header":
+        case "permission": return true;
+
+        default: return false;
+    }
+}
+function linkFormatterFromType(type) {
+    switch(type) {
+        case 'scheme':
+        case 'permission':
+        case 'dfn': return (text) => `[=${text}=]`;
+
+        case 'abstract-op': return (text) => `[\$${text}\$]`;
+
+        case 'function':
+        case 'at-rule':
+        case 'selector':
+        case 'value': return (text) => `''${text}''`;
+
+        case 'http-header': return (text) => `[:${text}:]`;
+
+        case 'interface':
+        case 'constructor':
+        case 'method':
+        case 'argument':
+        case 'attribute':
+        case 'callback':
+        case 'dictionary':
+        case 'dict-member':
+        case 'enum':
+        case 'enum-value':
+        case 'exception':
+        case 'const':
+        case 'typedef':
+        case 'stringifier':
+        case 'serializer':
+        case 'iterator':
+        case 'maplike':
+        case 'setlike':
+        case 'extended-attribute':
+        case 'event':
+        case 'idl': return (text) => `{{${text}}}`;
+
+        case 'element-state':
+        case 'element-attr':
+        case 'attr-value':
+        case 'element': return (element) => `<{${element}}>`;
+
+        case 'grammar': return (text) => `${text} (within a <pre class=prod>)`;
+
+        case 'type': return (text)=> `<<${text}>>`;
+
+        case 'descriptor':
+        case 'property': return (text) => `'${text}'`;
+
+        default: return;
+    };
+};
+
+function genLinkingSyntaxes(dfn) {
+    if(dfn.tagName != "DFN") return;
+
+    const type = dfn.getAttribute('data-dfn-type');
+    if(!type) {
+        console.log(`<dfn> doesn't have a data-dfn-type:`, dfn);
+        return [];
+    }
+
+    // Return a function that wraps link text based on the type
+    const linkFormatter = linkFormatterFromType(type);
+    if(!linkFormatter) {
+        console.log(`<dfn> has an unknown data-dfn-type:`, dfn);
+        return [];
+    }
+
+    let ltAlts;
+    if(dfn.hasAttribute('data-lt')) {
+        ltAlts = dfn.getAttribute('data-lt')
+            .split("|")
+            .map(x=>x.trim());
+    } else {
+        ltAlts = [dfn.textContent.trim()];
+    }
+    if(type == "type") {
+        // lt of "<foo>", but "foo" is the interior;
+        // <<foo/bar>> is how you write it with a for,
+        // not <foo/<bar>> or whatever.
+        for(var i = 0; i < ltAlts.length; i++) {
+            const lt = ltAlts[i];
+            const match = /<(.*)>/.exec(lt);
+            if(match) { ltAlts[i] = match[1]; }
+        }
+    }
+
+    let forAlts;
+    if(dfn.hasAttribute('data-dfn-for')) {
+        forAlts = dfn.getAttribute('data-dfn-for')
+            .split(",")
+            .map(x=>x.trim());
+    } else {
+        forAlts = [''];
+    }
+
+    let linkingSyntaxes = [];
+    if(!needsFor(type)) {
+        for(const lt of ltAlts) {
+            linkingSyntaxes.push(linkFormatter(lt));
+        }
+    }
+    if(!refusesFor(type)) {
+        for(const f of forAlts) {
+            linkingSyntaxes.push(linkFormatter(`${f}/${ltAlts[0]}`))
+        }
+    }
+    return [
+        mk.b({}, 'Possible linking syntaxes:'),
+        mk.ul({},
+            ...linkingSyntaxes.map(link => {
+                const copyLink = async () =>
+                    await navigator.clipboard.writeText(link);
+                return mk.li({},
+                    mk.div({ class: 'link-item' },
+                        mk.button({
+                            class: 'copy-icon', title: 'Copy',
+                            type: 'button',
+                            _onclick: copyLink,
+                            tabindex: 0,
+                        }, mk.span({ class: 'icon' }) ),
+                        mk.span({}, link)
+                    )
+                );
+            })
+        )
+    ];
+}
+}
+</script>
+<script>/* Boilerplate: script-ref-hints */
+"use strict";
+{
+let refsData = {
+"#construct-a-proximity-sensor-object": {"displayText":"construct a proximity sensor object","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"construct a proximity sensor object","type":"dfn","url":"#construct-a-proximity-sensor-object"},
+"#distance": {"displayText":"distance","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"distance","type":"dfn","url":"#distance"},
+"#dom-proximitysensor-distance": {"displayText":"distance","export":true,"for_":["ProximitySensor"],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"distance","type":"attribute","url":"#dom-proximitysensor-distance"},
+"#dom-proximitysensor-max": {"displayText":"max","export":true,"for_":["ProximitySensor"],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"max","type":"attribute","url":"#dom-proximitysensor-max"},
+"#dom-proximitysensor-near": {"displayText":"near","export":true,"for_":["ProximitySensor"],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"near","type":"attribute","url":"#dom-proximitysensor-near"},
+"#max": {"displayText":"max","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"max","type":"dfn","url":"#max"},
+"#near": {"displayText":"near","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"near","type":"dfn","url":"#near"},
+"#permissiondef-proximity": {"displayText":"proximity","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"proximity","type":"permission","url":"#permissiondef-proximity"},
+"#proximity-reading-parsing-algorithm": {"displayText":"proximity reading parsing algorithm","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"proximity reading parsing algorithm","type":"dfn","url":"#proximity-reading-parsing-algorithm"},
+"#proximity-sensor-feature": {"displayText":"proximity-sensor-feature","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"proximity-sensor-feature","type":"dfn","url":"#proximity-sensor-feature"},
+"#proximity-sensor-sensor-type": {"displayText":"proximity sensor","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"proximity sensor","type":"dfn","url":"#proximity-sensor-sensor-type"},
+"#proximity-virtual-sensor-type": {"displayText":"proximity virtual sensor type","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"proximity virtual sensor type","type":"dfn","url":"#proximity-virtual-sensor-type"},
+"#proximitysensor": {"displayText":"ProximitySensor","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"ProximitySensor","type":"interface","url":"#proximitysensor"},
+"#sensing-range": {"displayText":"sensing range","export":true,"for_":[],"level":"","normative":true,"shortname":"proximity","spec":"proximity","status":"local","text":"sensing range","type":"dfn","url":"#sensing-range"},
+"https://infra.spec.whatwg.org/#list": {"displayText":"list","export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"list","type":"dfn","url":"https://infra.spec.whatwg.org/#list"},
+"https://infra.spec.whatwg.org/#list-iterate": {"displayText":"for each","export":true,"for_":["list","set"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"for each","type":"dfn","url":"https://infra.spec.whatwg.org/#list-iterate"},
+"https://infra.spec.whatwg.org/#map-entry": {"displayText":"entry","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"entry","type":"dfn","url":"https://infra.spec.whatwg.org/#map-entry"},
+"https://infra.spec.whatwg.org/#map-getting-the-keys": {"displayText":"keys","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"keys","type":"dfn","url":"https://infra.spec.whatwg.org/#map-getting-the-keys"},
+"https://infra.spec.whatwg.org/#map-getting-the-values": {"displayText":"values","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"values","type":"dfn","url":"https://infra.spec.whatwg.org/#map-getting-the-values"},
+"https://infra.spec.whatwg.org/#map-key": {"displayText":"key","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"key","type":"dfn","url":"https://infra.spec.whatwg.org/#map-key"},
+"https://infra.spec.whatwg.org/#map-set": {"displayText":"set","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"set","type":"dfn","url":"https://infra.spec.whatwg.org/#map-set"},
+"https://infra.spec.whatwg.org/#map-value": {"displayText":"value","export":true,"for_":["map"],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"value","type":"dfn","url":"https://infra.spec.whatwg.org/#map-value"},
+"https://infra.spec.whatwg.org/#ordered-map": {"displayText":"map","export":true,"for_":[],"level":"1","normative":true,"shortname":"infra","spec":"infra","status":"current","text":"map","type":"dfn","url":"https://infra.spec.whatwg.org/#ordered-map"},
+"https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object-objects": {"displayText":"Object","export":true,"for_":[],"level":"1","normative":true,"shortname":"ecmascript","spec":"ecmascript","status":"current","text":"Object","type":"interface","url":"https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object-objects"},
+"https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm": {"displayText":"permission revocation algorithm","export":true,"for_":["powerful feature"],"level":"1","normative":true,"shortname":"permissions","spec":"permissions","status":"current","text":"permission revocation algorithm","type":"dfn","url":"https://w3c.github.io/permissions/#dfn-permission-revocation-algorithm"},
+"https://w3c.github.io/sensors#check-sensor-policy-controlled-features": {"displayText":"check sensor policy-controlled features","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"check sensor policy-controlled features","type":"dfn","url":"https://w3c.github.io/sensors#check-sensor-policy-controlled-features"},
+"https://w3c.github.io/sensors#default-sensor": {"displayText":"default sensor","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"default sensor","type":"dfn","url":"https://w3c.github.io/sensors#default-sensor"},
+"https://w3c.github.io/sensors#device-fingerprinting": {"displayText":"fingerprinting","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"fingerprinting","type":"dfn","url":"https://w3c.github.io/sensors#device-fingerprinting"},
+"https://w3c.github.io/sensors#initialize-a-sensor-object": {"displayText":"initialize a sensor object","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"initialize a sensor object","type":"dfn","url":"https://w3c.github.io/sensors#initialize-a-sensor-object"},
+"https://w3c.github.io/sensors#latest-reading": {"displayText":"latest reading","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"latest reading","type":"dfn","url":"https://w3c.github.io/sensors#latest-reading"},
+"https://w3c.github.io/sensors#mitigation-strategies": {"displayText":"mitigation strategies","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"mitigation strategies","type":"dfn","url":"https://w3c.github.io/sensors#mitigation-strategies"},
+"https://w3c.github.io/sensors#sensor-type": {"displayText":"sensor type","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"sensor type","type":"dfn","url":"https://w3c.github.io/sensors#sensor-type"},
+"https://w3c.github.io/sensors#user-identifying": {"displayText":"user identifying","export":true,"for_":[],"level":"","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"anchor-block","text":"user identifying","type":"dfn","url":"https://w3c.github.io/sensors#user-identifying"},
+"https://w3c.github.io/sensors/#dictdef-sensoroptions": {"displayText":"SensorOptions","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"SensorOptions","type":"dictionary","url":"https://w3c.github.io/sensors/#dictdef-sensoroptions"},
+"https://w3c.github.io/sensors/#extension-sensor-interface": {"displayText":"extension sensor interface","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"extension sensor interface","type":"dfn","url":"https://w3c.github.io/sensors/#extension-sensor-interface"},
+"https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm": {"displayText":"Generic Sensor permission revocation algorithm","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"generic sensor permission revocation algorithm","type":"dfn","url":"https://w3c.github.io/sensors/#generic-sensor-permission-revocation-algorithm"},
+"https://w3c.github.io/sensors/#get-value-from-latest-reading": {"displayText":"get value from latest reading","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"get value from latest reading","type":"dfn","url":"https://w3c.github.io/sensors/#get-value-from-latest-reading"},
+"https://w3c.github.io/sensors/#parse-single-value-number-reading": {"displayText":"parse single-value number reading","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"parse single-value number reading","type":"dfn","url":"https://w3c.github.io/sensors/#parse-single-value-number-reading"},
+"https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata": {"displayText":"per-type virtual sensor metadata","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"per-type virtual sensor metadata","type":"dfn","url":"https://w3c.github.io/sensors/#per-type-virtual-sensor-metadata"},
+"https://w3c.github.io/sensors/#sensor": {"displayText":"Sensor","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"Sensor","type":"interface","url":"https://w3c.github.io/sensors/#sensor"},
+"https://w3c.github.io/sensors/#sensor-feature-names": {"displayText":"sensor feature names","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"sensor feature names","type":"dfn","url":"https://w3c.github.io/sensors/#sensor-feature-names"},
+"https://w3c.github.io/sensors/#sensor-permission-names": {"displayText":"sensor permission names","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"sensor permission names","type":"dfn","url":"https://w3c.github.io/sensors/#sensor-permission-names"},
+"https://w3c.github.io/sensors/#sensor-reading": {"displayText":"sensor reading","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"sensor reading","type":"dfn","url":"https://w3c.github.io/sensors/#sensor-reading"},
+"https://w3c.github.io/sensors/#virtual-sensor-metadata": {"displayText":"virtual sensor metadata","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"virtual sensor metadata","type":"dfn","url":"https://w3c.github.io/sensors/#virtual-sensor-metadata"},
+"https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm": {"displayText":"reading parsing algorithm","export":true,"for_":["virtual sensor metadata"],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"reading parsing algorithm","type":"dfn","url":"https://w3c.github.io/sensors/#virtual-sensor-metadata-reading-parsing-algorithm"},
+"https://w3c.github.io/sensors/#virtual-sensor-type": {"displayText":"virtual sensor type","export":true,"for_":[],"level":"1","normative":true,"shortname":"generic-sensor","spec":"generic-sensor","status":"current","text":"virtual sensor type","type":"dfn","url":"https://w3c.github.io/sensors/#virtual-sensor-type"},
+"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature": {"displayText":"policy-controlled feature","export":true,"for_":[],"level":"1","normative":true,"shortname":"permissions-policy","spec":"permissions-policy-1","status":"current","text":"policy-controlled feature","type":"dfn","url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature"},
+"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist": {"displayText":"default allowlist","export":true,"for_":["policy-controlled feature"],"level":"1","normative":true,"shortname":"permissions-policy","spec":"permissions-policy-1","status":"current","text":"default allowlist","type":"dfn","url":"https://w3c.github.io/webappsec-permissions-policy/#policy-controlled-feature-default-allowlist"},
+"https://w3c.github.io/webdriver/#dfn-getting-properties": {"displayText":"get a property","export":true,"for_":[],"level":"","normative":true,"shortname":"webdriver2","spec":"webdriver2","status":"anchor-block","text":"get a property","type":"dfn","url":"https://w3c.github.io/webdriver/#dfn-getting-properties"},
+"https://webidl.spec.whatwg.org/#Exposed": {"displayText":"Exposed","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"Exposed","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#Exposed"},
+"https://webidl.spec.whatwg.org/#SecureContext": {"displayText":"SecureContext","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"SecureContext","type":"extended-attribute","url":"https://webidl.spec.whatwg.org/#SecureContext"},
+"https://webidl.spec.whatwg.org/#dfn-throw": {"displayText":"throw","export":true,"for_":["exception"],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"throw","type":"dfn","url":"https://webidl.spec.whatwg.org/#dfn-throw"},
+"https://webidl.spec.whatwg.org/#idl-DOMException": {"displayText":"DOMException","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"DOMException","type":"interface","url":"https://webidl.spec.whatwg.org/#idl-DOMException"},
+"https://webidl.spec.whatwg.org/#idl-boolean": {"displayText":"boolean","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"boolean","type":"interface","url":"https://webidl.spec.whatwg.org/#idl-boolean"},
+"https://webidl.spec.whatwg.org/#idl-double": {"displayText":"double","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"double","type":"interface","url":"https://webidl.spec.whatwg.org/#idl-double"},
+"https://webidl.spec.whatwg.org/#securityerror": {"displayText":"SecurityError","export":true,"for_":[],"level":"1","normative":true,"shortname":"webidl","spec":"webidl","status":"current","text":"SecurityError","type":"exception","url":"https://webidl.spec.whatwg.org/#securityerror"},
+};
+
+function mkRefHint(link, ref) {
+    const linkText = link.textContent;
+    let dfnTextElements = '';
+    if (ref.displayText.toLowerCase() != linkText.toLowerCase()) {
+        // Give the original term if it's being displayed in a different way.
+        // But allow casing differences, they're insignificant.
+        dfnTextElements =
+            mk.li({},
+                mk.b({}, "Term: "),
+                mk.span({}, ref.displayText)
+            );
+    }
+    const forList = ref.for_;
+    let forListElements;
+    if(forList.length == 0) {
+        forListElements = [];
+    } else if(forList.length == 1) {
+        forListElements = mk.li({},
+            mk.b({}, "For: "),
+            mk.span({}, forList[0]),
+        );
+    } else {
+        forListElements = mk.li({},
+            mk.b({}, "For: "),
+            mk.ul({},
+                ...forList.map(forItem =>
+                    mk.li({},
+                        mk.span({}, forItem)
+                    ),
+                ),
+            ),
+        );
+    }
+    const url = ref.url;
+    const safeUrl = encodeURIComponent(url);
+    const hintPanel = mk.aside({
+        class: "ref-hint",
+        id: `ref-hint-for-${safeUrl}`,
+        "data-for": url,
+        "aria-labelled-by": `ref-hint-for-${safeUrl}`,
+    },
+        mk.ul({},
+            dfnTextElements,
+            mk.li({},
+                mk.b({}, "URL: "),
+                mk.a({ href: url, class: "ref" }, url),
+            ),
+            mk.li({},
+                mk.b({}, "Type: "),
+                mk.span({}, `${ref.type}`),
+            ),
+            mk.li({},
+                mk.b({}, "Spec: "),
+                mk.span({}, `${ref.spec ? ref.spec : ''}`),
+            ),
+            forListElements
+        ),
+    );
+    hintPanel.forLink = link;
+    setupRefHintEventListeners(link, hintPanel);
+    return hintPanel;
+}
+
+function hideAllRefHints() {
+    queryAll(".ref-hint").forEach(el=>hideRefHint(el));
+}
+
+function hideRefHint(refHint) {
+    const link = refHint.forLink;
+    link.setAttribute("aria-expanded", "false");
+    if(refHint.teardownEventListeners) {
+        refHint.teardownEventListeners();
+    }
+    refHint.remove();
+}
+
+function showRefHint(link) {
+    if(link.classList.contains("dfn-link")) return;
+    const url = link.getAttribute("href");
+    const ref = refsData[url];
+    if(!ref) return;
+
+    hideAllRefHints(); // Only display one at this time.
+
+    const refHint = mkRefHint(link, ref);
+    append(document.body, refHint);
+    link.setAttribute("aria-expanded", "true");
+    positionRefHint(refHint);
+}
+
+function setupRefHintEventListeners(link, refHint) {
+    if (refHint.teardownEventListeners) return;
+    // Add event handlers to hide the refHint after the user moves away
+    // from both the link and refHint, if not hovering either within one second.
+    let timeout = null;
+    const startHidingRefHint = (event) => {
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {
+            hideRefHint(refHint);
+        }, 1000);
+    }
+    const resetHidingRefHint = (event) => {
+        if (timeout) clearTimeout(timeout);
+        timeout = null;
+    };
+    link.addEventListener("mouseleave", startHidingRefHint);
+    link.addEventListener("mouseenter", resetHidingRefHint);
+    link.addEventListener("blur", startHidingRefHint);
+    link.addEventListener("focus", resetHidingRefHint);
+    refHint.addEventListener("mouseleave", startHidingRefHint);
+    refHint.addEventListener("mouseenter", resetHidingRefHint);
+    refHint.addEventListener("blur", startHidingRefHint);
+    refHint.addEventListener("focus", resetHidingRefHint);
+
+    refHint.teardownEventListeners = () => {
+        // remove event listeners
+        resetHidingRefHint();
+        link.removeEventListener("mouseleave", startHidingRefHint);
+        link.removeEventListener("mouseenter", resetHidingRefHint);
+        link.removeEventListener("blur", startHidingRefHint);
+        link.removeEventListener("focus", resetHidingRefHint);
+        refHint.removeEventListener("mouseleave", startHidingRefHint);
+        refHint.removeEventListener("mouseenter", resetHidingRefHint);
+        refHint.removeEventListener("blur", startHidingRefHint);
+        refHint.removeEventListener("focus", resetHidingRefHint);
+    };
+}
+
+function positionRefHint(refHint) {
+    const link = refHint.forLink;
+    const linkPos = getBounds(link);
+    refHint.style.top = linkPos.bottom + "px";
+    refHint.style.left = linkPos.left + "px";
+
+    const panelPos = refHint.getBoundingClientRect();
+    const panelMargin = 8;
+    const maxRight = document.body.parentNode.clientWidth - panelMargin;
+    if (panelPos.right > maxRight) {
+        const overflowAmount = panelPos.right - maxRight;
+        const newLeft = Math.max(panelMargin, linkPos.left - overflowAmount);
+        refHint.style.left = newLeft + "px";
+    }
+}
+
+// TODO: shared util
+// Returns the root-level absolute position {left and top} of element.
+function getBounds(el, relativeTo=document.body) {
+    const relativeRect = relativeTo.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+    const top = elRect.top - relativeRect.top;
+    const left = elRect.left - relativeRect.left;
+    return {
+        top,
+        left,
+        bottom: top + elRect.height,
+        right: left + elRect.width,
+    }
+}
+
+function showRefHintListener(e) {
+    // If the target isn't in a link (or is a link),
+    // just ignore it.
+    let link = e.target.closest("a");
+    if(!link) return;
+
+    // If the target is in a ref-hint panel
+    // (aka a link in the already-open one),
+    // also just ignore it.
+    if(link.closest(".ref-hint")) return;
+
+    // Otherwise, show the panel for the link.
+    showRefHint(link);
+}
+
+function hideAllHintsListener(e) {
+    // If the click is inside a ref-hint panel, ignore it.
+    if(e.target.closest(".ref-hint")) return;
+    // Otherwise, close all the current panels.
+    hideAllRefHints();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.addEventListener("mousedown", showRefHintListener);
+    document.body.addEventListener("focus", showRefHintListener);
+
+    document.body.addEventListener("click", hideAllHintsListener);
+});
+
+window.addEventListener("resize", () => {
+    // Hide any open ref hint.
+    hideAllRefHints();
+});
 }
 </script>
 <script>/* Boilerplate: script-var-click-highlighting */
+"use strict";
+{
 /*
 Color-choosing design:
 
-Colors are ordered by goodness.
-Each color has a usage count (initially zero).
-Each variable has a last-used color.
-
-* If the var has a last-used color, and that color's usage is 0,
-    return that color.
-* Otherwise, return the lowest-indexed color with the lowest usage.
-    Increment the color's usage and set it as the last-used color
-    for that var.
-* On unclicking, decrement usage of the color.
+* Colors are ordered by goodness.
+* On clicking a var, give it the earliest color
+    with the lowest usage in the algorithm.
+* On re-clicking, re-use the var's most recent color
+    if that's not currently being used elsewhere.
 */
-"use strict";
-{
-    document.addEventListener("click", e=>{
-        if(e.target.nodeName == "VAR") {
-            highlightSameAlgoVars(e.target);
-        }
-    });
-    const indexCounts = new Map();
-    const indexNames = new Map();
-    function highlightSameAlgoVars(v) {
-        // Find the algorithm container.
-        let algoContainer = null;
-        let searchEl = v;
-        while(algoContainer == null && searchEl != document.body) {
-            searchEl = searchEl.parentNode;
-            if(searchEl.hasAttribute("data-algorithm")) {
-                algoContainer = searchEl;
-            }
-        }
 
-        // Not highlighting document-global vars,
-        // too likely to be unrelated.
-        if(algoContainer == null) return;
+const COLOR_COUNT = 7;
 
-        const algoName = algoContainer.getAttribute("data-algorithm");
-        const varName = getVarName(v);
-        const addClass = !v.classList.contains("selected");
-        let highlightClass = null;
-        if(addClass) {
-            const index = chooseHighlightIndex(algoName, varName);
-            indexCounts.get(algoName)[index] += 1;
-            indexNames.set(algoName+"///"+varName, index);
-            highlightClass = nameFromIndex(index);
-        } else {
-            const index = previousHighlightIndex(algoName, varName);
-            indexCounts.get(algoName)[index] -= 1;
-            highlightClass = nameFromIndex(index);
-        }
+document.addEventListener("click", e=>{
+    if(e.target.nodeName == "VAR") {
+        highlightSameAlgoVars(e.target);
+    }
+});
 
-        // Find all same-name vars, and toggle their class appropriately.
+function highlightSameAlgoVars(v) {
+    // Find the algorithm container.
+    let algoContainer = findAlgoContainer(v);
+
+    // Not highlighting document-global vars,
+    // too likely to be unrelated.
+    if(algoContainer == null) return;
+
+    const varName = nameFromVar(v);
+    if(!v.hasAttribute("data-var-color")) {
+        const newColor = chooseHighlightColor(algoContainer, v);
         for(const el of algoContainer.querySelectorAll("var")) {
-            if(getVarName(el) == varName) {
-                el.classList.toggle("selected", addClass);
-                el.classList.toggle(highlightClass, addClass);
+            if(nameFromVar(el) == varName) {
+                el.setAttribute("data-var-color", newColor);
+                el.setAttribute("data-var-last-color", newColor);
+            }
+        }
+    } else {
+        for(const el of algoContainer.querySelectorAll("var")) {
+            if(nameFromVar(el) == varName) {
+                el.removeAttribute("data-var-color");
             }
         }
     }
-    function getVarName(el) {
-        return el.textContent.replace(/(\s|\xa0)+/, " ").trim();
+}
+function findAlgoContainer(el) {
+    while(el != document.body) {
+        if(el.hasAttribute("data-algorithm")) return el;
+        el = el.parentNode;
     }
-    function chooseHighlightIndex(algoName, varName) {
-        let indexes = null;
-        if(indexCounts.has(algoName)) {
-            indexes = indexCounts.get(algoName);
-        } else {
-            // 7 classes right now
-            indexes = [0,0,0,0,0,0,0];
-            indexCounts.set(algoName, indexes);
-        }
+    return null;
+}
+function nameFromVar(el) {
+    return el.textContent.replace(/(\s|\xa0)+/g, " ").trim();
+}
+function colorCountsFromContainer(container) {
+    const namesFromColor = Array.from({length:COLOR_COUNT}, x=>new Set());
+    for(let v of container.querySelectorAll("var[data-var-color]")) {
+        let color = +v.getAttribute("data-var-color");
+        namesFromColor[color].add(nameFromVar(v));
+    }
 
-        // If the element was recently unclicked,
-        // *and* that color is still unclaimed,
-        // give it back the same color.
-        const lastIndex = previousHighlightIndex(algoName, varName);
-        if(indexes[lastIndex] === 0) return lastIndex;
-
-        // Find the earliest index with the lowest count.
-        const minCount = Math.min.apply(null, indexes);
-        let index = null;
-        for(var i = 0; i < indexes.length; i++) {
-            if(indexes[i] == minCount) {
-                return i;
-            }
+    return namesFromColor.map(x=>x.size);
+}
+function leastUsedColor(colors) {
+    // Find the earliest color with the lowest count.
+    let minCount = Infinity;
+    let minColor = null;
+    for(var i = 0; i < colors.length; i++) {
+        if(colors[i] < minCount) {
+            minColor = i;
+            minCount = colors[i];
         }
     }
-    function previousHighlightIndex(algoName, varName) {
-        return indexNames.get(algoName+"///"+varName);
+    return minColor;
+}
+function chooseHighlightColor(container, v) {
+    const colorCounts = colorCountsFromContainer(container);
+    if(v.hasAttribute("data-var-last-color")) {
+        let color = +v.getAttribute("data-var-last-color");
+        if(colorCounts[color] == 0) return color;
     }
-    function nameFromIndex(index) {
-        return "selected" + index;
-    }
+    return leastUsedColor(colorCounts);
+}
 }
 </script>
