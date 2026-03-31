@@ -12,12 +12,18 @@ Group: dap
 Abstract:
   This specification defines a concrete sensor interface to monitor
   the presence of nearby physical objects without physical contact.
-Status Text:
+Status Text: <div class="advisement">
+  This specification has not shipped in any major browser engine.
+  Implementer standards positions:
+  <a href="https://github.com/mozilla/standards-positions/issues/35">Mozilla</a>.
+  No WebKit standards position has been filed.
+  </div>
   The Devices and Sensors Working Group will perform a round of self-review and
   revisions on the security and privacy aspects of the API before
   requesting horizontal review. Existing <a
   href="https://www.w3.org/PM/horizontal/review.html?shortname=proximity-sensor">security
   and privacy issues</a> are available.
+
 Version History: https://github.com/w3c/proximity/commits/main/index.bs
 !Bug Reports: <a href="https://www.github.com/w3c/proximity/issues/new">via the w3c/proximity repository on GitHub</a>
 Indent: 2
