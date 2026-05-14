@@ -13,6 +13,8 @@ Abstract:
   This specification defines a concrete sensor interface to monitor
   the presence of nearby physical objects without physical contact.
 Status Text:
+  <p class="advisement">This specification is not implemented in any browser engine. It is not expected to advance to W3C Recommendation in its current form.</p>
+
   The Devices and Sensors Working Group will perform a round of self-review and
   revisions on the security and privacy aspects of the API before
   requesting horizontal review. Existing <a
