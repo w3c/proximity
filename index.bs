@@ -201,7 +201,7 @@ Abstract Operations {#abstract-operations}
     :: A {{ProximitySensor}} object.
 
     1.  Let |allowed| be the result of invoking [=check sensor policy-controlled features=]
-        with {{ProximitySensor}}.
+        with [=Proximity Sensor=].
     1.  If |allowed| is false, then:
         1.  [=Throw=] a {{SecurityError}} {{DOMException}}.
     1.  Let |proximity_sensor| be the new {{ProximitySensor}} object.
